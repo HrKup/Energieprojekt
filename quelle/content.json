@@ -1,0 +1,1675 @@
+{
+"lp": [
+{
+"ev": "section",
+"n": 2,
+"t": "Wände und Wärme"
+},
+{
+"ev": "darum",
+"t": "Ein Haus oder eine Wohnung verliert ständig Wärme an die Umgebung. Du lernst, auf welchen Wegen das passiert, welche Bauteile besonders viel Wärme verlieren und wie Dämmstoffe dagegen helfen."
+},
+{
+"ev": "vorher",
+"n": 2
+},
+{
+"ev": "lies",
+"t": "Wie verliert ein Haus Wärme?"
+},
+{
+"ev": "info",
+"t": "Wie verliert ein Haus Wärme?",
+"items": [
+[
+"H",
+"Wohin geht die Wärme?"
+],
+[
+"P",
+"Im Winter ist es drinnen 20 °C warm, draußen vielleicht 0 °C. Wärme fließt immer vom Warmen zum Kalten, also aus dem Haus hinaus. Die Heizung muss genau so viel Wärme nachliefern, wie verloren geht. Wo die Wärme ein unsaniertes Einfamilienhaus verlässt, zeigt das Beispielhaus: **Von der gesamten Wärme, die es verliert**, gehen etwa 30 % durch die Außenwände, 25 % durch das Dach, 25 % durch Fenster und Türen, 10 % durch Lüften und Ritzen und 10 % über Boden und Keller. Zusammen sind das 100 %. Bei jedem Haus sind die Anteile etwas anders. In einer Wohnung im Mehrfamilienhaus grenzen viele Wände an beheizte Nachbarwohnungen, dort geht weniger Wärme verloren."
+],
+[
+"IMG",
+"haus",
+12.5,
+"Wärmeverluste eines unsanierten Beispielhauses (gerundet, nach Angaben von Umweltbundesamt und co2online)"
+],
+[
+"H",
+"Drei Wege des Wärmetransports"
+],
+[
+"IMG",
+"transport",
+14.5,
+null
+],
+[
+"P",
+"**Wärmeleitung:** Wärme wandert durch einen Stoff von der warmen zur kalten Seite, zum Beispiel durch eine Hauswand nach draußen. Metalle, Beton und Glas leiten Wärme gut, ruhende Luft sehr schlecht. Deshalb bestehen Dämmstoffe aus vielen kleinen, eingeschlossenen Luftbläschen oder Fasern. **Wärmeströmung (Konvektion):** Warme Luft steigt nach oben, kalte sinkt. So verteilt sich die Wärme vom Heizkörper im Raum. Durch Ritzen und gekippte Fenster strömt die warme Luft aber auch nach draußen. **Wärmestrahlung:** Jeder warme Körper sendet unsichtbare Infrarotstrahlung aus, auch ohne Luft dazwischen. Glänzende Flächen werfen sie zurück. Wärmebildkameras machen diese Strahlung sichtbar."
+],
+[
+"H",
+"Baustoffe und Dämmstoffe"
+],
+[
+"P",
+"Die Wärmeleitfähigkeit λ (gesprochen „Lambda“) gibt an, wie gut ein Stoff Wärme leitet. Je kleiner λ, desto besser dämmt er. Die Einheit W/(m·K) bedeutet: So viele Watt fließen durch einen Würfel aus diesem Stoff mit 1 m Kantenlänge, wenn eine Seite 1 °C wärmer ist als die gegenüberliegende. Eine Schicht muss umso dicker sein, je größer λ ist: 10 cm Polystyrol dämmen etwa so gut wie 2,3 m Vollziegel. Dämmstoffe teilt man in drei Gruppen ein: mineralische (zum Beispiel Stein- und Glaswolle), Kunststoffe (zum Beispiel Polystyrol) und nachwachsende Dämmstoffe (zum Beispiel Holzfaser, Zellulose, Hanf)."
+],
+[
+"T",
+[
+"Stoff",
+"λ in W/(m·K)",
+"Stoff",
+"λ in W/(m·K)"
+],
+[
+[
+"Stahlbeton",
+"2,0",
+"Holz (Nadelholz)",
+"0,13"
+],
+[
+"Vollziegel",
+"0,8",
+"Mineralwolle",
+"0,035"
+],
+[
+"Kalksandstein",
+"0,9",
+"Polystyrol („Styropor“)",
+"0,035"
+],
+[
+"Porenbeton",
+"0,1 bis 0,2",
+"Holzfaser, Zellulose",
+"0,04"
+],
+[
+"Fensterglas",
+"1,0",
+"ruhende Luft",
+"0,025"
+]
+]
+],
+[
+"H",
+"Was bringt es, die Außenwand zu dämmen?"
+],
+[
+"P",
+"Eine Dämmung der Außenwand senkt **den Wärmeverlust der Wand** um 65 bis 80 %. Fürs ganze Haus sind das (siehe Prozentrechnung in Teil 1) meist 20 bis 25 % weniger Heizenergie. Außendämmung ist teuer und lohnt sich vor allem, wenn die Fassade ohnehin erneuert werden muss. Mieterinnen und Mieter entscheiden das nicht selbst, können aber zum Beispiel Heizkörpernischen dämmen lassen oder den Vermieter darauf ansprechen."
+],
+[
+"S",
+"Außenwand dämmen (Einfamilienhaus)",
+[
+"150 bis 250 € pro m² Wandfläche",
+"etwa 20 bis 25 % der Heizenergie",
+"bei Gasheizung etwa 0,9 t pro Jahr (Beispielhaus)",
+"oft erst nach 15 bis 30 Jahren"
+]
+]
+]
+},
+{
+"ev": "tool",
+"name": "Dämm-Quiz",
+"t": "Ordne die Alltagsbeispiele den drei Arten des Wärmetransports zu. Vergleiche dann mit dem Dicken-Rechner, wie dick eine Wand aus verschiedenen Stoffen sein müsste, um so gut zu dämmen wie 10 cm Styropor. Notiere zwei Ergebnisse, die dich überrascht haben.",
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Erläutere, welche Wärmeverluste bei einer Thermoskanne durch den Deckel, durch die verspiegelte Innenwand und durch das Vakuum zwischen den Wänden verringert werden. Nenne jeweils ein Bauteil eines Hauses, das dieselbe Aufgabe erfüllt."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Informiere dich auf der Seite "
+],
+[
+"l",
+"„Wände und Fenster richtig dämmen“ (Umweltbundesamt)",
+"https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/weniger-waermeverluste-mehr-komfort-waende-fenster"
+],
+[
+"t",
+" über die drei Gruppen von Dämmstoffen. Trage je Gruppe ein Beispiel, einen Vorteil und einen Nachteil direkt in die Tabelle hier in der Datei ein."
+]
+],
+"sub": []
+},
+{
+"ev": "grid",
+"head": [
+"Dämmstoffgruppe",
+"Beispiel",
+"Vorteil",
+"Nachteil"
+],
+"n": 3,
+"prefill": [
+[
+"mineralisch"
+],
+[
+"Kunststoff"
+],
+[
+"nachwachsend"
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Ein Haus verliert im Jahr 20 000 kWh Wärme, davon 35 % über die Außenwände. Eine Dämmung senkt den Wandverlust um 70 %."
+]
+],
+"sub": [
+"a) Berechne, wie viele kWh das Haus über die Wände verliert.",
+"b) Berechne die Einsparung in kWh und in € (Erdgas, 0,12 € pro kWh).",
+"c) Berechne, wie viel Prozent der gesamten Heizenergie das sind.",
+"d) Die Dämmung kostet 24 000 €. Berechne die Amortisationszeit und beurteile das Ergebnis."
+]
+},
+{
+"ev": "weiter",
+"n": 2
+},
+{
+"ev": "section",
+"n": 3,
+"t": "Wärmebilder"
+},
+{
+"ev": "darum",
+"t": "Mit einer Wärmebildkamera siehst du, wo deine Wohnung oder dein Haus Wärme verliert. Damit deine Bilder aussagekräftig sind, lernst du hier, wie die Kamera funktioniert und worauf du achten musst. Bearbeite diesen Teil zuerst, dann leihst du die Kamera aus."
+},
+{
+"ev": "lies",
+"t": "Wärmebilder richtig lesen"
+},
+{
+"ev": "info",
+"t": "Wärmebilder richtig lesen",
+"items": [
+[
+"H",
+"Was misst eine Wärmebildkamera?"
+],
+[
+"P",
+"Jeder Gegenstand sendet Infrarotstrahlung aus, und zwar umso mehr, je wärmer seine Oberfläche ist. Eine Wärmebildkamera misst diese Strahlung mit tausenden winzigen Messpunkten und rechnet sie in Oberflächentemperaturen um. Jede Temperatur bekommt eine Farbe. Die Skala am Bildrand zeigt, welche Farbe zu welcher Temperatur gehört. Die Kamera misst nur die Oberfläche: Was hinter der Wand passiert, sieht sie nicht direkt, sondern nur an der Wirkung auf die Oberfläche."
+],
+[
+"H",
+"Wärmebrücken finden"
+],
+[
+"P",
+"Fotografiert man ein Haus im Winter von außen, verraten warme Stellen, wo Wärme entweicht. Typische Schwachstellen sind Fenster und Rollladenkästen, Heizkörpernischen, Hausecken, Balkonplatten aus Beton und schlecht gedämmte Dachbereiche. Solche Stellen nennt man **Wärmebrücken**. Von innen ist es umgekehrt: Kalte Stellen an Außenwänden zeigen Wärmebrücken. Dort kann sich Feuchtigkeit niederschlagen und Schimmel bilden."
+],
+[
+"H",
+"So gelingen gute Wärmebilder"
+],
+[
+"P",
+"Außenaufnahmen gelingen nur bei kaltem Wetter: Innen und außen sollten mindestens 15 °C Unterschied sein, am besten morgens oder abends, wenn keine Sonne auf die Fassade scheint. Glas und glänzendes Metall spiegeln die Wärmestrahlung der Umgebung, deshalb sind Temperaturen auf Fensterscheiben oft falsch. Vergleiche Bilder nur, wenn sie dieselbe Farbskala haben. Fotografiere keine Personen und keine Hausnummern oder Namensschilder."
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Erkläre, warum eine warme Stelle auf der Außenwand im Winter ein schlechtes Zeichen ist, eine kalte Stelle auf der Innenwand aber ebenfalls."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Begründe, warum Außenaufnahmen bei Sonnenschein oder bei mildem Wetter wenig aussagekräftig sind."
+]
+],
+"sub": []
+},
+{
+"ev": "weiter",
+"n": 3
+},
+{
+"ev": "section",
+"n": 4,
+"t": "Dach und Sonnenstrom"
+},
+{
+"ev": "darum",
+"t": "Über das Dach geht viel Wärme verloren, gleichzeitig kann es Strom liefern. Du lernst, wie man ein Dach dämmt, welche Dämmstoffe sich wofür eignen und wie du herausfindest, ob sich Solarmodule auf dem Dach oder am Balkon lohnen."
+},
+{
+"ev": "vorher",
+"n": 4
+},
+{
+"ev": "lies",
+"t": "Dach und Sonnenstrom"
+},
+{
+"ev": "info",
+"t": "Dach und Sonnenstrom",
+"items": [
+[
+"H",
+"Dach oder oberste Geschossdecke dämmen?"
+],
+[
+"P",
+"Ein Steildach wird von schrägen Holzbalken getragen, den **Sparren**. Wird der Dachboden bewohnt, dämmt man die Dachschräge. Am häufigsten liegt der Dämmstoff **zwischen den Sparren** (Zwischensparrendämmung). Wird das Dach ohnehin neu gedeckt, kann eine durchgehende Schicht **auf die Sparren** gelegt werden (Aufsparrendämmung). Das ist teurer, dämmt aber lückenlos, weil die Holzbalken keine Wärmebrücken mehr bilden. Eine zusätzliche Schicht **unter den Sparren** verbessert eine vorhandene Dämmung von innen."
+],
+[
+"IMG",
+"dach",
+15,
+"Drei Arten, eine Dachschräge zu dämmen (Querschnitt, schematisch)"
+],
+[
+"P",
+"Wird der Dachboden nicht bewohnt, muss nicht das ganze Dach gedämmt werden. Es genügt, die **oberste Geschossdecke** zu dämmen, also den Fußboden des Dachbodens. Die Wärme bleibt dann in der Wohnung darunter, und der Dachboden bleibt kalt. Das ist die günstigste Dämmmaßnahme überhaupt."
+],
+[
+"IMG",
+"geschossdecke",
+9,
+null
+],
+[
+"H",
+"Welcher Dämmstoff fürs Dach?"
+],
+[
+"P",
+"Es gibt keinen „besten“ Dämmstoff, man muss abwägen. **Mineralwolle** ist günstig und brennt nicht, kratzt aber bei der Verarbeitung. **Hartschaum (PUR/PIR)** dämmt bei gleicher Dicke am besten, ist aber aus Erdöl hergestellt und schwer zu recyceln. **Holzfaser** und **Zellulose** (aus Altpapier) sind nachwachsend bzw. recycelt und speichern Wärme etwas besser, was im Sommer die Hitze unter dem Dach leicht verzögert; sie sind aber teurer bzw. brauchen mehr Dicke. Wichtig ist außerdem eine dichte Folie auf der Innenseite (Dampfbremse), damit keine feuchte Raumluft in die Dämmung zieht."
+],
+[
+"P",
+"Erinnerung: λ ist die Wärmeleitfähigkeit aus Teil 2. Je kleiner λ, desto besser dämmt der Stoff."
+],
+[
+"T",
+[
+"Dämmstoff",
+"λ in W/(m·K)",
+"brennbar?",
+"Herkunft"
+],
+[
+[
+"Mineralwolle",
+"0,032–0,040",
+"nein",
+"Gestein, Altglas"
+],
+[
+"PUR/PIR-Hartschaum",
+"0,022–0,028",
+"schwer entflammbar",
+"Erdöl"
+],
+[
+"Holzfaser",
+"0,038–0,052",
+"ja (normal entflammbar)",
+"Holzreste"
+],
+[
+"Zellulose",
+"0,038–0,045",
+"schwer bzw. normal entflammbar",
+"Altpapier"
+]
+]
+],
+[
+"S",
+"oberste Geschossdecke dämmen",
+[
+"20 bis 35 € pro m² (nicht begehbar), 40 bis 80 € (begehbar)",
+"etwa 7 % der Heizenergie",
+"Beispielhaus mit Gas: etwa 0,25 t pro Jahr",
+"oft schon nach 2 bis 6 Jahren"
+]
+],
+[
+"S",
+"Dachschräge dämmen",
+[
+"Zwischensparren 70 bis 120 € pro m², Aufsparren 130 bis 200 € pro m²",
+"etwa 13 % der Heizenergie",
+"Beispielhaus mit Gas: etwa 0,5 t pro Jahr",
+"stark abhängig von Dach und Zustand"
+]
+],
+[
+"SRC",
+"Quellen der Steckbriefe: co2online, 42watt (gerundet). Beispielhaus: 15 000 kWh Heizwärme mit Erdgas."
+],
+[
+"H",
+"Strom von der Sonne: Was du schon weißt"
+],
+[
+"P",
+"Aus dem Unterricht kennst du die Solarzelle: Sie wandelt Licht direkt in elektrische Energie um. Im „Digitalen Solar-Labor“ hast du mit PVGIS untersucht, wie Ausrichtung und Neigung den Ertrag verändern. Darauf baust du jetzt auf. Für dein Gutachten kommen drei Fragen dazu:"
+],
+[
+"P",
+"**Eigenverbrauch oder Einspeisung?** Solarstrom spart vor allem dann Geld, wenn man ihn selbst verbraucht, denn dann muss man keinen Strom für etwa 0,35 € pro kWh kaufen. Für Strom, der ins Netz fließt, gibt es bei Dachanlagen nur eine kleine Vergütung (wenige Cent), beim Balkonkraftwerk meist gar nichts. Weil die Sonne mittags scheint, viele aber abends Strom brauchen, nutzt ein Haushalt ohne Speicher meist nur etwa die Hälfte selbst. Mit einem **Batteriespeicher** steigt der Eigenverbrauch, der Speicher kostet aber zusätzlich und hat eine begrenzte Lebensdauer."
+],
+[
+"P",
+"**Wechselrichter und Schatten:** Solarmodule liefern Gleichstrom, im Haus wird Wechselstrom gebraucht. Das erledigt der Wechselrichter. Weil die Zellen eines Moduls hintereinandergeschaltet sind, kann schon der Schatten eines Baums oder Balkons den Ertrag eines ganzen Moduls stark senken."
+],
+[
+"P",
+"**Balkonkraftwerke:** Ein Balkonkraftwerk besteht meist aus zwei Modulen und einem kleinen Wechselrichter, der in die Steckdose gesteckt wird. Erlaubt sind 800 W Wechselrichterleistung. Mieterinnen und Mieter brauchen die Zustimmung des Vermieters, der sie seit Oktober 2024 aber nur noch in Ausnahmefällen verweigern darf (Verbraucherzentrale)."
+],
+[
+"S",
+"Balkonkraftwerk (800 W)",
+[
+"etwa 450 € mit Halterung",
+"je nach Ausrichtung 400 bis 700 kWh pro Jahr, davon ca. die Hälfte selbst genutzt",
+"etwa 0,1 t pro Jahr",
+"meist nach 4 bis 8 Jahren"
+]
+],
+[
+"H",
+"Himmelsrichtung, Kompass und Azimut"
+],
+[
+"P",
+"Wie viel Strom ein Modul liefert, hängt stark davon ab, wohin es zeigt. Die Richtung gibt man als Winkel in der Waagerechten an, den **Azimut**. Das Wort kommt aus dem Arabischen: as-sumūt bedeutet „die Richtungen“ oder „die Wege“. Arabische Astronomen haben damit im Mittelalter die Richtung von Sternen beschrieben. Achtung, es gibt zwei Zählweisen: Der **Kompass** zählt ab Norden im Uhrzeigersinn (Osten 90°, Süden 180°, Westen 270°). **PVGIS** zählt ab Süden: Süden 0°, Westen +90°, Osten −90°, Norden ±180°. Umrechnung: **Azimut = Kompass − 180°**."
+],
+[
+"IMG",
+"windrose",
+9.5,
+"Außen: Kompass-Grad. Innen: Azimut für PVGIS. Die Übung „Solar-Helfer“ zeigt dir beides für jede Richtung."
+],
+[
+"P",
+"Die Himmelsrichtung deiner Wohnung bestimmst du im Protokoll mit einer Kompass-App. Eine kostenlose App ohne Werbung, die keine Daten sammelt, ist „Compass“ von Philipp Bobek (Android, im Store danach suchen). Auf dem iPhone ist die App „Kompass“ schon installiert."
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Erkläre, warum bei einem unbewohnten Dachboden die Dämmung der obersten Geschossdecke genügt, und nenne zwei Vorteile gegenüber einer Dämmung der Dachschräge."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Familie B. baut den Dachboden zu einem Kinderzimmer aus. Im Sommer soll es dort nicht zu heiß werden, die Familie achtet auf Umweltverträglichkeit, das Geld ist aber knapp. Beurteile, welchen Dämmstoff du empfiehlst. Wäge dabei mindestens drei Gesichtspunkte ab."
+]
+],
+"sub": []
+},
+{
+"ev": "tool",
+"name": "Solar-Helfer",
+"t": "Ein Balkon zeigt laut Kompass-App nach 240°.",
+"sub": [
+"a) Stelle 240° im Solar-Helfer ein (Zahl eingeben oder in die Windrose klicken). Notiere Himmelsrichtung und Azimut für PVGIS.",
+"b) Prüfe die Umrechnung mit der Formel aus dem Info-Kasten.",
+"c) Beurteile, ob der Balkon für ein Balkonkraftwerk geeignet ist."
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Übe mit dem Solarrechner "
+],
+[
+"l",
+"PVGIS",
+"https://re.jrc.ec.europa.eu/pvg_tools/de/"
+],
+[
+"t",
+" am Beispiel dieses Balkons in Kiel. Gehe vor wie im „Digitalen Solar-Labor“."
+]
+],
+"sub": [
+"a) Klicke auf der Karte auf Kiel und wähle „Netzgekoppelt“.",
+"b) Trage ein: Leistung 0,8 kWp, Neigung 90° (Module senkrecht am Geländer), Azimut aus der vorigen Aufgabe. Entferne den Haken bei „Optimieren“.",
+"c) Lies den Jahresertrag in kWh ab und vergleiche ihn mit der Schätzung des Solar-Helfers.",
+"d) Berechne die Ersparnis pro Jahr (die Hälfte des Stroms wird selbst genutzt, 0,35 € pro kWh) und die Amortisationszeit bei 450 € Kosten."
+]
+},
+{
+"ev": "weiter",
+"n": 4
+},
+{
+"ev": "section",
+"n": 5,
+"t": "Fenster und Türen"
+},
+{
+"ev": "darum",
+"t": "Fenster sind die „Löcher“ in der warmen Hülle eines Hauses. Du lernst, woran man gute Fenster erkennt, wie man ihren Wärmeverlust berechnet und was man auch als Mieterin oder Mieter tun kann."
+},
+{
+"ev": "vorher",
+"n": 5
+},
+{
+"ev": "lies",
+"t": "Fenster und Türen"
+},
+{
+"ev": "info",
+"t": "Fenster und Türen",
+"items": [
+[
+"H",
+"Ein Viertel der Wärme"
+],
+[
+"P",
+"Im Beispielhaus aus Teil 2 gehen etwa 25 % der verlorenen Wärme durch Fenster und Türen, obwohl sie nur einen kleinen Teil der Außenfläche ausmachen. Glas leitet Wärme viel besser als eine Wand, und an undichten Fugen strömt warme Luft hinaus."
+],
+[
+"H",
+"Wie ist ein modernes Fenster aufgebaut?"
+],
+[
+"P",
+"Ein **Einfachfenster** hat nur eine Glasscheibe. Beim **Zweifach-** und **Dreifachglas** liegen zwischen den Scheiben dünne Zwischenräume, die mit einem Edelgas wie Argon gefüllt sind. Das Gas leitet Wärme noch schlechter als Luft. Bei Wärmeschutzglas ist außerdem eine hauchdünne, unsichtbare Metallschicht aufgedampft. Sie lässt Licht hinein, wirft aber die Wärmestrahlung aus dem Raum zurück. Auch Rahmen (Holz, Kunststoff, Aluminium) und Dichtungen beeinflussen, wie viel Wärme verloren geht. Fenster und Haustür müssen dicht schließen, sonst zieht kalte Luft herein."
+],
+[
+"H",
+"Der U-Wert"
+],
+[
+"P",
+"Wie viel Wärme ein Bauteil durchlässt, gibt der U-Wert an: Er sagt, wie viel Watt durch 1 m² fließen, wenn der Temperaturunterschied 1 K beträgt (1 K = 1 °C Unterschied). Je kleiner der U-Wert, desto besser. Es gilt: **Wärmeverlust-Leistung (W) = U-Wert · Fläche (m²) · Temperaturunterschied (K)**. Die Grafik zeigt eine Beispielrechnung für ein Einfachfenster:"
+],
+[
+"IMG",
+"fenster",
+14.5,
+null
+],
+[
+"T",
+[
+"Verglasung",
+"U-Wert in W/(m²·K), gerundet"
+],
+[
+[
+"Einfachglas",
+"5,8"
+],
+[
+"altes Isolierglas (zweifach, ohne Beschichtung)",
+"2,8"
+],
+[
+"Wärmeschutzglas zweifach",
+"1,1"
+],
+[
+"Wärmeschutzglas dreifach",
+"0,6"
+]
+]
+],
+[
+"H",
+"Prüfen und verbessern"
+],
+[
+"P",
+"**Feuerzeugtest (Umweltbundesamt):** Hält man eine Flamme vor die Scheibe, spiegelt jede Glasscheibe die Flamme einmal. So zählt man die Scheiben. Hat ein Spiegelbild eine andere Farbe, ist eine Wärmeschutzschicht aufgedampft. **Papiertest:** Lässt sich ein eingeklemmtes Blatt Papier bei geschlossenem Fenster leicht herausziehen, ist die Dichtung undicht. **Auch ohne neue Fenster** kann man viel tun: Dichtungen erneuern (wenige Euro pro Fenster), nachts Rollläden schließen (spart etwa 20 % der Verluste am Fenster) und Vorhänge nicht vor Heizkörper hängen."
+],
+[
+"S",
+"neues Fenster (Wärmeschutzglas dreifach)",
+[
+"je nach Größe grob 600 bis 1 500 € pro Fenster, eingebaut",
+"gegenüber Einfachglas etwa 90 % weniger Verlust am Fenster",
+"siehe Aufgabe",
+"lohnt sich vor allem bei sehr alten Fenstern"
+]
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Berechne mit der Formel aus dem Info-Kasten, wie viel Wärme ein 2 m² großes Fenster mit Dreifach-Wärmeschutzglas verliert. Gehe Schritt für Schritt vor wie in der Grafik (mittlerer Temperaturunterschied 12 K, Heizzeit 5 000 h, Erdgas 0,12 € pro kWh)."
+]
+],
+"sub": [
+"a) Wärmeverlust-Leistung in W",
+"b) Energieverlust im Winter in kWh",
+"c) Heizkosten pro Jahr in €",
+"d) Ersparnis gegenüber dem Einfachfenster aus der Grafik in € pro Jahr",
+"e) Das neue Fenster kostet 900 €. Berechne die Amortisationszeit und beurteile, ob sich der Tausch nur wegen der Heizkosten lohnt."
+]
+},
+{
+"ev": "weiter",
+"n": 5
+},
+{
+"ev": "section",
+"n": 6,
+"t": "Heizung und Warmwasser"
+},
+{
+"ev": "darum",
+"t": "Heizung und Warmwasser machen den größten Teil des Energieverbrauchs eines Haushalts aus. Du lernst die wichtigsten Heizungsarten kennen, erfährst, wie Kiel mit Fernwärme heizt, wie eine Wärmepumpe funktioniert und wie viel Energie beim Duschen steckt. Dieser Teil ist der größte, plane etwa drei Stunden ein."
+},
+{
+"ev": "vorher",
+"n": 6
+},
+{
+"ev": "lies",
+"t": "Heizung und Warmwasser"
+},
+{
+"ev": "info",
+"t": "Heizung und Warmwasser",
+"items": [
+[
+"H",
+"Heizungsarten"
+],
+[
+"P",
+"Die meisten Wohnungen in Deutschland werden noch mit Erdgas oder Heizöl beheizt. Dabei wird ein Brennstoff verbrannt, und es entsteht CO₂. Erdgas besteht vor allem aus Methan: CH₄ + 2 O₂ → CO₂ + 2 H₂O. Pro kWh Wärme entstehen bei einer Gasheizung etwa 0,24 kg CO₂: im Brenner selbst etwa 0,20 kg, dazu kommen Förderung, Transport und die Verluste der Heizung. Klimafreundlicher sind Wärmepumpen, Fernwärme aus erneuerbaren Quellen oder Abwärme und, mit Einschränkungen, Holzpellets. Seit 2024 gilt: Neu eingebaute Heizungen müssen nach und nach mindestens 65 % erneuerbare Energie nutzen. In Kiel gilt das ab Mitte 2026."
+],
+[
+"H",
+"Fernwärme in Kiel"
+],
+[
+"P",
+"Viele Kieler Wohnungen, auch in der Nähe unserer Schule, heizen mit **Fernwärme**: Heißes Wasser wird in Kraftwerken erhitzt und durch gut gedämmte Rohre unter den Straßen zu den Häusern gepumpt. Dort gibt es seine Wärme über einen Wärmetauscher an die Heizung ab und fließt abgekühlt zurück. Das Kieler Fernwärmenetz ist rund 374 km lang, eines der größten in Deutschland."
+],
+[
+"IMG",
+"fernwaerme",
+14.5,
+"So kommt die Fernwärme in Kiel zu den Wohnungen (vereinfacht; Angaben: BDEW, ZfK, Stadtwerke Kiel)"
+],
+[
+"P",
+"Herzstück ist seit 2019 das **Küstenkraftwerk** der Stadtwerke Kiel am Ostufer. Es ersetzt das alte Kohlekraftwerk. 20 große Gasmotoren erzeugen gleichzeitig Strom und Wärme. Das nennt man **Kraft-Wärme-Kopplung (KWK)**: Die Abwärme, die in einem normalen Kraftwerk ungenutzt verloren geht, heizt hier Wohnungen. So werden über 90 % der Energie des Erdgases genutzt. Auf dem Kraftwerksgelände steht außerdem ein 60 m hoher **Wärmespeicher**. Er fasst rund 30 000 m³ bis zu 115 °C heißes Wasser, also über 1 500 MWh Wärme. Damit könnte er etwa 70 000 Kunden bis zu 8 Stunden lang allein mit Wärme versorgen. Weht viel Wind und ist Strom im Überfluss da, macht ein **Elektrodenkessel** daraus Wärme für das Netz. Auch das kleinere Heizkraftwerk in der Humboldtstraße am Schrevenpark liefert Fernwärme. Die **Müllverbrennungsanlage** am Theodor-Heuss-Ring liefert das ganze Jahr über die Grundlast: im Sommer etwa 14 MW, im Winter etwa 28 MW Wärme. Gebaut wurde das Küstenkraftwerk für rund 290 Millionen €, den größten Teil davon (105 Millionen €) lieh die Europäische Investitionsbank. Bezahlt wird das am Ende über die Preise, die die Kunden für Wärme und Strom zahlen."
+],
+[
+"IMG",
+"kwk",
+14.5,
+null
+],
+[
+"P",
+"Noch stammt die Kieler Fernwärme überwiegend aus Erdgas. Bis 2045 muss sie klimaneutral werden. Die Stadtwerke planen dafür große Wärmepumpen, die dem Wasser der Förde Wärme entziehen, Wärme aus tiefen Erdschichten und später Wasserstoff. Die Stadt hat 2024 einen **Wärmeplan** beschlossen: Er legt fest, in welchen Straßen das Fernwärmenetz wachsen soll. Übrigens: Abwärme lässt sich auch anders nutzen. Um 2010 lag am Ostufer eine Forellenzucht im Bereich des warmen Kühlwassers des damaligen Kohlekraftwerks; Forscher maßen dort bis zu 2 °C wärmeres Wasser als in der übrigen Förde."
+],
+[
+"H",
+"Die Wärmepumpe"
+],
+[
+"P",
+"Ein Kühlschrank pumpt Wärme aus seinem Inneren nach außen, deshalb ist er innen kalt und hinten warm. Eine Wärmepumpe macht dasselbe umgekehrt: Sie holt Wärme aus der kalten Umgebung (Außenluft, Erdreich oder Grundwasser) und pumpt sie mit Hilfe von Strom ins Haus. Möglich macht das ein Kältemittel, das in einem Kreislauf umläuft:"
+],
+[
+"IMG",
+"wp_wiki2",
+14.5,
+"Der Kreislauf in einer Wärmepumpe (Quelle: Wikimedia Commons, verändert)"
+],
+[
+"P",
+"Die **Jahresarbeitszahl (JAZ)** gibt an, wie viele kWh Wärme die Pumpe im Jahresmittel aus 1 kWh Strom macht. Auf beiden Seiten steht eine Energie, deshalb hat die JAZ keine Einheit. Gute Anlagen erreichen 4 oder mehr (Umweltbundesamt): Aus 1 kWh Strom werden 4 kWh Wärme, die übrigen 3 kWh kommen kostenlos aus der Umwelt."
+],
+[
+"IMG",
+"jaz",
+13,
+null
+],
+[
+"P",
+"Beispiel: Ein Haus braucht 12 000 kWh Wärme pro Jahr. Mit JAZ 4 braucht die Wärmepumpe 12 000 kWh : 4 = 3 000 kWh Strom. **Luftwärmepumpen** sind am häufigsten, weil sie günstig einzubauen sind. Effizienter ist **oberflächennahe Geothermie**: Erdsonden (Bohrungen bis etwa 100 m, höchstens rund 400 m tief) oder Flächenkollektoren im Garten holen Erdwärme, denn der Boden ist auch im Winter etwa 8 bis 12 °C warm. Davon zu unterscheiden ist die **tiefe Geothermie**, bei der heißes Wasser aus mehreren Kilometern Tiefe direkt heizt oder Strom erzeugt. Eine Wärmepumpe arbeitet umso besser, je niedriger die Vorlauftemperatur des Heizwassers ist. Ideal ist eine Fußbodenheizung (35 °C oder weniger), in vielen Altbauten reichen auch große Heizkörper."
+],
+[
+"S",
+"Luftwärmepumpe (Einfamilienhaus)",
+[
+"grob 25 000 bis 35 000 € vor staatlicher Förderung",
+"Heizkosten je nach Strom- und Gaspreis etwas niedriger",
+"gegenüber Gas etwa 2 t pro Haushalt und Jahr",
+"stark abhängig von Förderung und Preisen"
+]
+],
+[
+"H",
+"Richtig heizen und lüften"
+],
+[
+"P",
+"Das Umweltbundesamt empfiehlt etwa 20 °C im Wohnzimmer, 18 °C in der Küche und 17 °C im Schlafzimmer. **Jedes Grad weniger spart etwa 6 % Heizenergie.** Gelüftet wird am besten mehrmals täglich für wenige Minuten mit weit geöffnetem Fenster (Stoßlüften). Ein dauerhaft gekipptes Fenster kühlt dagegen die Wände rund ums Fenster aus, verschwendet Wärme und kann Schimmel fördern."
+],
+[
+"H",
+"Warmes Wasser"
+],
+[
+"P",
+"Wasser kann viel Wärme aufnehmen: Um 1 Liter Wasser um 1 °C zu erwärmen, braucht man 4 190 Joule (die Wärmekapazität von Wasser). Weil 1 Wh = 3 600 J sind (siehe Teil 1), sind das 4 190 : 3 600 ≈ **1,16 Wh pro Liter und °C**. Duschwasser wird von etwa 10 °C auf 40 °C erwärmt, also um 30 °C. Ein normaler Duschkopf lässt 12 bis 15 Liter pro Minute durch, ein **Sparduschkopf** nur 6 bis 9 Liter. Er mischt Luft unter das Wasser, sodass der Strahl trotzdem kräftig wirkt. Noch günstiger ist ein **Durchflussbegrenzer**: ein kleiner Einsatz, der zwischen Schlauch und Armatur geschraubt wird. Am Wasserhahn erfüllt ein Strahlregler (Perlator) denselben Zweck. Weitere Tipps: kürzer duschen, beim Einseifen das Wasser abdrehen, Warmwasserrohre im Keller dämmen. Ein Haushalt duscht etwa 300-mal pro Person im Jahr (Schätzung)."
+],
+[
+"S",
+"Sparduschkopf",
+[
+"15 bis 40 €",
+"etwa 40 % weniger warmes Wasser beim Duschen",
+"siehe Aufgabe",
+"meist nach wenigen Monaten"
+]
+],
+[
+"H",
+"Solarthermie"
+],
+[
+"P",
+"Bei der Solarthermie erwärmt die Sonne in Kollektoren auf dem Dach eine Flüssigkeit. Sie gibt ihre Wärme im Speicher über einen Wärmetauscher an das Trinkwasser ab. Solarkreislauf und Trinkwasser sind zwei getrennte Kreisläufe, das Wasser vermischt sich nicht. Eine Anlage für das Warmwasser deckt etwa 60 % des Warmwasserbedarfs: Im Sommer reicht die Sonne fast allein, im Winter muss die Heizung nachhelfen. Man rechnet mit 1 bis 1,5 m² Kollektorfläche pro Person; 6 m² liefern etwa 2 000 kWh Wärme pro Jahr. Geeignet sind Dächer nach Osten, Süden oder Westen. Kosten: etwa 4 000 bis 6 000 € (Umweltbundesamt)."
+],
+[
+"IMG",
+"solarthermie",
+15,
+null
+]
+]
+},
+{
+"ev": "side",
+"t": "Warmes Wasser in den Wasserkocher – lohnt sich das?",
+"lines": [
+[
+[
+"t",
+"Spart man Geld, wenn man den Wasserkocher mit heißem Wasser aus der Leitung füllt? Ein Überschlag für 1 Liter: Kaltes Wasser (10 °C) zum Kochen zu bringen kostet etwa 4 Cent Strom. Mit 50 °C warmem Leitungswasser braucht der Wasserkocher nur gut die Hälfte, etwa 2 Cent. Das Vorwärmen hat die Heizung erledigt, mit Fernwärme für etwa 0,6 Cent. Rechnerisch spart man also gut 1 Cent pro Liter."
+]
+],
+[
+[
+"t",
+"Aber: Bis das warme Wasser am Hahn ankommt, läuft erst kaltes Wasser ungenutzt ab, und das warme Wasser in der Leitung kühlt danach aus. Bei einem Liter frisst das den Vorteil meist auf. Außerdem gilt: Für Getränke und zum Kochen nur kaltes Leitungswasser verwenden, weil warmes Wasser mehr Stoffe aus Rohren und Armaturen lösen kann (Verbraucherschutz-Empfehlung). Fazit: Kalt einfüllen und nur so viel kochen, wie man wirklich braucht. Das spart mehr."
+]
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Informiere dich auf der Seite "
+],
+[
+"l",
+"„Heizungsarten im Vergleich“ (co2online)",
+"https://www.co2online.de/modernisieren-und-bauen/heizung/heizungsarten-im-vergleich/"
+],
+[
+"t",
+" über die wichtigsten Heizungsarten und trage deine Ergebnisse direkt in die Tabelle hier in der Datei ein."
+]
+],
+"sub": []
+},
+{
+"ev": "grid",
+"head": [
+"Heizungsart",
+"Energieträger",
+"ein Vorteil",
+"ein Nachteil"
+],
+"n": 5,
+"prefill": [
+[
+"Gasheizung (Brennwert)"
+],
+[
+"Ölheizung"
+],
+[
+"Fernwärme"
+],
+[
+"Holzpelletheizung"
+],
+[
+"Wärmepumpe"
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Erkläre, wozu das Küstenkraftwerk einen großen Wärmespeicher braucht. Tipp: Überlege, ob Strom und Wärme immer zur gleichen Zeit gebraucht werden."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Informiere dich im Artikel "
+],
+[
+"l",
+"„Wärmeplanung: Hier baut Kiel Fernwärme“ (Kieler Leben)",
+"https://www.kielerleben.de/news/waermeplanung-hier-baut-kiel-fernwaerme-10027854.html"
+],
+[
+"t",
+", wie die Stadt die Wärmeversorgung umbauen will. Notiere zwei Ergebnisse des Wärmeplans."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Erkläre mit dem Kühlschrank-Vergleich, wie eine Wärmepumpe aus kalter Winterluft Wärme für das Haus gewinnt. Erläutere, warum eine Erdwärmepumpe im Winter mehr Wärme aus 1 kWh Strom macht als eine Luftwärmepumpe."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Ein Haus braucht im Jahr 15 000 kWh Wärme. Vergleiche eine Gasheizung mit einer Luftwärmepumpe (JAZ 3,5). Rechne mit diesen Werten: Gas 0,12 € und 0,24 kg CO₂ pro kWh, Wärmepumpen-Strom 0,28 € und 0,34 kg CO₂ pro kWh."
+]
+],
+"sub": [
+"a) Berechne die Heizkosten mit Gas.  Rechenhilfe: Kosten = Wärmebedarf · Gaspreis",
+"b) Berechne den Strombedarf und die Heizkosten der Wärmepumpe.  Rechenhilfe: Strombedarf = Wärmebedarf : JAZ",
+"c) Berechne die Ersparnis pro Jahr in € und in kg CO₂.",
+"d) Die Wärmepumpe kostet nach Förderung 12 000 € mehr als eine neue Gasheizung. Berechne, nach wie vielen Jahren sich der Mehrpreis bezahlt gemacht hat (Amortisation), und beurteile das Ergebnis."
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Informiere dich auf den Seiten "
+],
+[
+"l",
+"„Richtiges Heizen“",
+"https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/heizen-bauen/heizen-raumtemperatur"
+],
+[
+"t",
+" und "
+],
+[
+"l",
+"„Wie lüfte ich richtig?“",
+"https://www.umweltbundesamt.de/themen/gesundheit/umwelteinfluesse-auf-den-menschen/schimmel/wie-luefte-ich-richtig-tipps-tricks-zu"
+],
+[
+"t",
+" (beide Umweltbundesamt)."
+]
+],
+"sub": [
+"a) Notiere die empfohlenen Raumtemperaturen für Wohnzimmer, Küche und Schlafzimmer.",
+"b) Erkläre, warum ein dauerhaft gekipptes Fenster im Winter Energie verschwendet und Schimmel fördern kann."
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Die Warmduscher-Rechnung: Jemand duscht gern lange und warm. Rechne für eine Dusche mit Gasheizung (0,12 € und 0,24 kg CO₂ pro kWh Wärme; normaler Duschkopf 13 Liter pro Minute, Sparduschkopf 7 Liter pro Minute; Wasser von 10 °C auf 40 °C)."
+]
+],
+"sub": [
+"a) 15 Minuten mit normalem Duschkopf",
+"b) 15 Minuten mit Sparduschkopf",
+"c) 5 Minuten mit Sparduschkopf",
+"d) Rechne alle drei auf ein Jahr hoch (300 Duschen).",
+"e) Berechne, wie viel Prozent Energie c) gegenüber a) spart.",
+"Rechenhilfe: Energie (Wh) = Liter · Temperaturunterschied (30 °C) · 1,16 Wh pro Liter und °C. Kosten = kWh · 0,12 €. CO₂ = kWh · 0,24 kg.",
+"Trage deine Ergebnisse direkt in die Tabelle hier in der Datei ein."
+]
+},
+{
+"ev": "grid",
+"head": [
+"",
+"Wasser (Liter)",
+"Energie (kWh)",
+"Kosten (€)",
+"CO₂ (kg)",
+"pro Jahr: Energie (kWh)",
+"pro Jahr: Kosten (€)"
+],
+"n": 3,
+"prefill": [
+[
+"a)"
+],
+[
+"b)"
+],
+[
+"c)"
+]
+]
+},
+{
+"ev": "weiter",
+"n": 6
+},
+{
+"ev": "section",
+"n": 7,
+"t": "Strom und Geräte"
+},
+{
+"ev": "darum",
+"t": "Du lernst, wie viel Strom typische Geräte im Haushalt verbrauchen, woran du sparsame Geräte erkennst und wo „heimliche Stromfresser“ stecken."
+},
+{
+"ev": "vorher",
+"n": 7
+},
+{
+"ev": "lies",
+"t": "Strom und Geräte"
+},
+{
+"ev": "info",
+"t": "Strom und Geräte",
+"items": [
+[
+"H",
+"Leistung auf dem Typenschild"
+],
+[
+"P",
+"Die Leistung eines Geräts steht auf dem Typenschild, meist hinten oder unten. Wie viel Energie es im Jahr braucht, hängt aber auch davon ab, wie lange es läuft: Erinnerung aus Teil 1, **E = P · t**. Ein Föhn hat eine hohe Leistung, läuft aber nur wenige Minuten am Tag. Ein Kühlschrank hat eine kleine Leistung, läuft aber Tag und Nacht. Viele Geräte brauchen außerdem nicht immer ihre volle Leistung. Genau misst man den Verbrauch mit einem **Strommessgerät**, das zwischen Steckdose und Gerät gesteckt wird."
+],
+[
+"T",
+[
+"Gerät",
+"typische Leistung",
+"Nutzung",
+"Energie pro Jahr (ca.)"
+],
+[
+[
+"Kühlschrank, neu (Klasse A–C)",
+"im Mittel 10–20 W",
+"immer",
+"100–150 kWh"
+],
+[
+"Kühlschrank, 15 Jahre alt",
+"im Mittel 35–45 W",
+"immer",
+"300–400 kWh"
+],
+[
+"Waschmaschine",
+"2 000 W beim Heizen",
+"3-mal pro Woche",
+"ca. 150 kWh"
+],
+[
+"Fernseher",
+"80–150 W",
+"3 h täglich",
+"ca. 100 kWh"
+],
+[
+"Spielkonsole / PC",
+"100–300 W",
+"2 h täglich",
+"70–220 kWh"
+],
+[
+"WLAN-Router",
+"8 W",
+"immer",
+"ca. 70 kWh"
+],
+[
+"Wasserkocher",
+"2 000 W",
+"5 min täglich",
+"ca. 60 kWh"
+]
+]
+],
+[
+"H",
+"Stand-by: heimliche Stromfresser"
+],
+[
+"P",
+"Viele Geräte verbrauchen auch dann Strom, wenn sie scheinbar aus sind: Fernseher im Bereitschaftsmodus, Ladegeräte in der Steckdose, Router, Drucker, Spielkonsolen im Ruhemodus. Einzeln sind das oft nur 1 bis 10 W, aber sie laufen rund um die Uhr. Diese **Leerlaufverluste** kosten die Haushalte in Deutschland zusammen mehrere Milliarden Euro pro Jahr (Umweltbundesamt). Abhilfe schaffen schaltbare Steckdosenleisten oder das Ausstecken von Ladegeräten."
+],
+[
+"H",
+"Das Energielabel"
+],
+[
+"P",
+"Seit 2021 gilt für Kühlschränke, Waschmaschinen, Geschirrspüler, Fernseher und Lampen wieder die Skala **A bis G** (A = am sparsamsten). Die Klassen wurden dabei strenger: Ein früheres „A+++“-Gerät ist heute oft nur C oder D. Wichtiger als die Klasse ist die Zahl auf dem Label: der **Energieverbrauch in kWh pro Jahr**. Alte Kühl- und Gefriergeräte sind oft die größten Stromfresser im Haushalt."
+],
+[
+"S",
+"neuer Kühlschrank statt 15 Jahre altem Gerät",
+[
+"etwa 500 bis 800 €",
+"etwa 200 bis 250 kWh pro Jahr",
+"etwa 0,08 t pro Jahr",
+"oft erst nach 7 bis 10 Jahren; sinnvoll, wenn das alte Gerät ersetzt werden muss"
+]
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Ein Föhn mit 1 800 W läuft täglich 6 Minuten, ein WLAN-Router mit 8 W läuft immer. Berechne für beide die Energie und die Kosten pro Jahr (Strompreis 0,35 € pro kWh). Beurteile, welches Gerät mehr kostet, und erkläre das überraschende Ergebnis."
+]
+],
+"sub": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Ein alter Kühlschrank braucht laut Messung 360 kWh pro Jahr, ein neuer laut Energielabel 120 kWh. Der neue kostet 650 €."
+]
+],
+"sub": [
+"a) Berechne die Ersparnis pro Jahr in kWh, € und kg CO₂ (Strom: 0,35 € und 0,34 kg CO₂ pro kWh).",
+"b) Berechne die Amortisationszeit.",
+"c) Beurteile, wann sich ein Austausch lohnt und wann nicht."
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Schlage zwei Maßnahmen gegen Stand-by-Verluste vor und nenne jeweils einen Vor- und einen Nachteil."
+]
+],
+"sub": []
+},
+{
+"ev": "weiter",
+"n": 7
+},
+{
+"ev": "section",
+"n": 8,
+"t": "Beleuchtung"
+},
+{
+"ev": "darum",
+"t": "Licht macht nur einen kleinen Teil des Stromverbrauchs aus, hier lässt sich aber besonders leicht sparen. Du lernst, wie die vier Lampenarten aufgebaut sind, warum sie so unterschiedlich sparsam sind und was bei Herstellung und Entsorgung zu beachten ist."
+},
+{
+"ev": "vorher",
+"n": 8
+},
+{
+"ev": "lies",
+"t": "Lampen im Vergleich"
+},
+{
+"ev": "info",
+"t": "Lampen im Vergleich",
+"items": [
+[
+"IMG",
+"lampen_foto",
+15.5,
+"Die vier Lampenarten und der Anteil der Energie, der als Licht bzw. als Wärme abgegeben wird"
+],
+[
+"H",
+"Glühlampe und Halogenlampe"
+],
+[
+"P",
+"In der **Glühlampe** fließt Strom durch einen sehr dünnen Draht aus Wolfram, dem Metall mit dem höchsten Schmelzpunkt. Der Draht wird etwa 2 500 °C heiß und glüht. Damit er nicht verbrennt, ist der Glaskolben mit einem Schutzgas wie Argon gefüllt. Nur etwa 5 % der Energie werden zu Licht, der Rest wird als Wärme abgegeben. Die **Halogenlampe** ist eine verbesserte Glühlampe: Ein Halogengas im kleinen Innenkolben sorgt dafür, dass verdampftes Wolfram sich wieder am Draht ablagert. So kann der Draht heißer glühen und hält länger. Sie spart aber nur 20 bis 25 % gegenüber der Glühlampe. Deshalb dürfen beide in der EU seit einigen Jahren größtenteils nicht mehr verkauft werden."
+],
+[
+"H",
+"Leuchtstofflampe („Energiesparlampe“)"
+],
+[
+"P",
+"In der gebogenen Glasröhre befindet sich etwas **Quecksilberdampf**. Eine Elektronik im Sockel (Vorschaltgerät) zündet eine Gasentladung, der Dampf sendet unsichtbares UV-Licht aus. Eine Leuchtstoffschicht auf der Innenseite der Röhre wandelt es in sichtbares Licht um. Energiesparlampen sparen 60 bis 85 % gegenüber der Glühlampe. Weil Quecksilber giftig ist, gehören sie in den **Sondermüll** bzw. zur Sammelstelle für Altlampen. Seit 2023 dürfen sie in der EU nicht mehr verkauft werden."
+],
+[
+"H",
+"LED-Lampe"
+],
+[
+"P",
+"Eine **LED** (Leuchtdiode) ist ein winziger Halbleiter-Chip, der Strom direkt in Licht umwandelt. Weiße LEDs leuchten eigentlich blau, eine gelbe Leuchtstoffschicht macht daraus weißes Licht. Im Sockel steckt eine Treiber-Elektronik, außerdem ein Kühlkörper, denn auch LEDs werden warm, nur viel weniger. LEDs sind die sparsamsten und langlebigsten Lampen. Für ihre Herstellung braucht man allerdings Metalle wie Gallium und für die Leuchtstoffe Seltene Erden, deren Abbau die Umwelt belastet. Weil sie Elektronik enthalten, gehören LEDs nicht in den Hausmüll, sondern zum Wertstoffhof oder in die Sammelbox im Handel. Über die lange Lebensdauer fällt die Herstellung aber kaum ins Gewicht."
+],
+[
+"H",
+"Wie hell ist eine Lampe?"
+],
+[
+"P",
+"Die Helligkeit gibt der Lichtstrom in **Lumen (lm)** an, nicht die Leistung in Watt. Eine alte 60-W-Glühlampe liefert etwa 800 lm. Dieselbe Helligkeit schafft eine LED mit etwa 8 W."
+],
+[
+"T",
+[
+"Lampe",
+"Lumen pro Watt (ca.)",
+"Lebensdauer (Stunden, ca.)",
+"Leistung für etwa 800 lm"
+],
+[
+[
+"Glühlampe",
+"12",
+"1 000",
+"60 W"
+],
+[
+"Halogenlampe",
+"15",
+"2 000",
+"46 W"
+],
+[
+"Energiesparlampe",
+"55",
+"10 000",
+"13 W"
+],
+[
+"LED",
+"100 bis 150",
+"15 000 bis 25 000",
+"8 W"
+]
+]
+],
+[
+"S",
+"LED statt Glühlampe (eine Lampe, 3 h täglich)",
+[
+"etwa 3 bis 6 € pro LED",
+"etwa 57 kWh, also rund 20 € pro Jahr",
+"etwa 20 kg pro Jahr",
+"meist nach wenigen Monaten"
+]
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Vergleiche eine Glühlampe (60 W, 1,50 €) mit einer LED (8 W, 5 €) über 15 000 Stunden Brenndauer."
+]
+],
+"sub": [
+"a) Berechne, wie viele Glühlampen man in dieser Zeit braucht, und die Kaufkosten beider Varianten.",
+"b) Berechne die Stromkosten beider Varianten (0,35 € pro kWh).",
+"c) Beurteile das Ergebnis."
+]
+},
+{
+"ev": "weiter",
+"n": 8
+},
+{
+"ev": "section",
+"n": 9,
+"t": "CO₂-Bilanz"
+},
+{
+"ev": "darum",
+"t": "Am Ende fragst du: Wie viel CO₂ verursacht deine Wohnung oder dein Haus, und welche Maßnahmen bringen fürs Klima wirklich viel? Du lernst, den CO₂-Fußabdruck einzuordnen, kritisch zu betrachten und mit politischen Entscheidungen in Beziehung zu setzen."
+},
+{
+"ev": "p",
+"t": "Für diesen Teil brauchst du deine Ergebnisse aus Teil 6 und 7 im Protokoll. Neue Daten von zu Hause sind nicht nötig.",
+"italic": true,
+"bold": false
+},
+{
+"ev": "lies",
+"t": "Der CO₂-Fußabdruck"
+},
+{
+"ev": "info",
+"t": "Der CO₂-Fußabdruck",
+"items": [
+[
+"H",
+"Was ist der CO₂-Fußabdruck?"
+],
+[
+"P",
+"Der CO₂-Fußabdruck fasst zusammen, wie viele Treibhausgase ein Mensch im Jahr verursacht, umgerechnet in Tonnen CO₂. Dazu zählen Heizen und Strom, Mobilität, Ernährung und alles, was man kauft. In Deutschland liegt der Durchschnitt laut Umweltbundesamt bei rund **10 Tonnen pro Person** (2026 erstmals knapp darunter). Ein großer Teil davon entsteht beim Wohnen. Damit die Erderwärmung begrenzt werden kann, müsste er langfristig auf **unter 1 Tonne** sinken. Rund 1 Tonne pro Person entsteht dabei „öffentlich“, zum Beispiel durch Straßen, Schulen, Krankenhäuser und Verwaltung. Diesen Teil kann man allein kaum beeinflussen."
+],
+[
+"H",
+"Woher kommt der Begriff?"
+],
+[
+"P",
+"Die Idee des „ökologischen Fußabdrucks“ stammt aus den 1990er-Jahren von dem Wissenschaftler William Rees. Bekannt gemacht hat den **persönlichen CO₂-Fußabdruck** aber vor allem der Ölkonzern BP: In einer großen Werbekampagne ab etwa 2004 bot er einen der ersten Online-CO₂-Rechner an. Kritiker sehen darin den Versuch, die Verantwortung für den Klimawandel von den Unternehmen, die Öl und Gas fördern, auf die einzelnen Verbraucher zu verschieben. BP selbst bestreitet das. Der Fußabdruck ist trotzdem ein nützliches Werkzeug: Er zeigt, wo die großen Stellschrauben im eigenen Alltag liegen."
+],
+[
+"H",
+"Was bringt wie viel?"
+],
+[
+"P",
+"Nicht jede Maßnahme bringt gleich viel. Die Grafik vergleicht gerundete Richtwerte pro Person und Jahr. Manche Maßnahmen sind groß, aber teuer oder nur für Hausbesitzer möglich, andere sind klein, kosten aber fast nichts."
+],
+[
+"IMG",
+"co2",
+15,
+"Eingesparte Tonnen CO₂ pro Person und Jahr (eigene Überschlagsrechnung mit den Richtwerten aus dem Anhang; Flüge nach atmosfair)"
+],
+[
+"H",
+"Fußabdruck und Handabdruck"
+],
+[
+"P",
+"Neben dem Fußabdruck gibt es den **Handabdruck** (Begriff der Organisation Germanwatch). Er steht für alles, womit man die Bedingungen für viele Menschen verändert: Wählen gehen, in der Schülervertretung oder im Verein mitreden, Ideen in der Schule umsetzen, mit Familie und Freunden über Lösungen sprechen. Ein Fernwärmenetz, ein guter Busverkehr oder günstiger Ökostrom entstehen durch politische Entscheidungen, und die beeinflussen am Ende viel mehr Tonnen CO₂ als ein einzelner Haushalt. **Beides zählt:** Das eigene Handeln ist nicht egal, und wer mitgestaltet, bewegt noch mehr."
+],
+[
+"R",
+[
+[
+"t",
+"Mehr Ideen zum Handabdruck: "
+],
+[
+"l",
+"„Handabdruck“ (Germanwatch)",
+"https://www.germanwatch.org/de/handabdruck"
+]
+]
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"★ Ein Haushalt mit drei Personen heizt mit Fernwärme (12 000 kWh pro Jahr) und verbraucht 2 700 kWh Strom. Rechne mit 0,24 kg CO₂ pro kWh Fernwärme und 0,34 kg CO₂ pro kWh Strom."
+]
+],
+"sub": [
+"a) Berechne den CO₂-Ausstoß für Heizung und Strom pro Jahr, insgesamt und pro Person.",
+"b) Vergleiche mit dem Fußabdruck einer Person in Deutschland (rund 10 t): Welchen Anteil hat das Wohnen?"
+]
+},
+{
+"ev": "tool",
+"name": "CO₂-Regler",
+"t": "Probiere aus, wie stark die Maßnahmen aus der Grafik den Fußabdruck eines Haushalts verändern. Trage dann für fünf Maßnahmen direkt in die Tabelle hier in der Datei ein, wie groß ihre Wirkung ist und wie groß der Aufwand bzw. die Einschränkung. Kreuze die zwei Maßnahmen an, die du für dich oder deine Familie am sinnvollsten findest, und begründe deine Wahl in deiner Mappe.",
+"sub": []
+},
+{
+"ev": "grid",
+"head": [
+"Maßnahme",
+"Wirkung (groß / mittel / klein)",
+"Aufwand oder Einschränkung (groß / mittel / klein)",
+"für uns sinnvoll? (x)"
+],
+"n": 5,
+"prefill": []
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"„Was ich mache, ist doch egal.“ Nimm Stellung zu dieser Aussage. Beziehe dich auf den Fußabdruck und den Handabdruck und nenne ein Beispiel, wie du selbst einen Handabdruck hinterlassen könntest."
+]
+],
+"sub": []
+},
+{
+"ev": "p",
+"t": "Geschafft! Jetzt schreibst du im Protokoll, Teil 10, dein Gutachten. Alle Bausteine dafür hast du in den Stichpunkten „Für dein Gutachten“ schon gesammelt.",
+"italic": false,
+"bold": true
+},
+{
+"ev": "weiter",
+"n": 9
+},
+{
+"ev": "section",
+"n": "zsmart",
+"t": "★ Zusatz: Smart Home – sinnvoll oder Spielerei?"
+},
+{
+"ev": "darum",
+"t": "Dieser Teil ist freiwillig und wird nicht bewertet. Smarte Thermostate, Steckdosen und Lampen versprechen, Energie zu sparen. Du prüfst, was dran ist, und wägst Vor- und Nachteile ab."
+},
+{
+"ev": "lies",
+"t": "Smart Home"
+},
+{
+"ev": "info",
+"t": "Smart Home",
+"items": [
+[
+"H",
+"Was können smarte Geräte?"
+],
+[
+"P",
+"**Smarte Heizkörperthermostate** ersetzen den normalen Drehregler. Man steuert sie per App: Sie senken die Temperatur nach Zeitplan, etwa nachts oder wenn alle in der Schule und bei der Arbeit sind, erkennen ein offenes Fenster und drehen dann die Heizung ab. Manche merken über den Standort der Handys, ob jemand zu Hause ist. **Smarte Steckdosen** schalten Geräte nach Zeitplan ganz aus, **smarte Lampen** lassen sich dimmen und automatisch ausschalten."
+],
+[
+"H",
+"Wie viel sparen sie wirklich?"
+],
+[
+"P",
+"Laut co2online spart eine programmierbare Heizungsregelung im Mittel etwa 10 % Heizkosten; andere Stellen nennen 9 bis 15 %. Herstellerangaben liegen oft deutlich höher. Viel bringen smarte Thermostate vor allem dort, wo vorher schlecht geregelt wurde, zum Beispiel wenn die Wohnung oft zu warm war oder tagsüber leer stand und trotzdem geheizt wurde. Wer ohnehin sorgfältig heizt, spart wenig. Ein Thermostat kostet etwa 40 bis 80 €. Achtung bei Steckdosen: Eine smarte Steckdose braucht selbst etwa 0,5 bis 1 W, rund um die Uhr. Hängt dahinter nur ein Gerät mit 1 W Stand-by, spart sie fast nichts. Smart heißt also nicht automatisch sparsam."
+],
+[
+"H",
+"Die Kehrseite: Daten und Abhängigkeit"
+],
+[
+"P",
+"Smarte Thermostate wissen, wann jemand zu Hause ist. Solche **Anwesenheitsprofile** sind sensible Daten, die oft auf Servern des Herstellers gespeichert werden. Viele Geräte funktionieren nur mit der App und der Cloud eines bestimmten Herstellers. Stellt er den Dienst ein oder verlangt plötzlich Gebühren, sind die Geräte im schlimmsten Fall nutzlos. Geräte, die auch **ohne Internet** (lokal) und mit **offenen Standards** funktionieren, machen weniger abhängig."
+],
+[
+"H",
+"Schätzen statt messen"
+],
+[
+"P",
+"Wie viel ein smartes Thermostat bei dir bringen könnte, kannst du grob schätzen: **Ersparnis ≈ 6 % · Absenkung in °C · (Stunden abwesend : 24)**. Beispiel: An 9 Stunden pro Tag 3 °C weniger ergibt 6 % · 3 · 9 : 24 ≈ 7 % Heizenergie. Das ist nur ein Überschlag: Das Wiederaufheizen kostet etwas Energie zurück, und gut gedämmte Häuser kühlen langsamer aus."
+],
+[
+"R",
+[
+[
+"t",
+"Informiere dich außerdem auf folgender Internetseite: "
+],
+[
+"l",
+"„Smarte Thermostate“ (co2online)",
+"https://www.co2online.de/energie-sparen/heizenergie-sparen/thermostate/smarte-thermostate/"
+]
+]
+]
+]
+},
+{
+"ev": "task",
+"t": [
+[
+"t",
+"Wäge ab: Lohnen sich smarte Thermostate für deine Wohnung oder dein Haus?"
+]
+],
+"sub": [
+"a) Stelle Vor- und Nachteile in einer Tabelle oder Liste gegenüber (Energie, Kosten, Bequemlichkeit, Daten, Abhängigkeit).",
+"b) Schätze mit der Formel aus dem Info-Kasten, wie viel Prozent Heizenergie und wie viel Geld ihr sparen könntet. Notiere deine geschätzten Werte (Abwesenheit, Absenkung, Heizkosten aus dem Protokoll).",
+"c) Fälle ein begründetes Urteil: Würdest du sie empfehlen? Wenn ja, worauf sollte man beim Kauf achten?"
+]
+},
+{
+"ev": "section",
+"n": "anhang",
+"t": "Anhang: Wenn dir Angaben fehlen"
+},
+{
+"ev": "p",
+"t": "Gerade in Mietwohnungen bekommst du nicht alle Angaben, zum Beispiel weil die Heizkosten über die Nebenkosten abgerechnet werden. Dafür gibt es keinen Punktabzug. So gehst du vor:",
+"italic": false,
+"bold": false
+},
+{
+"ev": "p",
+"t": "1. **Eigene Daten zuerst:** Frage Eltern, Vermieter oder Hausverwaltung, schau in Rechnungen, Verträge und auf Typenschilder.  2. **Begründet schätzen:** Fehlt ein Wert trotzdem, nimm einen typischen Wert aus den Tabellen unten.  3. **Kennzeichnen:** Markiere geliehene Werte im Protokoll mit „(Ø)“. Ø bedeutet Durchschnittswert (kein Grenzwert).  4. **Im Gutachten erklären:** Schreibe, welche Angaben fehlen, was du versucht hast und wie sicher deine Ergebnisse deshalb sind.",
+"italic": false,
+"bold": false
+},
+{
+"ev": "p",
+"t": "Typischer Energiekennwert für Heizung und Warmwasser nach Baujahr (unsaniert, grobe Richtwerte)",
+"italic": false,
+"bold": true
+},
+{
+"ev": "table",
+"head": [
+"Baujahr",
+"bis 1948",
+"1949–1978",
+"1979–1994",
+"1995–2001",
+"2002–2015",
+"ab 2016"
+],
+"rows": [
+[
+"kWh pro m² und Jahr",
+"ca. 200",
+"ca. 200",
+"ca. 150",
+"ca. 110",
+"ca. 80",
+"ca. 50"
+]
+]
+},
+{
+"ev": "p",
+"t": "Ist das Gebäude saniert (neue Fenster, gedämmtes Dach oder Fassade), liegt der Wert oft ein Viertel bis die Hälfte niedriger. Heizenergie pro Jahr ≈ Energiekennwert · Wohnfläche.",
+"italic": false,
+"bold": false
+},
+{
+"ev": "p",
+"t": "Typischer Stromverbrauch pro Jahr (ohne elektrische Warmwasserbereitung, grobe Richtwerte)",
+"italic": false,
+"bold": true
+},
+{
+"ev": "table",
+"head": [
+"Personen im Haushalt",
+"1",
+"2",
+"3",
+"4",
+"5"
+],
+"rows": [
+[
+"Wohnung",
+"ca. 1 300 kWh",
+"ca. 2 000 kWh",
+"ca. 2 600 kWh",
+"ca. 3 000 kWh",
+"ca. 3 500 kWh"
+],
+[
+"Haus",
+"ca. 1 800 kWh",
+"ca. 2 700 kWh",
+"ca. 3 400 kWh",
+"ca. 3 900 kWh",
+"ca. 4 600 kWh"
+]
+]
+},
+{
+"ev": "p",
+"t": "Wird das Wasser elektrisch erwärmt (Durchlauferhitzer, Boiler), kommen pro Person etwa 600 bis 800 kWh dazu. Einordnen kannst du deinen Verbrauch auch mit dem StromCheck (Link im Protokoll, Teil 7).",
+"italic": false,
+"bold": false
+},
+{
+"ev": "p",
+"t": "Preise und CO₂ pro Kilowattstunde (gerundete Richtwerte)",
+"italic": false,
+"bold": true
+},
+{
+"ev": "p",
+"t": "CO₂ entsteht, wenn Kohle, Erdöl oder Erdgas verbrannt werden, im eigenen Haus oder in einem Kraftwerk. Bei den Heizungen stehen Preis und CO₂ pro kWh **Wärme**, damit du sie direkt vergleichen kannst.",
+"italic": false,
+"bold": false
+},
+{
+"ev": "table",
+"head": [
+"Energie",
+"Preis pro kWh",
+"CO₂ pro kWh",
+"Woher kommt das CO₂?"
+],
+"rows": [
+[
+"Strom (Haushalt)",
+"0,35 €",
+"0,34 kg",
+"Ein Teil des Stroms kommt noch aus Kohle- und Gaskraftwerken. Wind- und Solarstrom verursachen fast kein CO₂."
+],
+[
+"Erdgas",
+"0,12 €",
+"0,24 kg",
+"Methan verbrennt im Brenner zu CO₂ und Wasser (etwa 0,20 kg), dazu Förderung, Transport und Verluste."
+],
+[
+"Heizöl",
+"0,11 €",
+"0,31 kg",
+"Öl enthält mehr Kohlenstoff pro kWh als Erdgas, deshalb entsteht mehr CO₂."
+],
+[
+"Fernwärme Kiel",
+"0,14 €",
+"0,24 kg",
+"vor allem Erdgas im Küstenkraftwerk, dazu Müllverbrennung (vereinfacht)"
+],
+[
+"Holzpellets",
+"0,08 €",
+"0,03 kg",
+"Holz gibt beim Verbrennen nur so viel CO₂ ab, wie der Baum aufgenommen hat. Der Rest stammt aus Herstellung und Transport."
+],
+[
+"Wärmepumpe",
+"0,08 € pro kWh Wärme",
+"0,10 kg pro kWh Wärme",
+"aus dem Strom: Sie macht aus 1 kWh Strom (Sondertarif 0,28 €, 0,34 kg CO₂) etwa 3,5 kWh Wärme."
+]
+]
+},
+{
+"ev": "p",
+"t": "(Quellen: CO₂ für Strom: Umweltbundesamt, Strommix 2025; übrige Werte gerundete Richtwerte. Eigene Preise aus euren Rechnungen sind immer besser.)",
+"italic": true,
+"bold": false
+},
+{
+"ev": "p",
+"t": "**Warum ist das so?** In Kohle- und Gaskraftwerken geht mehr als die Hälfte der Energie als Abwärme verloren. Deshalb verursacht eine Kilowattstunde Strom mehr CO₂ als eine Kilowattstunde Erdgas, die direkt im Haus verbrannt wird. Strom ist außerdem teurer, weil auf ihm mehr Netzentgelte, Steuern und Abgaben liegen. Für Wärmepumpen bieten viele Stromanbieter einen günstigeren **Sondertarif** an, weil sie die Wärmepumpe bei hoher Netzlast kurz abschalten dürfen. Der Strom selbst ist derselbe, deshalb ist auch das CO₂ gleich. Preis und CO₂ haben also nichts miteinander zu tun.",
+"italic": false,
+"bold": false
+},
+{
+"ev": "p",
+"t": "**Wichtig beim Vergleichen:** Vergleiche immer, was eine Kilowattstunde **Wärme** kostet und verursacht. Die Wärmepumpe braucht für 1 kWh Wärme nur etwa 0,3 kWh Strom und verursacht damit rund 0,1 kg CO₂, weniger als die 0,24 kg beim Erdgas.",
+"italic": false,
+"bold": false
+}
+],
+"proto": {
+"1": {
+"t": "Haus und Haushalt",
+"zuhause": [
+"Anzahl der Personen, Wohnfläche (steht zum Beispiel im Mietvertrag), Anzahl der Zimmer und Etagen",
+"Baujahr des Hauses und letzte Renovierung (Eltern oder Vermieter fragen)",
+"Gibt es einen Energieausweis? Wenn ja: Effizienzklasse und Energiekennwert",
+"Energie für Heizung und Warmwasser pro Jahr und die Kosten dafür (Heizkostenabrechnung, Gas- oder Fernwärmerechnung). Bei Gas in m³ gilt: 1 m³ Erdgas ≈ 10 kWh.",
+"Stromverbrauch pro Jahr und Stromkosten (Stromabrechnung)"
+],
+"tasks": 2
+},
+"2": {
+"t": "Wände und Wärme",
+"zuhause": [
+"Baumaterial der Außenwände (zum Beispiel Ziegel, Kalksandstein, Beton, Holz) und ob sie gedämmt sind",
+"Dämmmaterial, Dicke und Alter der Dämmung (Eltern oder Vermieter fragen)",
+"Wanddicke: Miss sie mit dem Zollstock an einem geöffneten Fenster oder an der Haustür (an der Laibung, also der Innenseite der Maueröffnung).",
+"Sind die Kellerwände bzw. die Kellerdecke gedämmt?"
+],
+"tasks": 1
+},
+"3": {
+"t": "Wärmebilder",
+"zuhause": [],
+"tasks": 2
+},
+"4": {
+"t": "Dach und Sonnenstrom",
+"zuhause": [
+"Dachform, Dachneigung (schätzen oder mit einer Winkelmesser-App messen) und ungefähre Dachfläche",
+"Ist das Dach bzw. die oberste Geschossdecke gedämmt? Material, Dicke, Alter",
+"Die Himmelsrichtung von Balkon, Hauswänden oder Dachflächen (Aufgabe 4.1)",
+"Gibt es schon eine Photovoltaik- oder Solarthermieanlage? Falls ja: Fläche, Leistung, Ertrag pro Jahr",
+"Bei einer Wohnung: Gibt es einen Balkon oder eine Wand, an der Solarmodule hängen könnten? Ist dort Schatten?"
+],
+"tasks": 3
+},
+"5": {
+"t": "Fenster und Türen",
+"zuhause": [
+"Anzahl der Fenster, ungefähre Größe und Himmelsrichtung, Alter und Rahmenmaterial",
+"**Feuerzeugtest:** Halte eine Feuerzeugflamme vor die Scheibe. Jede Glasscheibe spiegelt die Flamme einmal, so zählst du die Scheiben. Hat ein Spiegelbild eine andere Farbe, hat das Glas eine Wärmeschutzschicht. Bitte nur mit Erlaubnis deiner Eltern und nicht in der Nähe von Vorhängen.",
+"**Papiertest:** Klemm ein Blatt Papier ins Fenster und schließ es. Lässt sich das Blatt leicht herausziehen, ist die Dichtung undicht.",
+"Rollläden vorhanden? Haustür: Material, schließt sie dicht?"
+],
+"tasks": 1
+},
+"6": {
+"t": "Heizung und Warmwasser",
+"zuhause": [
+"Art und Alter der Heizung (Typenschild am Heizkessel bzw. an der Fernwärmestation oder Eltern fragen), Anzahl der Heizkörper, Fußbodenheizung",
+"Raumtemperaturen in Wohnzimmer, Küche und Schlafzimmer messen. Wie wird im Winter gelüftet?",
+"Warmwasser: Wie wird es erwärmt (über die Heizung, Durchlauferhitzer, Boiler)? Sind die Rohre gedämmt?",
+"**Deine Dusche:** Stopp die Dauer einer typischen Dusche. **Eimer-Methode:** Halte einen Eimer 10 Sekunden unter die voll aufgedrehte Dusche, miss die Liter (Messbecher) und nimm sie mal 6. Das ergibt die Liter pro Minute. Kein Messbecher zu Hause? Leih dir einen bei Herrn Kuprat."
+],
+"tasks": 5
+},
+"7": {
+"t": "Strom und Geräte",
+"zuhause": [
+"Leistung der wichtigsten Geräte in Watt (Typenschild, meist hinten oder unten am Gerät) und ihre ungefähre Betriebszeit",
+"Effizienzklasse von Kühlschrank, Waschmaschine und Geschirrspüler, Alter des Kühlschranks",
+"Alle Geräte im Stand-by (Lämpchen, Display, Fernbedienung)"
+],
+"tasks": 2
+},
+"8": {
+"t": "Beleuchtung",
+"zuhause": [
+"Anzahl der Lampen nach Typ (Glühlampe, Halogenlampe, Energiesparlampe, LED). Auf der Lampe oder der Verpackung stehen Watt und Lumen.",
+"Wie viele Stunden pro Tag brennen die Lampen in den meistgenutzten Räumen ungefähr?"
+],
+"tasks": 1
+},
+"9": {
+"t": "CO₂-Bilanz",
+"zuhause": [],
+"tasks": 2
+},
+"10": {
+"t": "Gutachten",
+"zuhause": [],
+"tasks": 0
+},
+"11": {
+"t": "Anhang und Quellen",
+"zuhause": [],
+"tasks": 0
+}
+}
+}

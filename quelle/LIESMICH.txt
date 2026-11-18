@@ -1,0 +1,1 @@
+Quellen zum Neubau von index.html: content.json -> gen_web.py -> teile.js; integrate.py baut aus lernpfad_pilot.html + teile.js die Seite; codefix.py setzt den Fortschrittscode. Pfade in den Skripten anpassen.
