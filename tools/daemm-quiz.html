@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dämm-Quiz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: eine ruhige Spalte wie ein Arbeitsblatt, Karten nur für Übungen */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#17302b; --muted:#5a6d68; --line:#d5dfdb;
+  --accent:#0e7a63; --accent-ink:#ffffff; --soft:#e3f1ec; --ok:#1d7a3a; --ok-bg:#e2f4e6; --bad:#b3261e; --bad-bg:#fbe7e5;
+  --font:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101a18; --surface:#182522; --ink:#e3eeea; --muted:#9fb3ad; --line:#2c3d39;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1d3530; --ok:#7fd69a; --ok-bg:#16301f; --bad:#ff9a90; --bad-bg:#3a1c1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101a18; --surface:#182522; --ink:#e3eeea; --muted:#9fb3ad; --line:#2c3d39;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1d3530; --ok:#7fd69a; --ok-bg:#16301f; --bad:#ff9a90; --bad-bg:#3a1c1a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1{font-size:1.75rem;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:1.2rem;margin:0 0 4px}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted);font-weight:600}
+p{margin:0}
+.lead{color:var(--muted);max-width:65ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--muted);font-weight:600}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0;width:11rem}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;font-weight:600;border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:6px;padding:8px 12px;cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.result{background:var(--soft);border-radius:8px;padding:12px 14px;font-variant-numeric:tabular-nums}
+.big{font-size:1.6rem;font-weight:700}
+.fb{border-radius:6px;padding:6px 10px;font-size:.95rem}
+.fb.ok{background:var(--ok-bg);color:var(--ok)}
+.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.small{font-size:.85rem;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+.q{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;padding-block:10px;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.opts{display:flex;gap:4px;flex-wrap:wrap}
+.opts button{padding:5px 10px;font-size:.9rem}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:10px;align-items:center;font-size:.92rem}
+.track{background:var(--bg);border:1px solid var(--line);border-radius:4px;height:22px;overflow:hidden}
+.fill{height:100%;background:var(--accent);transition:width .4s}
+.bar .num{text-align:right;font-weight:600}
+.score{font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.q{grid-template-columns:1fr}.bar{grid-template-columns:6.5rem 1fr 4.5rem;font-size:.82rem}}
+</style>
+<div class="wrap">
+  <div><div class="eyebrow">Energieberatung · Teil 2</div><h1>Dämm-Quiz</h1></div>
+  <p class="lead">Wärme verlässt ein Haus auf drei Wegen. Ordne jedes Beispiel zu und lies die Rückmeldung. Danach siehst du im Dicken-Vergleich, warum Dämmstoffe so dünn sein können.</p>
+
+  <section class="card" aria-labelledby="h1q">
+    <div class="row" style="justify-content:space-between;align-items:baseline"><h2 id="h1q">Leitung, Strömung oder Strahlung?</h2><span class="score" id="score">0 von 9 richtig</span></div>
+    <div id="quiz"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h2q">
+    <h2 id="h2q">Dicken-Vergleich</h2>
+    <p>Wie dick muss eine Schicht sein, damit sie so gut dämmt wie <strong>10 cm Styropor</strong>? Je größer die Wärmeleitfähigkeit λ, desto dicker muss sie sein: Dicke = 10 cm · λ : 0,035.</p>
+    <p class="small">Schätze zuerst für Vollziegel und Stahlbeton, dann blende die Werte ein.</p>
+    <div><button type="button" class="primary" id="show">Dicken anzeigen</button></div>
+    <div class="bars" id="bars"></div>
+    <p class="small">Die Balken sind maßstabsgetreu. Richtwerte für λ in W/(m·K), gerundet.</p>
+  </section>
+</div>
+<script>
+const Q=[
+["Ein Metalllöffel im heißen Tee wird auch am Griff warm.","L","Die Wärme wandert durch das Metall von Teilchen zu Teilchen. Metall leitet Wärme gut."],
+["An der Zimmerdecke ist es wärmer als am Boden.","S","Warme Luft dehnt sich aus, wird leichter und steigt nach oben."],
+["Am Lagerfeuer wird das Gesicht warm, obwohl ein kalter Wind weht.","R","Die Infrarotstrahlung des Feuers erreicht dich direkt, die Luft dazwischen braucht sie nicht."],
+["Durch ein gekipptes Fenster geht im Winter warme Luft verloren.","S","Die warme Luft strömt mitsamt ihrer Wärme nach draußen."],
+["Die Außenseite einer ungedämmten Wand ist im Winter wärmer als die einer gedämmten.","L","Die Wärme wird durch das Mauerwerk nach außen geleitet. Die Dämmung bremst diese Leitung."],
+["Die Sonne wärmt die Erde durch den leeren Weltraum.","R","Im Weltraum gibt es keine Teilchen. Nur Strahlung kommt dort hindurch."],
+["Barfuß fühlen sich Fliesen kälter an als ein Teppich, obwohl beide gleich warm sind.","L","Fliesen leiten die Wärme schnell aus dem Fuß ab. Im Teppich steckt viel ruhende Luft, die schlecht leitet."],
+["Eine Wärmebildkamera zeigt eine warme Stelle an der Hauswand.","R","Die Kamera misst die Infrarotstrahlung, die jede Oberfläche aussendet."],
+["Ein Heizkörper unter dem Fenster wärmt das ganze Zimmer.","S","Die warme Luft steigt auf, kühlt am Fenster ab und sinkt wieder. Es entsteht eine Luftwalze."]];
+const N={L:"Leitung",S:"Strömung",R:"Strahlung"};
+const done=new Set(),qz=document.getElementById("quiz"),score=document.getElementById("score");
+Q.forEach((q,n)=>{
+  const d=document.createElement("div");d.className="q";
+  d.innerHTML="<div>"+q[0]+"</div><div class='opts' role='group' aria-label='Art des Wärmetransports'></div><div class='fb' hidden style='grid-column:1/-1'></div>";
+  const o=d.querySelector(".opts"),fb=d.querySelector(".fb");
+  Object.keys(N).forEach(k=>{const b=document.createElement("button");b.type="button";b.textContent=N[k];b.setAttribute("aria-pressed","false");
+    b.onclick=()=>{o.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");fb.hidden=false;
+      if(k===q[1]){fb.className="fb ok";fb.textContent="Richtig, "+N[k]+". "+q[2];done.add(n);}
+      else{fb.className="fb bad";fb.textContent="Nicht ganz. Überlege: Wandert die Wärme durch einen Stoff, bewegt sich warme Luft oder Flüssigkeit, oder geht es ganz ohne Stoff dazwischen?";done.delete(n);}
+      score.textContent=done.size+" von "+Q.length+" richtig";};
+    o.appendChild(b);});
+  qz.appendChild(d);
+});
+const M=[["Styropor",0.035],["Mineralwolle",0.035],["Holzfaser",0.04],["Porenbeton",0.15],["Nadelholz",0.13],["Vollziegel",0.8],["Kalksandstein",0.9],["Stahlbeton",2.0]];
+const bars=document.getElementById("bars"),max=10*2.0/0.035;
+M.forEach(m=>{const cm=10*m[1]/0.035;const r=document.createElement("div");r.className="bar";
+  r.innerHTML="<span>"+m[0]+" <span class='small'>λ = "+m[1].toLocaleString("de-DE")+"</span></span><div class='track'><div class='fill' style='width:"+(m[0]==="Styropor"?cm/max*100:0)+"%'></div></div><span class='num'>"+(m[0]==="Styropor"?"10 cm":"?")+"</span>";
+  r.dataset.w=(cm/max*100).toFixed(2);r.dataset.t=cm>=100?(cm/100).toLocaleString("de-DE",{maximumFractionDigits:1})+" m":Math.round(cm)+" cm";bars.appendChild(r);});
+document.getElementById("show").onclick=()=>{bars.querySelectorAll(".bar").forEach(r=>{r.querySelector(".fill").style.width=Math.max(.4,r.dataset.w)+"%";r.querySelector(".num").textContent=r.dataset.t;});};
+</script>
+
+</html>

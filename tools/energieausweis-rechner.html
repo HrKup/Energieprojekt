@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Energieausweis-Rechner</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: eine ruhige Spalte wie ein Arbeitsblatt, Karten nur für Übungen */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#17302b; --muted:#5a6d68; --line:#d5dfdb;
+  --accent:#0e7a63; --accent-ink:#ffffff; --soft:#e3f1ec; --ok:#1d7a3a; --ok-bg:#e2f4e6; --bad:#b3261e; --bad-bg:#fbe7e5;
+  --font:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101a18; --surface:#182522; --ink:#e3eeea; --muted:#9fb3ad; --line:#2c3d39;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1d3530; --ok:#7fd69a; --ok-bg:#16301f; --bad:#ff9a90; --bad-bg:#3a1c1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101a18; --surface:#182522; --ink:#e3eeea; --muted:#9fb3ad; --line:#2c3d39;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1d3530; --ok:#7fd69a; --ok-bg:#16301f; --bad:#ff9a90; --bad-bg:#3a1c1a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1{font-size:1.75rem;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:1.2rem;margin:0 0 4px}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted);font-weight:600}
+p{margin:0}
+.lead{color:var(--muted);max-width:65ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--muted);font-weight:600}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0;width:11rem}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;font-weight:600;border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:6px;padding:8px 12px;cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.result{background:var(--soft);border-radius:8px;padding:12px 14px;font-variant-numeric:tabular-nums}
+.big{font-size:1.6rem;font-weight:700}
+.fb{border-radius:6px;padding:6px 10px;font-size:.95rem}
+.fb.ok{background:var(--ok-bg);color:var(--ok)}
+.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.small{font-size:.85rem;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+.scale{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;position:relative;padding-top:30px}
+.scale div{color:#fff;font-weight:700;text-align:center;padding:8px 0;font-size:.95rem;border-radius:3px}
+.scale small{display:block;font-weight:500;font-size:.68rem;opacity:.95}
+.marker{position:absolute;top:0;transform:translateX(-50%);font-weight:700;font-size:.85rem;white-space:nowrap;transition:left .3s}
+.marker::after{content:"";display:block;width:0;height:0;margin:2px auto 0;border:7px solid transparent;border-top-color:var(--ink);border-bottom:0}
+.house{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center}
+.classes{display:flex;flex-wrap:wrap;gap:4px}
+.classes button{padding:4px 9px;min-width:2.4rem}
+@media (max-width:520px){.scale small{display:none}.house{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+  <div><div class="eyebrow">Energieberatung · Teil 1 und 6</div><h1>Energieausweis-Rechner</h1></div>
+  <p class="lead">Der Energiekennwert zeigt, wie viel Energie ein Gebäude pro Quadratmeter Wohnfläche und Jahr für Heizung und Warmwasser braucht. Gib Verbrauch und Wohnfläche ein. Das Beispiel ist das Einfamilienhaus aus den Lernpfaden.</p>
+
+  <section class="card" aria-labelledby="h-rechner">
+    <h2 id="h-rechner">Rechner</h2>
+    <div class="row">
+      <label for="verbrauch">Verbrauch pro Jahr<input id="verbrauch" type="number" min="0" step="any" value="18000"></label>
+      <label for="einheit">Einheit<select id="einheit">
+        <option value="1">kWh</option><option value="10">m³ Erdgas</option><option value="10">Liter Heizöl</option></select></label>
+      <label for="flaeche">Wohnfläche in m²<input id="flaeche" type="number" min="1" step="any" value="150"></label>
+    </div>
+    <div class="result" id="out" aria-live="polite"></div>
+    <div class="scale" id="scale" aria-hidden="true"><span class="marker" id="marker"></span></div>
+    <p class="small">Umrechnung: 1 m³ Erdgas ≈ 10 kWh, 1 Liter Heizöl ≈ 10 kWh. Klassen nach Gebäudeenergiegesetz (Wohngebäude).</p>
+  </section>
+
+  <section class="card" aria-labelledby="h-ueben">
+    <h2 id="h-ueben">Übungshäuser</h2>
+    <p class="small">Rechne zuerst selbst, dann wähle die Klasse. Erst danach darfst du den Rechner oben zur Kontrolle nutzen.</p>
+    <div id="houses" style="display:flex;flex-direction:column;gap:16px"></div>
+  </section>
+</div>
+<script>
+const K=[["A+",0,30,"#00843f"],["A",30,50,"#3aa935"],["B",50,75,"#8cc63f"],["C",75,100,"#d4e021"],["D",100,130,"#f3d81f"],["E",130,160,"#f4b120"],["F",160,200,"#ec7c1f"],["G",200,250,"#e2401f"],["H",250,1e9,"#b81e23"]];
+const fmt=n=>n.toLocaleString("de-DE",{maximumFractionDigits:0});
+function klasse(w){return K.findIndex(k=>w<k[2]);}
+const sc=document.getElementById("scale");
+K.forEach(k=>{const d=document.createElement("div");d.style.background=k[3];if(k[0]==="C"||k[0]==="D")d.style.color="#222";d.innerHTML=k[0]+"<small>"+(k[2]>1e8?"über "+k[1]:k[0]==="A+"?"unter 30":k[1]+"–"+k[2])+"</small>";sc.appendChild(d);});
+function calc(){
+  const v=parseFloat(verbrauch.value),f=parseFloat(flaeche.value),e=parseFloat(einheit.value);
+  const out=document.getElementById("out"),m=document.getElementById("marker");
+  if(!(v>=0)||!(f>0)){out.textContent="Gib einen Verbrauch und eine Wohnfläche größer als 0 ein.";m.hidden=true;return;}
+  const kwh=v*e,w=kwh/f,i=klasse(w);
+  out.innerHTML=(e!==1?fmt(v)+" × 10 = "+fmt(kwh)+" kWh · ":"")+fmt(kwh)+" kWh : "+fmt(f)+" m² = <span class='big'>"+w.toLocaleString("de-DE",{maximumFractionDigits:1})+" kWh pro m² und Jahr</span><br>Effizienzklasse <strong>"+K[i][0]+"</strong>";
+  const lo=K[i][1],hi=Math.min(K[i][2],K[i][1]+100),pos=Math.min(1,(w-lo)/(hi-lo));
+  m.hidden=false;m.style.left=((i+pos)/9*100)+"%";m.textContent=K[i][0];
+}
+[verbrauch,einheit,flaeche].forEach(x=>x.addEventListener("input",calc));calc();
+
+const H=[["Wohnung im Mehrfamilienhaus","72 m², 9 000 kWh Fernwärme pro Jahr",9000/72],
+         ["Altbau von 1960","120 m², 2 800 m³ Erdgas pro Jahr",28000/120],
+         ["Neubau mit Wärmepumpe","140 m², 4 900 kWh Wärme pro Jahr",4900/140]];
+const hs=document.getElementById("houses");
+H.forEach((h,n)=>{
+  const box=document.createElement("div");box.className="house";
+  box.innerHTML="<div><strong>"+(n+1)+". "+h[0]+"</strong><br><span class='small'>"+h[1]+"</span></div><div class='classes' role='group' aria-label='Klasse wählen'></div><div class='fb' hidden style='grid-column:1/-1'></div>";
+  const g=box.querySelector(".classes"),fb=box.querySelector(".fb"),right=klasse(h[2]);
+  K.forEach((k,i)=>{const b=document.createElement("button");b.type="button";b.textContent=k[0];b.setAttribute("aria-pressed","false");
+    b.onclick=()=>{g.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");fb.hidden=false;
+      if(i===right){fb.className="fb ok";fb.textContent="Richtig: "+h[2].toLocaleString("de-DE",{maximumFractionDigits:0})+" kWh pro m² und Jahr, Klasse "+k[0]+".";}
+      else{fb.className="fb bad";fb.textContent="Noch nicht. Rechne Energie (kWh) : Wohnfläche (m²). "+(n===1?"Denk an die Umrechnung von m³ in kWh.":"");}};
+    g.appendChild(b);});
+  hs.appendChild(box);
+});
+</script>
+
+</html>

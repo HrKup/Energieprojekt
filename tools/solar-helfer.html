@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solar-Helfer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: eine ruhige Spalte wie ein Arbeitsblatt, Karten nur für Übungen */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#17302b; --muted:#5a6d68; --line:#d5dfdb;
+  --accent:#0e7a63; --accent-ink:#ffffff; --soft:#e3f1ec; --ok:#1d7a3a; --ok-bg:#e2f4e6; --bad:#b3261e; --bad-bg:#fbe7e5;
+  --font:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101a18; --surface:#182522; --ink:#e3eeea; --muted:#9fb3ad; --line:#2c3d39;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1d3530; --ok:#7fd69a; --ok-bg:#16301f; --bad:#ff9a90; --bad-bg:#3a1c1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101a18; --surface:#182522; --ink:#e3eeea; --muted:#9fb3ad; --line:#2c3d39;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1d3530; --ok:#7fd69a; --ok-bg:#16301f; --bad:#ff9a90; --bad-bg:#3a1c1a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1{font-size:1.75rem;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:1.2rem;margin:0 0 4px}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted);font-weight:600}
+p{margin:0}
+.lead{color:var(--muted);max-width:65ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--muted);font-weight:600}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0;width:11rem}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;font-weight:600;border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:6px;padding:8px 12px;cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.result{background:var(--soft);border-radius:8px;padding:12px 14px;font-variant-numeric:tabular-nums}
+.big{font-size:1.6rem;font-weight:700}
+.fb{border-radius:6px;padding:6px 10px;font-size:.95rem}
+.fb.ok{background:var(--ok-bg);color:var(--ok)}
+.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.small{font-size:.85rem;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+:root{--blue:#2b6cb0;--blue-bg:#e6effa;--orange:#c25e00;--orange-bg:#fdf0e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--blue:#8ab8ef;--blue-bg:#16243a;--orange:#f2a65a;--orange-bg:#33230f}}
+:root[data-theme=dark]{--blue:#8ab8ef;--blue-bg:#16243a;--orange:#f2a65a;--orange-bg:#33230f}
+.grid2{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:center}
+svg text{fill:var(--ink);font-family:var(--font);font-size:13px;font-weight:700;pointer-events:none}
+svg text.c{fill:var(--blue);font-size:11px}
+svg text.p{fill:var(--orange);font-size:11px}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem}.lg span::before{content:'';display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-variant-numeric:tabular-nums}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-weight:700}
+input[type=range]{width:100%;padding:0;accent-color:var(--accent)}
+@media (max-width:560px){.grid2{grid-template-columns:1fr;justify-items:center}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div><div class="eyebrow">Energieberatung · Teil 4</div><h1>Solar-Helfer</h1></div>
+  <p class="lead">Gib die Gradzahl aus der Kompass-App ein oder klicke in die Rose. Der Helfer zeigt die Himmelsrichtung, den Azimut für PVGIS und schätzt, wie viel Strom Solarmodule dort liefern. Das Beispiel ist ein Balkon nach 240°.</p>
+  <section class="card" aria-labelledby="h-a">
+    <h2 id="h-a">Ausrichtung</h2>
+    <div class="grid2">
+      <svg id="rose" viewBox="-136 -136 272 272" width="280" height="280" role="img" aria-label="Kompassrose: außen Kompass-Grad, innen PVGIS-Azimut. Klicke in die Rose, um eine Richtung zu wählen." style="cursor:pointer;touch-action:none">
+        <circle r="132" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+        <circle r="103" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="2"/>
+        <circle r="70" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+        <path id="good" fill="var(--ok-bg)" stroke="var(--ok)" stroke-width="1"/>
+        <g id="ticks"></g>
+        <line id="arrow" x1="0" y1="0" x2="0" y2="-122" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+        <circle r="7" fill="var(--accent)"/>
+      </svg>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0;width:100%">
+        <div class="row">
+          <label for="deg">Kompass in Grad<input id="deg" type="number" min="0" max="359" value="240"></label>
+        </div>
+        <input id="slider" type="range" min="0" max="359" value="240" aria-label="Kompass in Grad">
+        <dl class="kv">
+          <dt>Himmelsrichtung</dt><dd id="dir"></dd>
+          <dt>Azimut für PVGIS</dt><dd id="azi"></dd>
+          <dt>Balkonkraftwerk</dt><dd id="eig"></dd>
+        </dl>
+        <div class="lg"><span style="--c:var(--blue)">außen: Kompass (ab Norden)</span><span style="--c:var(--orange)">Mitte: Azimut für PVGIS (ab Süden)</span></div>
+        <p class="small">Du kannst auch direkt in die Rose klicken oder den Zeiger ziehen. PVGIS misst den Azimut von Süden aus: Azimut = Kompass − 180°, Westen ist plus, Osten minus. Der grüne Bereich ist ideal (Südost bis Südwest).</p>
+      </div>
+    </div>
+  </section>
+  <section class="card" aria-labelledby="h-b">
+    <h2 id="h-b">Ertrag schätzen</h2>
+    <div class="row">
+      <label for="tilt">Neigung der Module<select id="tilt"><option value="0">0° (waagerecht)</option><option value="30">30° (Schrägdach)</option><option value="60">60°</option><option value="90" selected>90° (senkrecht am Geländer)</option></select></label>
+      <label for="kwp">Leistung in kWp<input id="kwp" type="number" min="0" step="0.1" value="0.8"></label>
+    </div>
+    <div class="result" id="out" aria-live="polite"></div>
+    <p class="small">Schätzung für Kiel ohne Schatten: 1 kWp liefert bei bester Ausrichtung etwa 950 kWh pro Jahr. PVGIS rechnet genauer. Weicht dein PVGIS-Ergebnis stark ab, prüfe Azimut, Neigung und Leistung.</p>
+  </section>
+</div>
+<script>
+const D=["Norden","Nordosten","Osten","Südosten","Süden","Südwesten","Westen","Nordwesten"];
+const T={0:[87,87,87],30:[100,95,83],60:[91,85,70],90:[70,62,50]}; // Abweichung von Süd: 0°,45°,90°
+const ticks=document.getElementById("ticks"),NS="http://www.w3.org/2000/svg";
+function txt(x,y,l,cls){const t=document.createElementNS(NS,"text");t.setAttribute("x",x.toFixed(1));t.setAttribute("y",(y+4).toFixed(1));t.setAttribute("text-anchor","middle");if(cls)t.setAttribute("class",cls);t.textContent=l;ticks.appendChild(t);}
+["N","NO","O","SO","S","SW","W","NW"].forEach((l,i)=>{const a=i*45*Math.PI/180,sx=Math.sin(a),cy=-Math.cos(a);
+  txt(sx*52,cy*52,l);
+  txt(sx*118,cy*118,(i*45)+"°","c");
+  const az=i*45-180; txt(sx*87,cy*87,az===-180?"±180°":(az>0?"+":az<0?"−":"")+Math.abs(az)+"°","p");});
+(function(){const p=(d)=>{const a=d*Math.PI/180;return [(Math.sin(a)*70).toFixed(1),(-Math.cos(a)*70).toFixed(1)]};const a=p(135),b=p(225);
+  document.getElementById("good").setAttribute("d","M0 0 L"+a[0]+" "+a[1]+" A70 70 0 0 1 "+b[0]+" "+b[1]+" Z");})();
+const deg=document.getElementById("deg"),sl=document.getElementById("slider");
+function factor(dev,tilt){ // dev = Abweichung von Süden in Grad (0..180)
+  const r=T[tilt]; if(tilt==0) return 87;
+  if(dev<=45) return r[0]+(r[1]-r[0])*dev/45;
+  if(dev<=90) return r[1]+(r[2]-r[1])*(dev-45)/45;
+  return null;}
+function upd(src){
+  let g=parseFloat(src.value); if(isNaN(g)) return; g=((Math.round(g)%360)+360)%360; deg.value=g; sl.value=g;
+  document.getElementById("arrow").setAttribute("transform","rotate("+g+")");
+  document.getElementById("dir").textContent=D[Math.round(g/45)%8];
+  let az=g-180; document.getElementById("azi").textContent=(az>0?"+":az<0?"−":"")+Math.abs(az)+"°";
+  const dev=Math.abs(az)>180?360-Math.abs(az):Math.abs(az), dv=Math.abs(g-180);
+  document.getElementById("eig").textContent=dv<=45?"ideal":dv<=90?"geeignet, etwas weniger Ertrag":dv<=135?"kaum geeignet":"ungeeignet";
+  const tilt=document.getElementById("tilt").value,kwp=parseFloat(document.getElementById("kwp").value)||0,f=factor(dv,+tilt),out=document.getElementById("out");
+  if(f===null){out.innerHTML="Diese Richtung zeigt nach Norden. Senkrechte oder schräge Module liefern hier weniger als die Hälfte und lohnen sich meist nicht.";return;}
+  const e=950*kwp*f/100;
+  out.innerHTML="Ertragsfaktor etwa <strong>"+Math.round(f)+" %</strong><br><span class='big'>≈ "+Math.round(e/10)*10+" kWh pro Jahr</span> <span class='small'>("+kwp.toLocaleString("de-DE")+" kWp · 950 kWh · "+Math.round(f)+" %)</span>";
+}
+deg.addEventListener("input",()=>upd(deg));
+const rose=document.getElementById("rose");let drag=false;
+function pick(e){const r=rose.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+  let g=Math.round(Math.atan2(x,-y)*180/Math.PI);if(g<0)g+=360;deg.value=g;upd(deg);}
+rose.addEventListener("pointerdown",e=>{drag=true;rose.setPointerCapture(e.pointerId);pick(e);});
+rose.addEventListener("pointermove",e=>{if(drag)pick(e);});
+rose.addEventListener("pointerup",()=>drag=false);sl.addEventListener("input",()=>upd(sl));
+["tilt","kwp"].forEach(id=>document.getElementById(id).addEventListener("input",()=>upd(deg)));
+upd(deg);
+</script>
+
+</body>
+</html>
