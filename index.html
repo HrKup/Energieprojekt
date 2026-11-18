@@ -234,7 +234,7 @@ const CH=[
   </tbody></table></div>`},
  {k:"info",t:"Fortschritt sichern",h:`<div class="eyebrow">Start</div><h1>Am Stundenende: Fortschritt sichern</h1>
   <div class="text"><p>Der Lernpfad merkt sich, was du erledigt hast. An einem anderen Computer weiß er das aber nicht mehr. Deshalb sicherst du deinen Fortschritt in deinem Protokoll. Das dauert 10 Sekunden.</p></div>
-  <div class="card"><h2>Stundenende</h2><ol class="bullets"><li>Klicke oben rechts auf <b>Fortschritt sichern</b>. Dein Code ist jetzt kopiert.</li><li>Öffne dein Protokoll, klicke auf Seite 2 in das Feld <b>Mein Fortschrittscode</b> und drücke <b>Strg + V</b>. Alten Code vorher markieren und überschreiben.</li><li>Protokoll speichern.</li></ol></div>
+  <div class="card"><h2>Stundenende</h2><ol class="bullets"><li>Klicke oben rechts auf <b>Fortschritt sichern</b>. Dein Code ist jetzt kopiert.</li><li>Öffne dein Protokoll, klicke auf Seite 1 in das Feld <b>Mein Fortschrittscode</b> und drücke <b>Strg + V</b>. Alten Code vorher markieren und überschreiben.</li><li>Protokoll speichern.</li></ol></div>
   <div class="card"><h2>Stundenbeginn an einem anderen Computer</h2><ol class="bullets"><li>Öffne den Lernpfad über den Link in itslearning.</li><li>Kopiere den Code aus deinem Protokoll (markieren, <b>Strg + C</b>) und füge ihn auf der Startseite ein (<b>Strg + V</b>).</li><li>Klicke auf <b>Weiter, wo ich aufgehört habe</b>.</li></ol></div>`},
  {k:"info",t:"Dein Weg durch das Projekt",h:`<div class="eyebrow">Start</div><h1>Dein Weg durch das Projekt</h1>
   <div class="text"><p>Jeder Teil hat zwei Hälften: Erst lernst du hier im Lernpfad, dann arbeitest du im Protokoll mit deinen eigenen Daten. Die Punkte zeigen ungefähr, wann du an welchem Teil arbeiten solltest. Was du im Unterricht nicht schaffst, erledigst du zu Hause.</p></div>
@@ -383,7 +383,7 @@ function home(){
   $("#slide").innerHTML=`<div class="eyebrow">Lernpfad zur Energieberatung</div><h1>Das Wissen für dein Gutachten</h1>
   <div class="card"><h2>Weiterarbeiten</h2>
    ${resume?`<p>Zuletzt warst du in <b>${chapter(resume[0]).short}, Folie ${resume[1]+1}</b>.</p><div><button class="btn primary" id="resume">Weiter, wo ich aufgehört habe</button></div>`:`<p>Du bist zum ersten Mal hier? Dann starte mit „So funktioniert der Lernpfad“.</p><div><button class="btn primary" id="resume">Lernpfad starten</button></div>`}
-   <details class="tip"${resume?"":" open"}><summary>Anderer Computer? Fortschrittscode einfügen</summary><div style="display:flex;flex-direction:column;gap:8px"><label for="codeIn" class="small">Kopiere den Code aus deinem Protokoll (Seite 2) und füge ihn hier mit Strg + V ein.</label><textarea id="codeIn" placeholder="EB-…"></textarea><div><button class="btn" id="codeGo">Fortschritt laden</button></div><div class="fb" id="codeFb" hidden></div></div></details></div>
+   <details class="tip"${resume?"":" open"}><summary>Anderer Computer? Fortschrittscode einfügen</summary><div style="display:flex;flex-direction:column;gap:8px"><label for="codeIn" class="small">Kopiere den Code aus deinem Protokoll (Seite 1) und füge ihn hier mit Strg + V ein.</label><textarea id="codeIn" placeholder="EB-…"></textarea><div><button class="btn" id="codeGo">Fortschritt laden</button></div><div class="fb" id="codeFb" hidden></div></div></details></div>
   <h2>Die Teile</h2><div class="chap-list">${CH.map((c,k)=>`<button class="chap" data-go="${c.id}" ${c.slides.length?"":"disabled"}><span class="num">${c.id==="start"?"★":c.id==="zusatz"?"Z":c.id==="anhang"?"A":c.id.replace("teil","")}</span><span><b>${c.title}</b><span class="meta">${c.slides.length?` · ${c.slides.length} Folien`:" · folgt"}</span><span class="bar"><i style="width:${pct(c.id)}%"></i></span></span><span class="pct">${c.slides.length?pct(c.id)+" %":""}</span></button>`).join("")}</div>`;
   $("#resume").onclick=()=>resume?go(resume[0],resume[1]):go("start",0);
   document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const c=b.dataset.go;const ch=chapter(c);const first=ch.slides.findIndex((s,i)=>!isDone(c,i));go(c,first<0?0:first);});
@@ -435,7 +435,7 @@ document.addEventListener("keydown",e=>{if(e.target.matches("input,textarea,sele
 $("#saveBtn").onclick=()=>{
   const code=makeCode();let copied=false;
   const done=()=>{$("#dlg").innerHTML=`<h2>${copied?"Code kopiert":"Dein Fortschrittscode"}</h2>
-   <p>${copied?"Öffne jetzt dein Protokoll, klicke auf Seite 2 in das Feld <b>Mein Fortschrittscode</b> und drücke <b>Strg + V</b>. Dann Protokoll speichern.":"Markiere den Code, kopiere ihn mit <b>Strg + C</b> und füge ihn im Protokoll auf Seite 2 bei <b>Mein Fortschrittscode</b> ein."}</p>
+   <p>${copied?"Öffne jetzt dein Protokoll, klicke auf Seite 1 in das Feld <b>Mein Fortschrittscode</b> und drücke <b>Strg + V</b>. Dann Protokoll speichern.":"Markiere den Code, kopiere ihn mit <b>Strg + C</b> und füge ihn im Protokoll auf Seite 1 bei <b>Mein Fortschrittscode</b> ein."}</p>
    <div class="code-box" id="codeShow">${code}</div><div><button class="btn primary" id="dlgClose">Fertig</button></div>`;
    $("#ov").hidden=false;$("#dlgClose").onclick=()=>$("#ov").hidden=true;$("#dlgClose").focus();
    if(!copied){const r=document.createRange();r.selectNodeContents($("#codeShow"));const s=getSelection();s.removeAllRanges();s.addRange(r);}};
