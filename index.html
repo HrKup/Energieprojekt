@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Lernpfad Energieberatung</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: App wie ein Foliensatz. Links Folienleiste (Miniaturen mit Status), rechts die Folie, unten Blätterleiste. */
+:root{
+  --bg:#eef3f1; --surface:#ffffff; --ink:#15302a; --muted:#566b65; --line:#cfdcd7;
+  --accent:#0e7a63; --accent-ink:#ffffff; --soft:#e0f0ea;
+  --done:#1f8a4c; --done-bg:#dff3e6; --open:#b9c4c0;
+  --mappe:#a35a00; --mappe-bg:#fff1dc; --proto:#1d5fa8; --proto-bg:#e3eefb;
+  --bad:#b3261e; --bad-bg:#fbe7e5; --star:#c98a00;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1917; --surface:#172421; --ink:#e2eeea; --muted:#9db2ab; --line:#2b3d38;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1b3430;
+  --done:#6fd396; --done-bg:#163222; --open:#4a5a55;
+  --mappe:#ffb758; --mappe-bg:#3a2a12; --proto:#8cbcf2; --proto-bg:#16283d;
+  --bad:#ff9a90; --bad-bg:#3a1c1a; --star:#f2c14e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1917; --surface:#172421; --ink:#e2eeea; --muted:#9db2ab; --line:#2b3d38;
+  --accent:#4cc3a3; --accent-ink:#0b1513; --soft:#1b3430;
+  --done:#6fd396; --done-bg:#163222; --open:#4a5a55;
+  --mappe:#ffb758; --mappe-bg:#3a2a12; --proto:#8cbcf2; --proto-bg:#16283d;
+  --bad:#ff9a90; --bad-bg:#3a1c1a; --star:#f2c14e; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent)}
+.app{display:grid;grid-template-rows:auto 1fr auto;height:100%}
+/* Kopfleiste */
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{font-family:var(--display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:0;padding:4px 2px}
+.brand .dot{width:12px;height:12px;border-radius:3px;background:var(--accent)}
+.where{color:var(--muted);font-size:.95rem;min-width:0;flex:1}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;width:120px}
+.bar>i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
+.pct{font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem;min-width:3.2em;text-align:right}
+.btn{border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.menu-btn{display:none}
+/* Mitte */
+.mid{display:grid;grid-template-columns:270px 1fr;min-height:0}
+.side{border-right:1px solid var(--line);background:var(--surface);overflow-y:auto;padding:12px 10px 20px;display:flex;flex-direction:column;gap:10px}
+.side select{width:100%;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-weight:700}
+.thumbs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.thumb{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;width:100%;text-align:left;border:2px solid var(--line);border-left-width:8px;border-left-color:var(--open);background:var(--bg);border-radius:8px;padding:6px 8px;cursor:pointer}
+.thumb .n{font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted);font-size:.85rem}
+.thumb .t{font-size:.85rem;line-height:1.25;min-width:0}
+.thumb .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block}
+.thumb.done{border-left-color:var(--done);background:var(--done-bg)}
+.thumb.cur{border-color:var(--accent);border-left-color:var(--accent)}
+.thumb.done.cur{border-left-color:var(--done)}
+.thumb .s{font-size:.9rem}
+.legend{font-size:.78rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;padding:4px 2px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.stage{overflow-y:auto;padding-block:24px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.slide{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.slide h1{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.015em}
+.slide h2{font-size:1.25rem;font-weight:600}
+.lead{font-size:1.1rem}
+.text{max-width:68ch;display:flex;flex-direction:column;gap:12px}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:700;letter-spacing:.03em;text-transform:none}
+.tag.mappe{background:var(--mappe-bg);color:var(--mappe)}
+.tag.proto{background:var(--proto-bg);color:var(--proto)}
+.tag.screen{background:var(--soft);color:var(--accent)}
+.tag.star{background:var(--mappe-bg);color:var(--star)}
+.where-box{border-radius:10px;padding:12px 16px;display:flex;gap:12px;align-items:flex-start;font-weight:700}
+.where-box.mappe{background:var(--mappe-bg);color:var(--mappe)}
+.where-box.proto{background:var(--proto-bg);color:var(--proto)}
+.where-box .ic{font-size:1.4rem;line-height:1}
+.where-box p{color:var(--ink);font-weight:400}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.merk{border-left:6px solid var(--accent);background:var(--soft);border-radius:0 10px 10px 0;padding:12px 16px;font-weight:700}
+.formula{font-family:var(--display);font-weight:800;font-size:1.35rem;background:var(--surface);border:2px solid var(--accent);border-radius:10px;padding:10px 16px;align-self:flex-start}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.bullets{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.task-q{font-size:1.15rem}
+details.tip{border:1px dashed var(--accent);border-radius:10px;padding:8px 14px;background:var(--surface)}
+details.tip summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details.tip[open]{border-style:solid}
+details.tip div{padding-top:8px}
+.check{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.check label{display:flex;flex-direction:column;gap:4px;font-size:.88rem;font-weight:700;color:var(--muted)}
+.check input,.check select{width:10rem;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg)}
+.fb{border-radius:8px;padding:8px 12px;font-size:.95rem}
+.fb.ok{background:var(--done-bg);color:var(--done)}
+.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.sol{background:var(--soft);border-radius:10px;padding:12px 16px}
+.done-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:14px}
+.btn.done-btn[aria-pressed="true"]{background:var(--done);border-color:var(--done);color:var(--accent-ink)}
+.small{font-size:.85rem;color:var(--muted)}
+/* Effizienzklassen */
+.scale{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;border-radius:6px;overflow:hidden;position:relative;margin-top:22px}
+.scale div{color:#fff;font-weight:700;text-align:center;padding:6px 2px;font-size:.9rem;line-height:1.1}
+.scale small{display:block;font-weight:400;font-size:.68rem}
+.marker{position:absolute;top:-22px;transform:translateX(-50%);font-size:.8rem;font-weight:700;color:var(--ink)}
+.house{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;border-top:1px solid var(--line);padding-top:12px}
+.classes{display:flex;flex-wrap:wrap;gap:4px}
+.classes button{padding:4px 9px;min-width:2.4rem;border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:6px;font-weight:700;cursor:pointer}
+.classes button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.big{font-size:1.5rem;font-weight:700}
+/* Schätz-Balken */
+.est{display:grid;grid-template-columns:8.5rem 1fr 4rem;gap:6px 12px;align-items:center}
+.est .b{height:14px;border-radius:7px;background:var(--line);position:relative;overflow:hidden}
+.est .b i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.est .b i.uba{background:var(--mappe)}
+/* Startseite */
+.chap-list{display:grid;gap:10px}
+.chap{display:grid;grid-template-columns:2.4rem 1fr auto;gap:12px;align-items:center;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.chap .num{font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--accent);text-align:center}
+.chap[disabled]{cursor:default;opacity:.55}
+.chap .bar{width:100%;margin-top:6px}
+.chap .meta{font-size:.85rem;color:var(--muted)}
+.code-box{font-family:ui-monospace,Consolas,monospace;font-size:1rem;word-break:break-all;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;user-select:all}
+textarea{width:100%;min-height:4.5rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);padding:10px;font-family:ui-monospace,Consolas,monospace}
+.plan{overflow-x:auto}
+.plan td.on{background:var(--mappe-bg)}
+.plan td.on::after{content:"●";color:var(--mappe)}
+.plan td{text-align:center}
+.plan td:first-child{text-align:left}
+/* Fußleiste */
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--surface);border-top:1px solid var(--line)}
+.foot .count{font-variant-numeric:tabular-nums;font-weight:700}
+.foot .grp{display:flex;gap:8px}
+/* Dialog */
+.overlay{position:fixed;inset:0;background:rgba(10,20,18,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.dialog{background:var(--surface);border-radius:14px;max-width:560px;width:100%;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+@media (max-width:900px){
+  .mid{grid-template-columns:1fr}
+  .side{display:none;position:fixed;inset:56px 0 64px 0;z-index:15;border-right:0}
+  .side.show{display:flex}
+  .menu-btn{display:inline-block}
+  .bar.top-bar{width:70px}
+  .where{flex-basis:100%;order:5}
+}
+@media (max-width:520px){.scale small{display:none}.house{grid-template-columns:1fr}.est{grid-template-columns:6.5rem 1fr 3.4rem}.foot .first{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="top">
+    <button class="btn ghost menu-btn" id="menuBtn" aria-controls="side" aria-expanded="false">Folien</button>
+    <button class="brand" id="homeBtn" title="Zur Übersicht"><span class="dot"></span>Energieberatung</button>
+    <span class="where" id="where"></span>
+    <span class="bar top-bar" aria-hidden="true"><i id="topBar"></i></span><span class="pct" id="topPct"></span>
+    <button class="btn primary" id="saveBtn">Fortschritt sichern</button>
+  </header>
+  <div class="mid">
+    <nav class="side" id="side" aria-label="Folien">
+      <select id="chapSel" aria-label="Teil wählen"></select>
+      <ol class="thumbs" id="thumbs"></ol>
+      <div class="legend"><span style="--c:var(--done)">grün: erledigt</span><span style="--c:var(--open)">grau: noch offen</span><span style="--c:var(--accent)">Rahmen: hier bist du</span></div>
+    </nav>
+    <main class="stage" id="stage"><div class="slide" id="slide"></div></main>
+  </div>
+  <footer class="foot" id="foot">
+    <div class="grp"><button class="btn ghost first" id="firstBtn">Erste Folie</button><button class="btn ghost" id="prevBtn">Zurück</button></div>
+    <span class="count" id="count"></span>
+    <button class="btn primary" id="nextBtn">Weiter</button>
+  </footer>
+</div>
+<div class="overlay" id="ov" hidden><div class="dialog" id="dlg" role="dialog" aria-modal="true"></div></div>
+
+<script>
+/* ---------- Hilfen ---------- */
+const $=s=>document.querySelector(s);
+const de=(n,d=2)=>Number(n).toLocaleString("de-DE",{maximumFractionDigits:d});
+const num=v=>parseFloat(String(v).replace(/\s| /g,"").replace(",","."));
+const MAPPE='<div class="where-box mappe"><span class="ic">✎</span><div>In deine Mappe<p>Schreib den Rechenweg und das Ergebnis mit Einheit in deine Mappe. Hier kannst du dein Ergebnis danach prüfen.</p></div></div>';
+function tips(list){return list.map((t,i)=>`<details class="tip"><summary>Tipp ${i+1}${list.length>1&&i==list.length-1?" (fast die Lösung)":""}</summary><div>${t}</div></details>`).join("");}
+/* Prüffelder: [label, richtig, Toleranz, Einheit] */
+function checker(id,fields,solution){
+  return `<div class="card"><h2>Ergebnis prüfen</h2><div class="check">${fields.map((f,i)=>`<label for="${id}_${i}">${f[0]}<input id="${id}_${i}" inputmode="decimal" autocomplete="off" placeholder="${f[3]}"></label>`).join("")}<button class="btn" data-check="${id}">Prüfen</button></div><div class="fb" id="${id}_fb" hidden></div><details class="tip"><summary>Lösung anzeigen</summary><div class="sol">${solution}</div></details></div>`;
+}
+const CHECKS={};
+function regCheck(id,fields){CHECKS[id]=fields;}
+
+/* ---------- Inhalte ---------- */
+const CH=[
+{id:"start",short:"Start",title:"So funktioniert der Lernpfad",slides:[
+ {k:"info",t:"Willkommen",h:`<div class="eyebrow">Start</div><h1>Du wirst Energieberaterin oder Energieberater</h1>
+  <div class="text"><p class="lead">In den nächsten Wochen untersuchst du eine Wohnung oder ein Haus, sammelst Daten, nimmst Wärmebilder auf und schreibst am Ende ein Gutachten mit Verbesserungsvorschlägen.</p>
+  <p>Dafür brauchst du nur zwei Dinge:</p></div>
+  <div class="card"><h2>1. Diesen Lernpfad</h2><p>Hier lernst du Folie für Folie, was du für dein Gutachten wissen musst. Du übst mit Beispielzahlen. Rechenaufgaben löst du in deiner Mappe und prüfst sie hier. Der Lernpfad wird nicht benotet.</p></div>
+  <div class="card"><h2>2. Dein Protokoll (Word-Datei)</h2><p>Das ist die einzige Datei, die du speichern musst. Dort trägst du die Daten deiner Wohnung oder deines Hauses ein, rechnest mit deinen eigenen Zahlen und schreibst am Ende dein Gutachten. Protokoll und Gutachten werden bewertet.</p></div>`},
+ {k:"info",t:"So bedienst du den Lernpfad",h:`<div class="eyebrow">Start</div><h1>So bedienst du den Lernpfad</h1>
+  <div class="text"><p>Unten blätterst du mit <b>Weiter</b> und <b>Zurück</b>. Links (am Handy unter „Folien“) siehst du alle Folien des Teils.</p></div>
+  <div class="card"><table><tbody>
+   <tr><td style="width:9rem"><span class="tag" style="background:var(--done-bg);color:var(--done)">grün</span></td><td>Folie erledigt. Infofolien werden grün, wenn du auf <b>Weiter</b> klickst. Aufgaben werden grün, wenn du auf <b>Aufgabe erledigt</b> klickst.</td></tr>
+   <tr><td><span class="tag" style="background:var(--line);color:var(--ink)">grau</span></td><td>Noch offen oder übersprungen. So siehst du sofort, was dir noch fehlt.</td></tr>
+   <tr><td><span class="tag mappe">✎ Mappe</span></td><td>Diese Aufgabe bearbeitest du in deiner Mappe.</td></tr>
+   <tr><td><span class="tag proto">▤ Protokoll</span></td><td>Jetzt wechselst du in dein Protokoll (Word).</td></tr>
+   <tr><td><span class="tag star">★ freiwillig</span></td><td>Für alle, die schneller fertig sind.</td></tr>
+  </tbody></table></div>`},
+ {k:"info",t:"Fortschritt sichern",h:`<div class="eyebrow">Start</div><h1>Am Stundenende: Fortschritt sichern</h1>
+  <div class="text"><p>Der Lernpfad merkt sich, was du erledigt hast. An einem anderen Computer weiß er das aber nicht mehr. Deshalb sicherst du deinen Fortschritt in deinem Protokoll. Das dauert 10 Sekunden.</p></div>
+  <div class="card"><h2>Stundenende</h2><ol class="bullets"><li>Klicke oben rechts auf <b>Fortschritt sichern</b>. Dein Code ist jetzt kopiert.</li><li>Öffne dein Protokoll, klicke auf Seite 2 in das Feld <b>Mein Fortschrittscode</b> und drücke <b>Strg + V</b>. Alten Code vorher markieren und überschreiben.</li><li>Protokoll speichern.</li></ol></div>
+  <div class="card"><h2>Stundenbeginn an einem anderen Computer</h2><ol class="bullets"><li>Öffne den Lernpfad über den Link in itslearning.</li><li>Kopiere den Code aus deinem Protokoll (markieren, <b>Strg + C</b>) und füge ihn auf der Startseite ein (<b>Strg + V</b>).</li><li>Klicke auf <b>Weiter, wo ich aufgehört habe</b>.</li></ol></div>`},
+ {k:"info",t:"Zwei Fenster nebeneinander",h:`<div class="eyebrow">Start</div><h1>Lernpfad und Protokoll nebeneinander</h1>
+  <div class="text"><p>Am bequemsten arbeitest du, wenn beide Fenster gleichzeitig zu sehen sind.</p>
+  <ul class="bullets"><li>Klicke in den Browser und drücke <b>Windows-Taste + Pfeil links</b>. Der Lernpfad füllt die linke Hälfte.</li><li>Klicke dann rechts auf dein Protokoll. Es füllt die rechte Hälfte.</li></ul>
+  <h2>Tipps fürs Protokoll</h2>
+  <ul class="bullets"><li><b>Speichern:</b> in IServ unter Dateien → Eigene → „Energieprojekt“. Ersetze im Dateinamen „Mein Name“ durch deinen Namen. Speichere am Ende jeder Stunde.</li>
+  <li><b>Rechnungen tippen:</b> Schreib den Rechenweg in eine Zeile, zum Beispiel 18 000 kWh : 150 m2 = 120 kWh pro m2. Statt · darfst du * schreiben.</li>
+  <li><b>Tabellen:</b> Mit der Tab-Taste springst du in die nächste Zelle.</li>
+  <li><b>Du kommst nicht weiter?</b> Notiere deine Frage in der Mappe und mach weiter. Wir klären sie in der nächsten Stunde.</li></ul></div>`},
+ {k:"info",t:"Dein Weg durch das Projekt",h:`<div class="eyebrow">Start</div><h1>Dein Weg durch das Projekt</h1>
+  <div class="text"><p>Jeder Teil hat zwei Hälften: Erst lernst du hier im Lernpfad, dann arbeitest du im Protokoll mit deinen eigenen Daten. Die Punkte zeigen ungefähr, wann du an welchem Teil arbeiten solltest. Was du im Unterricht nicht schaffst, erledigst du zu Hause.</p></div>
+  <div class="card plan"><table id="planTbl"></table></div>
+  <p class="small">Vor jedem Teil erhebst du zu Hause die Daten, die im Protokoll am Anfang des Teils stehen.</p>`},
+]},
+{id:"teil1",short:"Teil 1",title:"Haus und Haushalt",slides:[
+ {k:"info",t:"Darum geht es",h:`<div class="eyebrow">Teil 1 · Haus und Haushalt</div><h1>Rechnen mit Energie</h1>
+  <div class="text"><p class="lead">Bevor du ein Haus oder eine Wohnung beurteilen kannst, musst du mit Energie rechnen können. Alles, was du hier übst, brauchst du in den späteren Teilen wieder.</p></div>
+  <div class="card"><h2>Das lernst du in Teil 1</h2><ul class="bullets"><li>den Unterschied zwischen <b>Watt</b> und <b>Kilowattstunde</b></li><li>Einsparungen mit <b>Prozentrechnung</b> richtig berechnen</li><li><b>Kosten</b>, <b>Amortisationszeit</b> und <b>CO₂</b> ausrechnen</li><li>den <b>Energieausweis</b> lesen und selbst einen Energiekennwert bestimmen</li></ul></div>
+  <div class="where-box proto"><span class="ic">▤</span><div>Bevor du beginnst<p>Erhebe zu Hause die Daten aus dem Protokoll, Teil 1: Personen, Wohnfläche, Baujahr, Energieausweis, Heiz- und Stromverbrauch mit Kosten.</p></div></div>`},
+ {k:"task",n:"1.1",t:"Wofür braucht ein Haushalt Energie?",h:`<div class="eyebrow">Teil 1 · Aufgabe 1.1 <span class="tag screen">● hier am Bildschirm</span></div><h1>Wofür braucht ein Haushalt Energie?</h1>
+  <p class="task-q">Schätze, wie viel Prozent der Energie eines Haushalts für <b>Heizen</b>, für <b>warmes Wasser</b> und für <b>Strom</b> (Geräte, Licht, Kochen) gebraucht werden. Zusammen sind es 100 %.</p>
+  <div class="card"><div class="check">
+   <label for="e_h">Heizen in %<input id="e_h" inputmode="numeric" placeholder="%"></label>
+   <label for="e_w">Warmwasser in %<input id="e_w" inputmode="numeric" placeholder="%"></label>
+   <label for="e_s">Strom in %<input id="e_s" inputmode="numeric" placeholder="%"></label>
+   <button class="btn primary" id="e_go">Mit dem Umweltbundesamt vergleichen</button></div>
+   <div class="fb" id="e_fb" hidden></div>
+   <div id="e_res" hidden style="display:flex;flex-direction:column;gap:10px"></div></div>
+  <div id="e_pot" hidden class="card"><h2>Wo liegt das größte Einsparpotenzial?</h2><div class="classes" id="e_potBtns"></div><div class="fb" id="e_potFb" hidden></div></div>
+  ${MAPPE.replace("Schreib den Rechenweg und das Ergebnis mit Einheit in deine Mappe. Hier kannst du dein Ergebnis danach prüfen.","Notiere deine Schätzung, die Werte des Umweltbundesamts und wo das größte Einsparpotenzial liegt.")}`},
+ {k:"info",n:"1.2",t:"Leistung: Watt",h:`<div class="eyebrow">Teil 1 · Info 1 von 6</div><h1>Leistung: Watt</h1>
+  <div class="text"><p>Die <b>Leistung P</b> gibt an, wie viel Energie ein Gerät <b>in jedem Moment</b> umsetzt. Ihre Einheit ist das <b>Watt (W)</b>. 1 000 W sind 1 kW.</p>
+  <p>Ein Watt bedeutet: In jeder Sekunde wird 1 Joule Energie umgewandelt. Ein Wasserkocher mit 2 000 W setzt also in jeder Sekunde 2 000 Joule um, ganz egal, wie lange er läuft.</p>
+  <p>Die Leistung steht auf dem <b>Typenschild</b> eines Geräts, meist hinten oder unten.</p></div>
+  <div class="merk">Watt sagt, wie „stark“ ein Gerät gerade arbeitet.</div>`},
+ {k:"info",n:"1.2",t:"Energie: Kilowattstunde",h:`<div class="eyebrow">Teil 1 · Info 2 von 6</div><h1>Energie: Kilowattstunde</h1>
+  <div class="text"><p>Die <b>Energie E</b> gibt an, wie viel <b>insgesamt</b> umgesetzt wurde. Sie entsteht erst, wenn eine Leistung eine Zeit lang wirkt:</p></div>
+  <div class="formula">Energie = Leistung · Zeit &nbsp; (E = P · t)</div>
+  <div class="text"><p>Im Haushalt misst man Energie in <b>Kilowattstunden (kWh)</b>. Bezahlt wird immer die Energie: Auf der Stromrechnung stehen Kilowattstunden, nicht Watt.</p>
+  <p><b>Beispiel:</b> Der Wasserkocher (2 kW) läuft 3 Minuten, also 0,05 h. E = 2 kW · 0,05 h = 0,1 kWh.</p>
+  <p><b>Häufiger Fehler:</b> „Watt pro Stunde“ oder „W/h“ gibt es nicht. Watt ist schon eine Größe „pro Sekunde“.</p></div>
+  <div class="merk">Watt steht auf dem Gerät, Kilowattstunden stehen auf der Rechnung.</div>`},
+ {k:"info",n:"1.2",t:"Umrechnen",h:`<div class="eyebrow">Teil 1 · Info 3 von 6</div><h1>Umrechnen</h1>
+  <div class="card tbl"><table><thead><tr><th>Umrechnen</th><th>so geht es</th></tr></thead><tbody>
+   <tr><td>W ↔ kW</td><td>2 000 W = 2 kW (durch 1 000 teilen)</td></tr>
+   <tr><td>Wh ↔ kWh</td><td>695 000 Wh = 695 kWh (durch 1 000 teilen)</td></tr>
+   <tr><td>Minuten → Stunden</td><td>3 min = 3 : 60 h = 0,05 h; 30 min = 0,5 h</td></tr>
+   <tr><td>Wh ↔ Joule</td><td>1 Wh = 1 W · 3 600 s = 3 600 J</td></tr>
+   <tr><td>Tag → Jahr</td><td>mal 365; „immer an“ = 24 h · 365 = 8 760 h</td></tr></tbody></table></div>`},
+ {k:"info",n:"1.2",t:"Prozent wovon?",h:`<div class="eyebrow">Teil 1 · Info 4 von 6</div><h1>Prozentrechnung: Prozent wovon?</h1>
+  <div class="text"><p>Prozentangaben ergeben nur Sinn, wenn man weiß, <b>wovon</b> sie gerechnet werden. Das ist der Grundwert.</p></div>
+  <div class="formula">Anteil = Grundwert · Prozentsatz : 100</div>
+  <div class="card"><h2>Beispiel: Wand dämmen</h2><ul class="bullets"><li>Ein Haus verliert im Jahr 20 000 kWh Wärme.</li><li>30 % davon gehen durch die Wände: 20 000 kWh · 30 : 100 = <b>6 000 kWh</b>.</li><li>Eine Dämmung senkt <b>den Verlust der Wände</b> um 70 %: 6 000 kWh · 70 : 100 = <b>4 200 kWh</b> gespart.</li><li>Bezogen auf das ganze Haus: 4 200 : 20 000 · 100 = <b>21 %</b>, nicht 70 %!</li></ul></div>`},
+ {k:"info",n:"1.2",t:"Kosten, Amortisation, CO₂",h:`<div class="eyebrow">Teil 1 · Info 5 von 6</div><h1>Kosten, Amortisation und CO₂</h1>
+  <div class="formula">Kosten = Energie · Preis pro kWh</div>
+  <div class="text"><p>Viele Sparmaßnahmen kosten erst einmal Geld. Die <b>Amortisationszeit</b> sagt, nach wie vielen Jahren sich die Anschaffung durch die Ersparnis bezahlt gemacht hat.</p></div>
+  <div class="formula">Amortisationszeit = Anschaffungskosten : Ersparnis pro Jahr</div>
+  <div class="text"><p><b>Beispiel:</b> Ein Gerät kostet 60 € und spart 15 € pro Jahr. Nach 60 : 15 = 4 Jahren hat es sich bezahlt gemacht, danach spart es echtes Geld.</p></div>
+  <div class="formula">CO₂ = Energie · CO₂ pro kWh</div>
+  <div class="text"><p>Wie viel CO₂ eine Kilowattstunde verursacht, hängt vom Energieträger ab. Die Werte stehen jeweils in der Aufgabe.</p></div>`},
+ {k:"info",n:"1.2",t:"Der Energieausweis",h:`<div class="eyebrow">Teil 1 · Info 6 von 6</div><h1>Der Energieausweis: ein Zeugnis für Häuser</h1>
+  <div class="text"><p>Der Energieausweis zeigt, wie viel Energie ein Gebäude pro Quadratmeter Wohnfläche und Jahr für Heizung und Warmwasser braucht. Wie beim Kühlschrank wird das Ergebnis einer <b>Effizienzklasse</b> zugeordnet. Vermieter und Verkäufer müssen den Ausweis auf Nachfrage vorlegen.</p></div>
+  <div class="formula">Energiekennwert = Energie für Heizung und Warmwasser pro Jahr (kWh) : Wohnfläche (m²)</div>
+  <div class="card"><h2>Effizienzklassen in kWh pro m² und Jahr</h2><div class="scale" data-scale></div></div>`},
+ {k:"task",n:"1.3 a",t:"Fernseher",h:`<div class="eyebrow">Teil 1 · Aufgabe 1.3 a <span class="tag mappe">✎ Mappe</span></div><h1>Fernseher</h1>
+  <p class="task-q">Ein Fernseher hat <b>100 W</b> und läuft täglich <b>4 Stunden</b>. Berechne die Energie pro Jahr in kWh und die Kosten bei einem Strompreis von <b>0,35 € pro kWh</b>.</p>${MAPPE}
+  ${tips(["Rechne erst die Energie pro Tag: E = P · t. Achte darauf, Watt in Kilowatt umzurechnen.","100 W = 0,1 kW. Pro Tag: 0,1 kW · 4 h = 0,4 kWh. Jetzt mal 365 Tage, dann mal 0,35 €."])}
+  ${checker("c1a",[["Energie pro Jahr",146,1,"kWh"],["Kosten pro Jahr",51.1,0.2,"€"]],"0,1 kW · 4 h = 0,4 kWh pro Tag<br>0,4 kWh · 365 = <b>146 kWh pro Jahr</b><br>146 kWh · 0,35 € = <b>51,10 € pro Jahr</b>")}`},
+ {k:"task",n:"1.3 b",t:"Wasserkocher",h:`<div class="eyebrow">Teil 1 · Aufgabe 1.3 b <span class="tag mappe">✎ Mappe</span></div><h1>Wasserkocher</h1>
+  <p class="task-q">Ein Wasserkocher (<b>2 000 W</b>) läuft täglich <b>3 Minuten</b>. Berechne die Energie pro Jahr und die Kosten (0,35 € pro kWh).</p>${MAPPE}
+  ${tips(["Rechne Minuten in Stunden um (siehe Folie „Umrechnen“).","2 000 W = 2 kW und 3 min = 0,05 h. Pro Tag: 2 kW · 0,05 h = 0,1 kWh."])}
+  ${checker("c1b",[["Energie pro Jahr",36.5,0.3,"kWh"],["Kosten pro Jahr",12.78,0.1,"€"]],"2 kW · 0,05 h = 0,1 kWh pro Tag<br>0,1 kWh · 365 = <b>36,5 kWh pro Jahr</b><br>36,5 kWh · 0,35 € ≈ <b>12,78 € pro Jahr</b>")}`},
+ {k:"task",n:"1.3 c",t:"1 °C weniger heizen",h:`<div class="eyebrow">Teil 1 · Aufgabe 1.3 c <span class="tag mappe">✎ Mappe</span></div><h1>1 °C weniger heizen</h1>
+  <p class="task-q">Ein Haushalt heizt mit <b>16 000 kWh Erdgas</b> pro Jahr. Wer 1 °C weniger heizt, spart etwa <b>6 %</b> Heizenergie. Berechne die Einsparung in kWh, in € und in kg CO₂. Erdgas: <b>0,12 €</b> und <b>0,24 kg CO₂</b> pro kWh.</p>${MAPPE}
+  ${tips(["Prozent wovon? Der Grundwert sind die 16 000 kWh.","16 000 kWh · 6 : 100 = 960 kWh. Diese 960 kWh nimmst du dann mal 0,12 € und mal 0,24 kg."])}
+  ${checker("c1c",[["Einsparung",960,2,"kWh"],["Geld",115.2,0.5,"€"],["CO₂",230.4,1,"kg"]],"16 000 kWh · 6 : 100 = <b>960 kWh</b><br>960 kWh · 0,12 € = <b>115,20 €</b><br>960 kWh · 0,24 kg = <b>230,4 kg CO₂</b>")}`},
+ {k:"task",n:"1.3 d",t:"Zeitschaltuhr",h:`<div class="eyebrow">Teil 1 · Aufgabe 1.3 d <span class="tag mappe">✎ Mappe</span></div><h1>Lohnt sich eine Zeitschaltuhr?</h1>
+  <p class="task-q">Eine Zeitschaltuhr kostet <b>12 €</b> und spart <b>8 €</b> Strom pro Jahr. Berechne die Amortisationszeit und erkläre in einem Satz, was das Ergebnis bedeutet.</p>${MAPPE}
+  ${tips(["Amortisationszeit = Anschaffungskosten : Ersparnis pro Jahr (Folie „Kosten, Amortisation, CO₂“).","12 € : 8 € pro Jahr = ? Jahre. Was passiert nach dieser Zeit?"])}
+  ${checker("c1d",[["Amortisationszeit",1.5,0.05,"Jahre"]],"12 € : 8 € pro Jahr = <b>1,5 Jahre</b><br>Nach anderthalb Jahren hat die Zeitschaltuhr ihren Preis wieder eingespart. Danach spart sie jedes Jahr 8 €.")}`},
+ {k:"task",n:"1.4",t:"Energieausweis-Rechner",h:`<div class="eyebrow">Teil 1 · Aufgabe 1.4 <span class="tag mappe">✎ Mappe</span></div><h1>Energieausweis-Rechner</h1>
+  <p class="task-q">Bestimme für die drei Übungshäuser den Energiekennwert und die Effizienzklasse. Rechne zuerst selbst in deiner Mappe, dann wähle die Klasse.</p>
+  <div class="card"><h2>Übungshäuser</h2><div id="houses" style="display:flex;flex-direction:column;gap:4px"></div></div>
+  ${tips(["Energiekennwert = Energie pro Jahr (kWh) : Wohnfläche (m²).","Beim Altbau ist der Verbrauch in m³ Erdgas angegeben: 1 m³ Erdgas ≈ 10 kWh."])}
+  <div class="card"><h2>Rechner</h2><p class="small">Erst nach dem eigenen Rechnen zur Kontrolle nutzen. Später rechnest du hier auch für deine eigene Wohnung oder dein Haus.</p>
+   <div class="check"><label for="ea_v">Verbrauch pro Jahr<input id="ea_v" inputmode="decimal" value="18000"></label>
+   <label for="ea_e">Einheit<select id="ea_e"><option value="1">kWh</option><option value="10">m³ Erdgas</option><option value="10">Liter Heizöl</option></select></label>
+   <label for="ea_f">Wohnfläche in m²<input id="ea_f" inputmode="decimal" value="150"></label></div>
+   <div class="sol" id="ea_out" aria-live="polite"></div>
+   <div class="scale" data-scale id="ea_scale"><span class="marker" id="ea_m"></span></div>
+   <p class="small">1 m³ Erdgas ≈ 10 kWh, 1 Liter Heizöl ≈ 10 kWh. Klassen nach Gebäudeenergiegesetz (Wohngebäude).</p></div>`},
+ {k:"switch",t:"Jetzt ins Protokoll",h:`<div class="eyebrow">Teil 1 · Wechsel <span class="tag proto">▤ Protokoll</span></div><h1>Jetzt arbeitest du im Protokoll weiter</h1>
+  <div class="where-box proto"><span class="ic">▤</span><div>Öffne dein Protokoll, Teil 1<p>Dort rechnest du mit den Zahlen deiner eigenen Wohnung oder deines Hauses.</p></div></div>
+  <div class="card"><ol class="bullets"><li>Trag die <b>Daten</b> ein, die du zu Hause erhoben hast.</li><li>Bearbeite <b>Aufgabe 1.1</b> (Wohnfläche pro Person).</li><li>Bearbeite <b>Aufgabe 1.2</b> (Energiekennwert). Den Rechner findest du hier auf der Folie davor.</li><li>Schreib unter <b>Für dein Gutachten</b> deine Stichpunkte.</li></ol></div>
+  <p class="small">Klicke auf „Aufgabe erledigt“, wenn du Teil 1 im Protokoll fertig hast. Danach geht es hier mit Teil 2 weiter.</p>`},
+]},
+{id:"teil2",short:"Teil 2",title:"Wände und Wärme",slides:[]},
+{id:"teil3",short:"Teil 3",title:"Wärmebilder",slides:[]},
+{id:"teil4",short:"Teil 4",title:"Dach und Sonnenstrom",slides:[]},
+{id:"teil5",short:"Teil 5",title:"Fenster und Türen",slides:[]},
+{id:"teil6",short:"Teil 6",title:"Heizung und Warmwasser",slides:[]},
+{id:"teil7",short:"Teil 7",title:"Strom und Geräte",slides:[]},
+{id:"teil8",short:"Teil 8",title:"Beleuchtung",slides:[]},
+{id:"teil9",short:"Teil 9",title:"CO₂-Bilanz",slides:[]},
+];
+const PLAN={dates:["Mo 23.11.","Mi 25.11.","Mo 30.11.","Mi 2.12.","Mo 7.12.","Mi 9.12.","Mo 14.12.","Mi 16.12."],
+ rows:[["Teil 1 · Haus und Haushalt",[0]],["Teil 2 · Wände und Wärme",[0,1]],["Teil 3 · Wärmebilder",[1]],["Teil 4 · Dach und Sonnenstrom",[2]],["Teil 5 · Fenster und Türen",[2,3]],["Teil 6 · Heizung und Warmwasser",[3]],["Teil 7 · Strom und Geräte",[4]],["Teil 8 · Beleuchtung",[4,5]],["Teil 9 · CO₂-Bilanz",[5]],["Teil 10 · Gutachten schreiben (Protokoll)",[6,7]]]};
+CHECKS.c1a=[[146,1],[51.1,.2]];CHECKS.c1b=[[36.5,.3],[12.78,.1]];CHECKS.c1c=[[960,2],[115.2,.5],[230.4,1]];CHECKS.c1d=[[1.5,.05]];
+
+/* ---------- Zustand ---------- */
+const KEY="eb-lernpfad-v1";
+let S={done:{},last:null};
+CH.forEach(c=>S.done[c.id]=[]);
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY)||"null");if(r&&r.done){CH.forEach(c=>S.done[c.id]=r.done[c.id]||[]);S.last=r.last||null;}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const isDone=(c,i)=>(S.done[c]||[]).includes(i);
+function setDone(c,i,v){const a=S.done[c];const k=a.indexOf(i);if(v&&k<0)a.push(i);if(!v&&k>=0)a.splice(k,1);save();}
+function pct(c){const ch=CH.find(x=>x.id===c);if(!ch.slides.length)return 0;return Math.round(100*S.done[c].filter(i=>i<ch.slides.length).length/ch.slides.length);}
+
+/* Fortschrittscode: Version + je Teil 32 Bit + letzte Folie, Base32 ohne verwechselbare Zeichen */
+const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function makeCode(){
+  let bits="1"; // Version 1 (1 Bit Startmarke)
+  CH.forEach(c=>{let m=0;S.done[c.id].forEach(i=>{if(i<32)m|=(1<<i)>>>0;});bits+=(m>>>0).toString(2).padStart(32,"0");});
+  const li=S.last?CH.findIndex(c=>c.id===S.last[0]):0;bits+=Math.max(0,li).toString(2).padStart(4,"0")+(S.last?S.last[1]:0).toString(2).padStart(5,"0");
+  let sum=0;for(const b of bits)sum=(sum*2+ +b)%31;bits+=sum.toString(2).padStart(5,"0");
+  while(bits.length%5)bits+="0";
+  let s="";for(let i=0;i<bits.length;i+=5)s+=A[parseInt(bits.substr(i,5),2)];
+  s=s.replace(/^(A+)/,"");// führende Nullen gibt es wegen Startmarke nicht
+  return "EB-"+s.match(/.{1,5}/g).join("-");
+}
+function readCode(str){
+  const s=String(str).toUpperCase().replace(/^EB-?/,"").replace(/[^A-Z0-9]/g,"");
+  if(!s)return false;let bits="";for(const ch of s){const v=A.indexOf(ch);if(v<0)return false;bits+=v.toString(2).padStart(5,"0");}
+  const need=1+32*CH.length+9+5;if(bits.length<need||bits[0]!=="1")return false;
+  const body=bits.slice(0,1+32*CH.length+9);let sum=0;for(const b of body)sum=(sum*2+ +b)%31;
+  if(parseInt(bits.substr(body.length,5),2)!==sum)return false;
+  CH.forEach((c,k)=>{const m=bits.substr(1+32*k,32);S.done[c.id]=[];for(let i=0;i<32;i++)if(m[31-i]==="1")S.done[c.id].push(i);});
+  const o=1+32*CH.length,li=parseInt(bits.substr(o,4),2),ls=parseInt(bits.substr(o+4,5),2);
+  S.last=CH[li]?[CH[li].id,Math.min(ls,Math.max(0,CH[li].slides.length-1))]:null;save();return true;
+}
+
+/* ---------- Ansicht ---------- */
+let cur=null; // {c, i}
+function chapter(id){return CH.find(c=>c.id===id);}
+function go(c,i){location.hash=c==="home"?"start-seite":c+"-"+(i+1);}
+function route(){
+  const h=location.hash.slice(1);const m=h.match(/^([a-z]+\d*)(?:-(\d+))?$/);
+  if(!m||m[1]==="start"&&!m[2]&&false){}
+  if(m&&chapter(m[1])&&chapter(m[1]).slides.length){const ch=chapter(m[1]);const i=Math.min(ch.slides.length-1,Math.max(0,(+m[2]||1)-1));show(ch.id,i);}
+  else home();
+}
+function home(){
+  cur=null;document.body.dataset.view="home";
+  $("#where").textContent="Übersicht";$("#foot").hidden=true;$("#side").classList.remove("show");
+  $("#topPct").textContent="";$("#topBar").style.width="0";
+  renderSide(null);
+  const resume=S.last&&chapter(S.last[0])?S.last:null;
+  $("#slide").innerHTML=`<div class="eyebrow">Lernpfad zur Energieberatung</div><h1>Das Wissen für dein Gutachten</h1>
+  <div class="card"><h2>Weiterarbeiten</h2>
+   ${resume?`<p>Zuletzt warst du in <b>${chapter(resume[0]).short}, Folie ${resume[1]+1}</b>.</p><div><button class="btn primary" id="resume">Weiter, wo ich aufgehört habe</button></div>`:`<p>Du bist zum ersten Mal hier? Dann starte mit „So funktioniert der Lernpfad“.</p><div><button class="btn primary" id="resume">Lernpfad starten</button></div>`}
+   <details class="tip"${resume?"":" open"}><summary>Anderer Computer? Fortschrittscode einfügen</summary><div style="display:flex;flex-direction:column;gap:8px"><label for="codeIn" class="small">Kopiere den Code aus deinem Protokoll (Seite 2) und füge ihn hier mit Strg + V ein.</label><textarea id="codeIn" placeholder="EB-…"></textarea><div><button class="btn" id="codeGo">Fortschritt laden</button></div><div class="fb" id="codeFb" hidden></div></div></details></div>
+  <h2>Die Teile</h2><div class="chap-list">${CH.map((c,k)=>`<button class="chap" data-go="${c.id}" ${c.slides.length?"":"disabled"}><span class="num">${k?k:"★"}</span><span><b>${c.title}</b><span class="meta">${c.slides.length?` · ${c.slides.length} Folien`:" · folgt"}</span><span class="bar"><i style="width:${pct(c.id)}%"></i></span></span><span class="pct">${c.slides.length?pct(c.id)+" %":""}</span></button>`).join("")}</div>`;
+  $("#resume").onclick=()=>resume?go(resume[0],resume[1]):go("start",0);
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const c=b.dataset.go;const ch=chapter(c);const first=ch.slides.findIndex((s,i)=>!isDone(c,i));go(c,first<0?0:first);});
+  $("#codeGo").onclick=()=>{const ok=readCode($("#codeIn").value);const fb=$("#codeFb");fb.hidden=false;
+    if(ok){fb.className="fb ok";fb.textContent="Fortschritt geladen.";setTimeout(home,700);}else{fb.className="fb bad";fb.textContent="Der Code passt nicht. Kopiere ihn noch einmal vollständig aus deinem Protokoll.";}};
+}
+function renderSide(cid){
+  const sel=$("#chapSel");sel.innerHTML=`<option value="home">Übersicht</option>`+CH.filter(c=>c.slides.length).map(c=>`<option value="${c.id}" ${c.id===cid?"selected":""}>${c.short}: ${c.title}</option>`).join("");
+  if(!cid){sel.value="home";$("#thumbs").innerHTML="";return;}
+  const ch=chapter(cid);
+  $("#thumbs").innerHTML=ch.slides.map((s,i)=>{const kind=s.k==="task"?"Aufgabe "+(s.n||""):s.k==="switch"?"Protokoll":"Info";
+    return `<li><button class="thumb ${isDone(cid,i)?"done":""} ${cur&&cur.i===i?"cur":""}" data-i="${i}" aria-current="${cur&&cur.i===i?"step":"false"}"><span class="n">${i+1}</span><span class="t"><span class="k">${kind}</span>${s.t}</span><span class="s">${isDone(cid,i)?"✓":s.star?"★":""}</span></button></li>`;}).join("");
+  document.querySelectorAll(".thumb").forEach(b=>b.onclick=()=>go(cid,+b.dataset.i));
+}
+function show(cid,i){
+  const ch=chapter(cid),s=ch.slides[i];cur={c:cid,i};S.last=[cid,i];save();document.body.dataset.view="slide";
+  $("#foot").hidden=false;$("#side").classList.remove("show");$("#menuBtn").setAttribute("aria-expanded","false");
+  $("#where").textContent=ch.short+": "+ch.title;
+  let extra="";
+  if(s.k==="task"||s.k==="switch"){const d=isDone(cid,i);extra=`<div class="done-row"><button class="btn done-btn" id="doneBtn" aria-pressed="${d}">${d?"✓ Aufgabe erledigt":"Aufgabe erledigt"}</button><span class="small">${d?"Diese Folie ist grün markiert.":"Klicke, wenn du die Aufgabe fertig hast. Dann wird die Folie grün."}</span></div>`;}
+  $("#slide").innerHTML=s.h+extra;
+  $("#stage").scrollTop=0;
+  const db=$("#doneBtn");if(db)db.onclick=()=>{setDone(cid,i,!isDone(cid,i));show(cid,i);};
+  wire();
+  $("#count").textContent=`Folie ${i+1} von ${ch.slides.length}`;
+  $("#prevBtn").disabled=i===0;$("#firstBtn").disabled=i===0;
+  const ci=CH.indexOf(ch),nextCh=CH.slice(ci+1).find(c=>c.slides.length);
+  $("#nextBtn").textContent=i<ch.slides.length-1?"Weiter":nextCh?"Weiter mit "+nextCh.short:"Zur Übersicht";
+  updTop();renderSide(cid);
+  const t=document.querySelector(".thumb.cur");if(t)t.scrollIntoView({block:"nearest"});
+}
+function updTop(){if(!cur)return;const p=pct(cur.c);$("#topPct").textContent=p+" %";$("#topBar").style.width=p+"%";}
+function next(){
+  if(!cur)return;const ch=chapter(cur.c),s=ch.slides[cur.i];
+  if(s.k==="info")setDone(cur.c,cur.i,true);
+  if(cur.i<ch.slides.length-1)go(cur.c,cur.i+1);
+  else{const ci=CH.indexOf(ch),n=CH.slice(ci+1).find(c=>c.slides.length);n?go(n.id,0):go("home");}
+}
+$("#nextBtn").onclick=next;
+$("#prevBtn").onclick=()=>cur&&cur.i>0&&go(cur.c,cur.i-1);
+$("#firstBtn").onclick=()=>cur&&go(cur.c,0);
+$("#homeBtn").onclick=()=>go("home");
+$("#chapSel").onchange=e=>{const v=e.target.value;if(v==="home")go("home");else go(v,0);};
+$("#menuBtn").onclick=()=>{const s=$("#side");s.classList.toggle("show");$("#menuBtn").setAttribute("aria-expanded",s.classList.contains("show"));};
+document.addEventListener("keydown",e=>{if(e.target.matches("input,textarea,select"))return;if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")$("#prevBtn").click();});
+
+/* Fortschritt sichern */
+$("#saveBtn").onclick=()=>{
+  const code=makeCode();let copied=false;
+  const done=()=>{$("#dlg").innerHTML=`<h2>${copied?"Code kopiert":"Dein Fortschrittscode"}</h2>
+   <p>${copied?"Öffne jetzt dein Protokoll, klicke auf Seite 2 in das Feld <b>Mein Fortschrittscode</b> und drücke <b>Strg + V</b>. Dann Protokoll speichern.":"Markiere den Code, kopiere ihn mit <b>Strg + C</b> und füge ihn im Protokoll auf Seite 2 bei <b>Mein Fortschrittscode</b> ein."}</p>
+   <div class="code-box" id="codeShow">${code}</div><div><button class="btn primary" id="dlgClose">Fertig</button></div>`;
+   $("#ov").hidden=false;$("#dlgClose").onclick=()=>$("#ov").hidden=true;$("#dlgClose").focus();
+   if(!copied){const r=document.createRange();r.selectNodeContents($("#codeShow"));const s=getSelection();s.removeAllRanges();s.addRange(r);}};
+  try{navigator.clipboard.writeText(code).then(()=>{copied=true;done();},()=>done());}catch(e){done();}
+};
+$("#ov").onclick=e=>{if(e.target.id==="ov")$("#ov").hidden=true;};
+
+/* ---------- Interaktive Teile ---------- */
+const K=[["A+",0,30,"#00843f"],["A",30,50,"#3aa935"],["B",50,75,"#8cc63f"],["C",75,100,"#d4e021"],["D",100,130,"#f3d81f"],["E",130,160,"#f4b120"],["F",160,200,"#ec7c1f"],["G",200,250,"#e2401f"],["H",250,1e9,"#b81e23"]];
+const klasse=w=>K.findIndex(k=>w<k[2]);
+function wire(){
+  document.querySelectorAll("[data-scale]").forEach(sc=>{K.forEach(k=>{const d=document.createElement("div");d.style.background=k[3];if(k[0]==="C"||k[0]==="D"||k[0]==="B")d.style.color="#1b1b1b";d.innerHTML=k[0]+"<small>"+(k[2]>1e8?"über "+k[1]:k[0]==="A+"?"unter 30":k[1]+"–"+k[2])+"</small>";sc.appendChild(d);});});
+  document.querySelectorAll("[data-check]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.check,F=CHECKS[id],fb=$("#"+id+"_fb");let ok=0,empty=0;
+    F.forEach((f,i)=>{const v=num($("#"+id+"_"+i).value);if(isNaN(v))empty++;else if(Math.abs(v-f[0])<=f[1])ok++;});
+    fb.hidden=false;
+    if(empty){fb.className="fb bad";fb.textContent="Trag in jedes Feld eine Zahl ein (ohne Einheit).";}
+    else if(ok===F.length){fb.className="fb ok";fb.textContent="Richtig! Klicke unten auf „Aufgabe erledigt“.";}
+    else{fb.className="fb bad";fb.textContent=(F.length>1?ok+" von "+F.length+" richtig. ":"Noch nicht. ")+"Schau dir einen Tipp an und rechne noch einmal.";}
+  });
+  /* 1.1 Schätzung */
+  if($("#e_go")){
+    const U={h:70,w:15,s:15};const nm={h:"Heizen",w:"Warmwasser",s:"Strom"};
+    $("#e_go").onclick=()=>{const v={h:num($("#e_h").value),w:num($("#e_w").value),s:num($("#e_s").value)};const fb=$("#e_fb");
+      if([v.h,v.w,v.s].some(isNaN)){fb.hidden=false;fb.className="fb bad";fb.textContent="Trag erst alle drei Schätzungen ein.";return;}
+      const sum=v.h+v.w+v.s;fb.hidden=false;fb.className=Math.abs(sum-100)<=2?"fb ok":"fb bad";fb.textContent="Deine Summe: "+de(sum,0)+" %"+(Math.abs(sum-100)<=2?"":". Eigentlich sollten es zusammen 100 % sein, aber du kannst trotzdem vergleichen.");
+      const r=$("#e_res");r.hidden=false;
+      r.innerHTML=`<div class="est"><span></span><span class="small">oben: deine Schätzung · unten: Umweltbundesamt</span><span></span>${["h","w","s"].map(k=>`<b>${nm[k]}</b><span style="display:flex;flex-direction:column;gap:3px"><span class="b"><i style="width:${Math.min(100,v[k])}%"></i></span><span class="b"><i class="uba" style="width:${U[k]}%"></i></span></span><span class="pct">${de(v[k],0)} %<br>${U[k]} %</span>`).join("")}</div>
+       <p class="small">Werte gerundet: Umweltbundesamt, Anteile der Anwendungsbereiche am Endenergieverbrauch privater Haushalte 2024 („mehr als zwei Drittel“ fürs Heizen). Wer mag: <a href="https://www.umweltbundesamt.de/daten/private-haushalte-konsum/wohnen/energieverbrauch-privater-haushalte" target="_blank" rel="noopener">Seite des Umweltbundesamts</a>.</p>`;
+      $("#e_pot").hidden=false;
+      $("#e_potBtns").innerHTML=["h","w","s"].map(k=>`<button data-p="${k}" aria-pressed="false">${nm[k]}</button>`).join("");
+      document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-p]").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");const f=$("#e_potFb");f.hidden=false;
+        if(b.dataset.p==="h"){f.className="fb ok";f.textContent="Genau: Beim Heizen steckt der größte Anteil, also auch das größte Einsparpotenzial. Darum geht es in den Teilen 2 bis 6.";}
+        else{f.className="fb bad";f.textContent="Auch hier lässt sich sparen. Aber schau auf die Balken: Wo ist der Anteil am größten?";}});
+    };
+  }
+  /* 1.4 Übungshäuser + Rechner */
+  if($("#houses")){
+    const H=[["Wohnung im Mehrfamilienhaus","72 m², 9 000 kWh Fernwärme pro Jahr",9000/72],["Altbau von 1960","120 m², 2 800 m³ Erdgas pro Jahr",28000/120],["Neubau mit Wärmepumpe","140 m², 4 900 kWh Wärme pro Jahr",4900/140]];
+    H.forEach((h,n)=>{const box=document.createElement("div");box.className="house";
+      box.innerHTML="<div><b>"+(n+1)+". "+h[0]+"</b><br><span class='small'>"+h[1]+"</span></div><div class='classes' role='group' aria-label='Klasse wählen'></div><div class='fb' hidden style='grid-column:1/-1'></div>";
+      const g=box.querySelector(".classes"),fb=box.querySelector(".fb"),right=klasse(h[2]);
+      K.forEach((k,i)=>{const b=document.createElement("button");b.type="button";b.textContent=k[0];b.setAttribute("aria-pressed","false");
+        b.onclick=()=>{g.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");fb.hidden=false;
+          if(i===right){fb.className="fb ok";fb.textContent="Richtig: "+de(h[2],0)+" kWh pro m² und Jahr, Klasse "+k[0]+".";}
+          else{fb.className="fb bad";fb.textContent="Noch nicht. Rechne Energie (kWh) : Wohnfläche (m²)."+(n===1?" Denk an die Umrechnung von m³ in kWh.":"");}};
+        g.appendChild(b);});
+      $("#houses").appendChild(box);});
+    const calc=()=>{const v=num($("#ea_v").value),f=num($("#ea_f").value),e=num($("#ea_e").value),out=$("#ea_out"),m=$("#ea_m");
+      if(!(v>=0)||!(f>0)){out.textContent="Gib einen Verbrauch und eine Wohnfläche größer als 0 ein.";m.hidden=true;return;}
+      const kwh=v*e,w=kwh/f,i=klasse(w);
+      out.innerHTML=(e!==1?de(v,0)+" × 10 = "+de(kwh,0)+" kWh · ":"")+de(kwh,0)+" kWh : "+de(f,1)+" m² = <span class='big'>"+de(w,1)+" kWh pro m² und Jahr</span><br>Effizienzklasse <b>"+K[i][0]+"</b>";
+      const lo=K[i][1],hi=Math.min(K[i][2],K[i][1]+100),pos=Math.min(1,(w-lo)/(hi-lo));m.hidden=false;m.style.left=((i+pos)/9*100)+"%";m.textContent="▼";};
+    ["#ea_v","#ea_e","#ea_f"].forEach(s=>$(s).addEventListener("input",calc));calc();
+  }
+  /* Plan */
+  if($("#planTbl")){$("#planTbl").innerHTML="<thead><tr><th>Teil</th>"+PLAN.dates.map(d=>"<th>"+d+"</th>").join("")+"</tr></thead><tbody>"+PLAN.rows.map(r=>"<tr><td>"+r[0]+"</td>"+PLAN.dates.map((d,k)=>"<td class='"+(r[1].includes(k)?"on":"")+"'></td>").join("")+"</tr>").join("")+"</tbody>";}
+}
+
+load();window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
