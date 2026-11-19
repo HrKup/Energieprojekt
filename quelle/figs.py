@@ -213,7 +213,7 @@ def kwk():
     save(fig, 'kwk')
 
 def fernwaerme():
-    fig, ax = plt.subplots(figsize=(9, 4.2)); ax.set_xlim(0, 18); ax.set_ylim(-1.0, 7.4); ax.axis('off')
+    fig, ax = plt.subplots(figsize=(9, 4.4)); ax.set_xlim(-0.3, 18); ax.set_ylim(-1.0, 7.6); ax.axis('off')
     def node(x, y, w, h, t, fc):
         ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle='round,pad=0.12', fc=fc, ec=INK, lw=1.4))
         ax.text(x + w / 2, y + h / 2, t, ha='center', va='center', fontsize=10.5)
@@ -223,6 +223,9 @@ def fernwaerme():
     node(13.2, 4.6, 4.5, 2.4, 'Heizkraftwerk\nHumboldtstraße\n(am Schrevenpark)', '#FFE8CC')
     node(6.6, 2.4, 4.8, 2.6, 'Fernwärmenetz\nrund 374 km Rohre\nheißes Wasser hin,\nabgekühltes zurück', '#FFC9C9')
     node(13.2, 0.6, 4.5, 2.6, 'Wohnungen, Schulen,\nBüros: mehr als\n73 500 Anschlüsse', '#D3F9D8')
+    for (bx, by, k) in [(0.3, 7.0, 1), (0.3, 4.2, 2), (0.3, 1.0, 3), (13.2, 7.0, 4)]:
+        ax.add_patch(Circle((bx, by), 0.42, fc=INK, ec='white', lw=1.5, zorder=5))
+        ax.text(bx, by, str(k), ha='center', va='center', color='white', fontsize=12, fontweight='bold', zorder=6)
     arrow(ax, (5.4, 5.6), (6.5, 4.4), color=HOT, lw=3); arrow(ax, (5.4, 2.9), (6.5, 3.2), color=HOT, lw=3)
     arrow(ax, (5.4, 0.2), (6.8, 2.3), color=HOT, lw=2)
     arrow(ax, (13.1, 5.6), (11.5, 4.4), color=HOT, lw=3); arrow(ax, (11.5, 3.0), (13.1, 2.2), color=HOT, lw=3)
