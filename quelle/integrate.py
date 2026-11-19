@@ -383,3 +383,17 @@ assert si<ki
 src=src[:_objs[si][0]]+so+src[_objs[si][1]:_objs[ki][0]]+src[_objs[ki][1]:]
 assert src.count(WT)==1
 open('lernpfad.html','w').write(src); print('wasserkocher merged')
+
+# ---- 6.2: Kurztexte statt co2online-Link (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a=src.index('<h1>Heizungsarten vergleichen</h1><p class=\\"task-q\\">'); b=src.index('</p>',a)+4
+HA=[('Gasheizung (Brennwert)','Verbrennt Erdgas aus dem Gasnetz. Ein Brennwertgerät nutzt sogar die Wärme im Abgas. Die Anlage ist recht günstig und braucht wenig Platz. Beim Verbrennen entsteht aber viel CO₂, und der Gaspreis schwankt stark.'),
+('Ölheizung','Verbrennt Heizöl, das in einem Tank im Keller lagert. Sie braucht kein Gasnetz. Pro kWh Wärme entsteht noch mehr CO₂ als bei Gas, und der Tank braucht Platz. Neue Ölheizungen werden kaum noch eingebaut.'),
+('Fernwärme','Heißes Wasser kommt aus einem Kraftwerk oder aus Abwärme über Rohre ins Haus. Im Haus braucht man nur eine kleine Übergabestation, keinen eigenen Brenner und keinen Schornstein. Man ist aber an den örtlichen Anbieter gebunden. Wie klimafreundlich Fernwärme ist, hängt davon ab, womit das Kraftwerk heizt.'),
+('Holzpelletheizung','Verbrennt kleine Presslinge aus Holzresten. Holz wächst nach und hat beim Wachsen so viel CO₂ aufgenommen, wie beim Verbrennen frei wird. Man braucht aber einen Lagerraum für die Pellets, und beim Verbrennen entsteht Feinstaub.'),
+('Wärmepumpe','Holt mit Strom Wärme aus der Luft, dem Erdreich oder dem Grundwasser. Aus 1 kWh Strom werden 3 bis 4 kWh Wärme. Mit Ökostrom entsteht fast kein CO₂. Die Anschaffung ist teuer, und sie arbeitet am besten in einem gut gedämmten Haus mit großen Heizkörpern oder Fußbodenheizung.')]
+txt='<p class=\\"task-q\\">Lies die Kurzinfos zu den fünf Heizungsarten. Lege die Tabelle in deiner Mappe an und trage für jede Heizungsart den Energieträger, einen Vorteil und einen Nachteil ein.</p><div class=\\"card\\"><h2>Kurzinfos</h2>'+''.join('<p><b>%s:</b> %s</p>'%(n,t) for n,t in HA)+'</div>'
+src=src[:a]+'<h1>Heizungsarten vergleichen</h1>'+txt+src[b:]
+c=src.index('<details class=\\"tip\\"><summary>Tipp 1</summary><div>Wenn die Seite von co2online nicht lädt'); d=src.index('</details>',c)+len('</details>')
+src=src[:c]+src[d:]
+open('lernpfad.html','w').write(src); print('6.2 ok')
