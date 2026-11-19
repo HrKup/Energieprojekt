@@ -65,7 +65,7 @@ X = {
   'check': [('a) Energie', 6.79, 0.1, 'kWh'), ('b) Energie', 3.65, 0.1, 'kWh'), ('c) Energie', 1.22, 0.05, 'kWh'), ('d) a) pro Jahr', 2036, 30, 'kWh'), ('e) Ersparnis', 82, 1, '%')],
   'sol': 'a) 195 l · 30 · 1,16 Wh ≈ <b>6,8 kWh</b>, 0,81 €, 1,6 kg CO₂<br>b) 105 l → <b>3,7 kWh</b>, 0,44 €, 0,9 kg<br>c) 35 l → <b>1,2 kWh</b>, 0,15 €, 0,3 kg<br>d) pro Jahr: a) <b>2 036 kWh</b> und 244 €, b) 1 096 kWh und 132 €, c) 365 kWh und 44 €<br>e) (6,8 − 1,2) : 6,8 · 100 ≈ <b>82 %</b>'},
  '7.2': {'tips': [
-   'Föhn: 1 800 W sind 1,8 kW, 6 Minuten sind 0,1 Stunden. Pro Tag: 1,8 kW · 0,1 h = 0,18 kWh. Mal 365 Tage, dann mal 0,35 €.',
+   'Föhn: 1 800 W sind 1,8 kW (1 kW = 1 000 W, also 1 800 : 1 000). Eine Stunde hat 60 Minuten, also sind 6 Minuten 6 : 60 = 0,1 Stunden. Pro Tag: 1,8 kW · 0,1 h = 0,18 kWh. Mal 365 Tage, dann mal 0,35 €.',
    'Router: 8 W sind 0,008 kW. Er läuft das ganze Jahr, also 8 760 Stunden: 0,008 kW · 8 760 h = … kWh. Dann mal 0,35 €.'],
   'check': [('Föhn pro Jahr', 65.7, 0.5, 'kWh'), ('Föhn', 23.0, 0.3, '€'), ('Router pro Jahr', 70.1, 0.5, 'kWh'), ('Router', 24.53, 0.3, '€')],
   'sol': 'Föhn: 0,18 kWh · 365 = <b>65,7 kWh</b>, 65,7 · 0,35 € ≈ <b>23,00 €</b><br>Router: 0,008 kW · 8 760 h ≈ <b>70,1 kWh</b>, ≈ <b>24,53 €</b><br>Der kleine Router kostet mehr, weil er nie ausgeschaltet wird.'},

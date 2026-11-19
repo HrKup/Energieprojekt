@@ -476,7 +476,7 @@ def _body(k,h1):
 b1=_body(i1,'Leistung auf dem Typenschild'); b2=_body(i2,'Stand-by: heimliche Stromfresser'); b3=_body(i3,'Das Energielabel')
 old='Erinnerung aus Teil 1, <b>E = P · t</b>.'
 assert old in b1
-b1=b1.replace(old,'Erinnerung aus Teil 1: <b>E = P · t</b>, also <b>Energie = Leistung · Zeit</b>. Ein Wasserkocher mit 2 000 W (= 2 kW), der 3 Minuten (= 0,05 h) läuft, braucht 2 kW · 0,05 h = 0,1 kWh. Damit die Einheit kWh herauskommt, rechnet man die Leistung in kW und die Zeit in Stunden um.',1)
+b1=b1.replace(old,'Erinnerung aus Teil 1: <b>E = P · t</b>, also <b>Energie = Leistung · Zeit</b>. Ein Wasserkocher mit 2 000 W (= 2 kW), der 3 Minuten läuft (3 : 60 = 0,05 h, denn eine Stunde hat 60 Minuten), braucht 2 kW · 0,05 h = 0,1 kWh. Damit die Einheit kWh herauskommt, rechnet man die Leistung in kW und die Zeit in Stunden um.',1)
 NT='Strom im Haushalt: Leistung, Stand-by und Energielabel'
 H2='<h2 style=\\"margin-top:24px\\">%s</h2>'
 o1=src[_objs[i1][0]:_objs[i1][1]]
