@@ -342,5 +342,26 @@ open('lernpfad.html','w').write(src); print('karte ok')
 src=open('lernpfad.html').read()
 a='<img src=\\"fig/wp_haus.png\\"'
 assert a in src
-src=src.replace(a,'<img style=\\"max-height:none;width:min(100%,860px)\\" src=\\"fig/wp_haus.png\\"',1)
+src=src.replace(a,'<img style=\\"max-height:none;width:min(100%,860px)\\" src=\\"fig/wp_haus.png?v=3\\"',1)
 open('lernpfad.html','w').write(src); print('wp_haus ok')
+
+# ---- Teil 6: Info 4 (Heizen/Lüften) und Info 5 (Warmes Wasser) zusammenlegen (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+hi=[k for k,(a,b) in enumerate(_objs) if 'Teil 6 · Info 4 von 6</div><h1>Richtig heizen und lüften</h1>' in src[a:b]][0]
+wi=[k for k,(a,b) in enumerate(_objs) if 'Teil 6 · Info 5 von 6</div><h1>Warmes Wasser</h1>' in src[a:b]][0]
+assert wi==hi+1
+ho=src[_objs[hi][0]:_objs[hi][1]]; wo=src[_objs[wi][0]:_objs[wi][1]]
+hb=ho[ho.index('<h1>Richtig heizen und lüften</h1>')+len('<h1>Richtig heizen und lüften</h1>'):ho.rindex('"}')]
+wb=wo[wo.index('<h1>Warmes Wasser</h1>')+len('<h1>Warmes Wasser</h1>'):wo.rindex('"}')]
+NT='Kleine Stellschrauben: Heizen, Lüften, Duschen'
+INTRO='<div class=\\"text\\"><p>Nicht nur eine neue Heizung spart Energie. Auch kleine Stellschrauben im Alltag bringen viel und kosten wenig oder gar nichts: die richtige Raumtemperatur, richtiges Lüften und sparsames Duschen.</p></div>'
+H2='<h2 style=\\"margin-top:24px\\">%s</h2>'
+new=ho[:ho.index('"t": "Richtig heizen und lüften"')]+'"t": "'+NT+'", "h": "<div class=\\"eyebrow\\">Teil 6 · Info 4 von 5</div><h1>'+NT+'</h1>'+INTRO+H2%'Richtig heizen und lüften'+hb+H2%'Warmes Wasser beim Duschen'+wb+'"}'+ho[ho.rindex('"}')+2:]
+src=src[:_objs[hi][0]]+new+src[_objs[wi][1]:]
+for i in (1,2,3): src=src.replace('Teil 6 · Info %d von 6'%i,'Teil 6 · Info %d von 5'%i)
+src=src.replace('Teil 6 · Info 6 von 6','Teil 6 · Info 5 von 5')
+assert 'von 6</div>' not in src.split('Teil 6 ·',1)[1].split('Teil 7')[0]
+open('lernpfad.html','w').write(src); print('6 info merged')
