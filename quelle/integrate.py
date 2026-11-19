@@ -192,3 +192,26 @@ a='<img src=\\"fig/windrose.png\\"'
 assert a in src
 src=src.replace(a,'<img style=\\"max-height:none;width:min(100%,520px)\\" src=\\"fig/windrose.png\\"')
 open('lernpfad.html','w').write(src); print('windrose ok')
+
+# ---- ★-Aufgaben: deutlicher Kasten unten (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+STARBOX='<div class=\\"where-box star\\"><span class=\\"ic\\">★</span><div>Freiwillige Aufgabe<p>Bearbeite sie, wenn du noch Zeit hast. Wird die Zeit knapp, lass sie weg.</p></div></div>'
+cnt=0
+def _star_obj(obj):
+    global cnt
+    if '\\"tag star\\"' not in obj or 'Freiwillige Aufgabe' in obj: return obj
+    k=obj.find('<div class=\\"where-box mappe\\">')
+    if k<0:
+        k=obj.rfind('", "star": true')
+        if k<0: return obj
+    cnt+=1
+    return obj[:k]+STARBOX+obj[k:]
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_parts=[src[:_st[0]]]
+for _a,_b in zip(_st,_st[1:]+[None]):
+    _o=src[_a:_b] if _b else src[_a:]
+    _parts.append(_star_obj(_o) if '"star": true' in _o else _o)
+src=''.join(_parts)
+src=src.replace('.where-box.mappe{','.where-box.star{background:#FFF3BF;color:#8a5a00;border:2px solid #F59F00}\n.where-box.star .ic{color:#F59F00}\n.where-box.mappe{',1)
+print('starbox',cnt)
+open('lernpfad.html','w').write(src)
