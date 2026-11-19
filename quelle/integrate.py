@@ -365,3 +365,21 @@ for i in (1,2,3): src=src.replace('Teil 6 · Info %d von 6'%i,'Teil 6 · Info %d
 src=src.replace('Teil 6 · Info 6 von 6','Teil 6 · Info 5 von 5')
 assert 'von 6</div>' not in src.split('Teil 6 ·',1)[1].split('Teil 7')[0]
 open('lernpfad.html','w').write(src); print('6 info merged')
+
+# ---- Teil 6: „Wasserkocher“-Folie in die Stellschrauben-Folie (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+WT='Warmes Wasser in den Wasserkocher – lohnt sich das?'
+ki=[k for k,(a,b) in enumerate(_objs) if src[a:b].startswith('{"k": "info", "t": "'+WT+'"')][0]
+si=[k for k,(a,b) in enumerate(_objs) if '<h1>Kleine Stellschrauben' in src[a:b]][0]
+ko=src[_objs[ki][0]:_objs[ki][1]]
+kb=ko[ko.index('<h1>'+WT+'</h1>')+len('<h1>'+WT+'</h1>'):ko.rindex('"}')]
+so=src[_objs[si][0]:_objs[si][1]]
+p=so.rindex('"}')
+so=so[:p]+'<h2 style=\\"margin-top:24px\\">'+WT+'</h2>'+kb+so[p:]
+assert si<ki
+src=src[:_objs[si][0]]+so+src[_objs[si][1]:_objs[ki][0]]+src[_objs[ki][1]:]
+assert src.count(WT)==1
+open('lernpfad.html','w').write(src); print('wasserkocher merged')
