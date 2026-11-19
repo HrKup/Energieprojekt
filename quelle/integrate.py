@@ -267,9 +267,10 @@ to=to.replace('"t": "'+old_t+'"','"t": "Der U-Wert: Wärmeverlust eines Fensters
 to=to.replace('<h1>'+old_t+'</h1>','<h1>Der U-Wert: Wärmeverlust eines Fensters</h1>'+body+'<h2 style=\\"margin-top:28px\\">Deine Aufgabe</h2>',1)
 to=_re.sub(r' <span class=\\"tag star\\">★ freiwillig</span>','',to,1)
 to=_re.sub(r'<div class=\\"where-box star\\">.*?</div></div>','',to,1)
+to=to.replace('<h2 style=\\"margin-top:28px\\">Deine Aufgabe</h2>','<h2 style=\\"margin-top:28px\\">Freiwillige Aufgabe</h2>'+STARBOX.replace('Freiwillige Aufgabe<p>Bearbeite sie','Nur die Rechnung ist freiwillig<p>Die Erklärung oben lesen alle. Rechne die Aufgabe'),1)
 to=to.replace(', "star": true}','}',1)
 to=to.replace('Berechne mit der Formel aus dem Info-Kasten,','Berechne mit der Formel oben,',1)
-assert 'Freiwillige Aufgabe' not in to and 'tag star' not in to
+assert 'tag star' not in to and 'Nur die Rechnung' in to
 src=src[:_objs[ui][0]]+to+src[_objs[ti][1]:]
 src=src.replace('Teil 5 · Info 1 von 3','Teil 5 · Info 1 von 2').replace('Teil 5 · Info 2 von 3','Teil 5 · Info 2 von 2')
 open('lernpfad.html','w').write(src); print('5.2 merged')
