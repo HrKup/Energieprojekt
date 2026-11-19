@@ -532,3 +532,17 @@ for (x,y,tit,neu) in ((1,2,'Der CO₂-Fußabdruck: was er misst und woher er kom
     new=head+'<div class=\\"eyebrow\\">Teil 9 · Info '+neu+'</div><h1>'+tit+'</h1>'+''.join(parts)+'"}'+o1[o1.rindex('"}')+2:]
     src=src[:_objs[ks[0]][0]]+new+src[_objs[ks[1]][1]:]
 open('lernpfad.html','w').write(src); print('teil9 merged')
+
+# ---- Tools nahtlos einbinden: eigener Kopf weg, kein Rahmen (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='document.querySelectorAll(".tool-frame iframe").forEach(f=>f.addEventListener("load",()=>{try{f.style.height=(f.contentDocument.documentElement.scrollHeight+20)+"px";}catch(e){}}));'
+assert src.count(a)==1
+b=('document.querySelectorAll(".tool-frame iframe").forEach(f=>f.addEventListener("load",()=>{try{const d=f.contentDocument;'
+   'const st=d.createElement("style");st.textContent="html,body{background:transparent!important}.wrap{max-width:none!important;padding:0 0 4px!important}.wrap>div:first-child{display:none!important}.lead{font-size:inherit!important;color:inherit!important;max-width:none!important}";d.head.appendChild(st);'
+   'const fit=()=>{f.style.height=d.documentElement.scrollHeight+"px";};fit();'
+   'if(window.ResizeObserver)new ResizeObserver(fit).observe(d.body);}catch(e){}}));')
+src=src.replace(a,b)
+a='.tool-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}'
+src=src.replace(a,'.tool-frame{border:0;background:transparent;margin-top:8px}')
+src=src.replace('.tool-frame iframe{display:block;width:100%;min-height:520px;border:0}','.tool-frame iframe{display:block;width:100%;min-height:300px;border:0;background:transparent}')
+open('lernpfad.html','w').write(src); print('tools inline')

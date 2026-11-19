@@ -148,8 +148,8 @@ details.tip div{padding-top:8px}
 .fig figcaption{font-size:.85rem;color:var(--muted)}
 .steck dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
 .steck dt{font-weight:700}.steck dd{margin:0}
-.tool-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
-.tool-frame iframe{display:block;width:100%;min-height:520px;border:0}
+.tool-frame{border:0;background:transparent;margin-top:8px}
+.tool-frame iframe{display:block;width:100%;min-height:300px;border:0;background:transparent}
 table.grid td{height:2em}
 .tbl{overflow-x:auto}
 @media (max-width:520px){.steck dl{grid-template-columns:1fr}.steck dd{margin-bottom:6px}}
@@ -430,7 +430,7 @@ function show(cid,i){
   let extra="";
   if(s.k==="task"||s.k==="switch"){const d=isDone(cid,i);extra=`<div class="done-row"><button class="btn done-btn" id="doneBtn" aria-pressed="${d}">${d?"✓ Aufgabe erledigt":"Aufgabe erledigt"}</button><span class="small">${d?"Diese Folie ist grün markiert.":"Klicke, wenn du die Aufgabe fertig hast. Dann wird die Folie grün."}</span></div>`;}
   $("#slide").innerHTML=nb(s.h)+extra;
-  document.querySelectorAll(".tool-frame iframe").forEach(f=>f.addEventListener("load",()=>{try{f.style.height=(f.contentDocument.documentElement.scrollHeight+20)+"px";}catch(e){}}));
+  document.querySelectorAll(".tool-frame iframe").forEach(f=>f.addEventListener("load",()=>{try{const d=f.contentDocument;const st=d.createElement("style");st.textContent="html,body{background:transparent!important}.wrap{max-width:none!important;padding:0 0 4px!important}.wrap>div:first-child{display:none!important}.lead{font-size:inherit!important;color:inherit!important;max-width:none!important}";d.head.appendChild(st);const fit=()=>{f.style.height=d.documentElement.scrollHeight+"px";};fit();if(window.ResizeObserver)new ResizeObserver(fit).observe(d.body);}catch(e){}}));
   $("#stage").scrollTop=0;
   const db=$("#doneBtn");if(db)db.onclick=()=>{setDone(cid,i,!isDone(cid,i));show(cid,i);};
   wire();wireDaten(cid,i);
