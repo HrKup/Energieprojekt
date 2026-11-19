@@ -265,7 +265,7 @@ def render_items(items):
             out += f'</div><div class="card tbl"><table><thead><tr>{th}</tr></thead><tbody>{tb}</tbody></table>{src}</div><div class="text">'
         elif k == 'S':
             v = it[2]
-            out += (f'</div><div class="card steck"><h2>Steckbrief: {md(it[1])}</h2><dl>'
+            out += (f'</div><div class="card steck"><h2>Kosten und Nutzen: {md(it[1])}</h2><dl>'
                     f'<dt>Kosten (ca.)</dt><dd>{md(v[0])}</dd><dt>Einsparung</dt><dd>{md(v[1])}</dd><dt>CO₂</dt><dd>{md(v[2])}</dd><dt>Lohnt sich nach</dt><dd>{md(v[3])}</dd></dl></div><div class="text">')
         elif k == 'SRC': out += f'<p class="small">({md(it[1])})</p>'
     out += '</div>'
