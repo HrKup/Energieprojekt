@@ -410,3 +410,29 @@ for i in range(4,9):
     src=src.replace('"n": "6.%d"'%i,'"n": "6.%d"'%(i-1)).replace('Teil 6 · Aufgabe 6.%d '%i,'Teil 6 · Aufgabe 6.%d '%(i-1))
 assert '"n": "6.8"' not in src
 open('lernpfad.html','w').write(src); print('6.3 removed')
+
+# ---- 6.5: JAZ erklären, Werte als Liste; 6.6: UBA-Seiten als Text (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_i=src.index('<h1>Gasheizung oder Wärmepumpe?</h1>')+len('<h1>Gasheizung oder Wärmepumpe?</h1>')
+_j=src.index('</p>',_i)+4
+assert 'JAZ 3,5' in src[_i:_j]
+a=src[_i:_j]
+b=('<p class=\\"task-q\\">Ein Haus braucht im Jahr 15&#8239;000 kWh Wärme. Vergleiche eine Gasheizung mit einer Luftwärmepumpe.</p>'
+ '<div class=\\"card\\"><h2>Das brauchst du für die Rechnung</h2>'
+ '<p><b>Jahresarbeitszahl (JAZ) 3,5:</b> Die Wärmepumpe macht übers Jahr gerechnet aus 1 kWh Strom 3,5 kWh Wärme. Den Rest holt sie kostenlos aus der Außenluft. Im kalten Winter schafft sie etwas weniger, in der Übergangszeit mehr. Die JAZ ist der Durchschnitt über das ganze Jahr.</p>'
+ '<ul class=\\"bullets\\"><li><b>Gas:</b> 0,12 € pro kWh und 0,24 kg CO₂ pro kWh</li><li><b>Strom für die Wärmepumpe:</b> 0,28 € pro kWh und 0,34 kg CO₂ pro kWh</li></ul></div>')
+src=src.replace(a,b,1)
+
+UBA=('<div class=\\"card\\"><h2>Richtig heizen und lüften (nach dem Umweltbundesamt)</h2>'
+ '<p><b>Die richtige Temperatur:</b> Das Umweltbundesamt empfiehlt etwa 20 °C im Wohnzimmer, 18 °C in der Küche und 17 °C im Schlafzimmer. Jedes Grad weniger spart etwa 6 % Heizenergie. Nachts und wenn niemand zu Hause ist, kann die Temperatur etwas sinken, die Räume sollten aber nicht ganz auskühlen. Am Thermostat entspricht Stufe 3 ungefähr 20 °C. Türen zwischen warmen und kühlen Räumen bleiben geschlossen.</p>'
+ '<p><b>Die Wärme muss in den Raum kommen:</b> Heizkörper sollten nicht von Möbeln oder langen Vorhängen verdeckt sein. Nachts halten geschlossene Rollläden oder Vorhänge die Wärme im Raum. Gluckert der Heizkörper oder wird er oben nicht richtig warm, muss er entlüftet werden.</p>'
+ '<p><b>Warum lüften?</b> Menschen geben beim Atmen, Duschen und Kochen viel Wasserdampf an die Raumluft ab. Bleibt die Feuchtigkeit im Raum, kann sich Schimmel bilden. Warme Luft kann viel Wasserdampf aufnehmen. Trifft sie auf eine kalte Fläche, wird ein Teil davon wieder zu Wasser, so wie am Badezimmerspiegel nach dem Duschen.</p>'
+ '<p><b>So lüftet man richtig:</b> Mehrmals am Tag das Fenster für wenige Minuten weit öffnen (Stoßlüften), im Winter reichen etwa 5 Minuten. Noch besser ist Querlüften mit zwei gegenüberliegenden Fenstern. Dabei wird die feuchte Luft schnell ausgetauscht, die Wände bleiben aber warm. Während des Lüftens dreht man das Thermostat herunter. Nach dem Duschen und Kochen sollte man immer lüften.</p>'
+ '<p><b>Das gekippte Fenster:</b> Durch einen Spalt wird die Luft nur langsam ausgetauscht. Das Fenster bleibt deshalb lange offen, und die Heizung darunter heizt die ganze Zeit nach draußen. Die Wand rund um das Fenster kühlt dabei stark aus.</p>'
+ '<p style=\\"font-size:.85rem;color:var(--muted)\\">Zusammengefasst nach den Seiten „Richtiges Heizen“ und „Wie lüfte ich richtig?“ des Umweltbundesamts.</p></div>')
+a=src.index('<h1>Heiz- und Lüftungstipps des Umweltbundesamts</h1><p class=\\"task-q\\">'); b=src.index('</p>',a)+4
+src=src[:a]+'<h1>Heiz- und Lüftungstipps des Umweltbundesamts</h1><p class=\\"task-q\\">Lies den Text und bearbeite dann die Aufgaben.</p>'+UBA+src[b:]
+c=src.index('<details class=\\"tip\\"><summary>Tipp 1</summary><div>Auf der Seite „Richtiges Heizen“'); d=src.index('</details>',c)+len('</details>')
+src=src[:c]+'<details class=\\"tip\\"><summary>Tipp 1</summary><div>b) Verbinde zwei Stellen im Text: Was passiert mit der Wand neben dem Fenster? Und was passiert, wenn warme, feuchte Raumluft auf eine kalte Fläche trifft?</div></details>'+src[d:]
+src=src.replace('<li>b) Erkläre, warum ein dauerhaft gekipptes Fenster im Winter Energie verschwendet und Schimmel fördern kann.</li>','<li>b) Erkläre, warum ein dauerhaft gekipptes Fenster im Winter Energie verschwendet und Schimmel fördern kann.</li>',1)
+open('lernpfad.html','w').write(src); print('6.5/6.6 ok')
