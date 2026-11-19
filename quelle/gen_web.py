@@ -22,7 +22,7 @@ def fix_task_text(t):
     t = t.replace('Trage deine Ergebnisse direkt in die Tabelle hier in der Datei ein.', 'Lege dafür die Tabelle unten in deiner Mappe an.')
     return t
 
-TOOLS = {'Dämm-Quiz': 'daemm-quiz.html', 'Solar-Helfer': 'solar-helfer.html', 'CO₂-Regler': 'co2-regler.html', 'Energieausweis-Rechner': 'energieausweis-rechner.html'}
+TOOLS = {'Dämm-Quiz': 'daemm-quiz.html', 'Balkonkraftwerk-Planer': 'solar-helfer.html', 'CO₂-Regler': 'co2-regler.html', 'Energieausweis-Rechner': 'energieausweis-rechner.html'}
 
 # ---------- Extras: Tipps (konkret, ohne Formelzeichen) und Prüffelder ----------
 # check: (label, richtig, toleranz, einheit)

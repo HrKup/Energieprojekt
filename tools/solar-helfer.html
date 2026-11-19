@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Solar-Helfer</title>
+<title>Balkonkraftwerk-Planer</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: eine ruhige Spalte wie ein Arbeitsblatt, Karten nur für Übungen */
@@ -47,9 +47,9 @@ button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--blue:#8ab8ef;--blue-bg:#16243a;--orange:#f2a65a;--orange-bg:#33230f}}
 :root[data-theme=dark]{--blue:#8ab8ef;--blue-bg:#16243a;--orange:#f2a65a;--orange-bg:#33230f}
 .grid2{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:center}
-svg text{fill:var(--ink);font-family:var(--font);font-size:13px;font-weight:700;pointer-events:none}
-svg text.c{fill:var(--blue);font-size:11px}
-svg text.p{fill:var(--orange);font-size:11px}
+svg text{fill:var(--ink);font-family:var(--font);font-size:15px;font-weight:700;pointer-events:none}
+svg text.c{fill:var(--blue);font-size:13px}
+svg text.p{fill:var(--orange);font-size:13px}
 .lg{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem}.lg span::before{content:'';display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-variant-numeric:tabular-nums}
 .kv dt{color:var(--muted)} .kv dd{margin:0;font-weight:700}
@@ -60,12 +60,12 @@ input[type=range]{width:100%;padding:0;accent-color:var(--accent)}
 <body>
 
 <div class="wrap">
-  <div><div class="eyebrow">Energieberatung · Teil 4</div><h1>Solar-Helfer</h1></div>
-  <p class="lead">Gib die Gradzahl aus der Kompass-App ein oder klicke in die Rose. Der Helfer zeigt die Himmelsrichtung, den Azimut für PVGIS und schätzt, wie viel Strom Solarmodule dort liefern. Das Beispiel ist ein Balkon nach 240°.</p>
+  <div><div class="eyebrow">Energieberatung · Teil 4 · Balkonkraftwerk</div><h1>Balkonkraftwerk-Planer</h1></div>
+  <p class="lead">Gib die Gradzahl aus der Kompass-App ein oder klicke in die Rose. Der Planer zeigt die Himmelsrichtung, den Azimut für PVGIS und schätzt, wie viel Strom ein Balkonkraftwerk dort liefert. Das Beispiel ist ein Balkon nach 240°.</p>
   <section class="card" aria-labelledby="h-a">
     <h2 id="h-a">Ausrichtung</h2>
     <div class="grid2">
-      <svg id="rose" viewBox="-136 -136 272 272" width="280" height="280" role="img" aria-label="Kompassrose: außen Kompass-Grad, innen PVGIS-Azimut. Klicke in die Rose, um eine Richtung zu wählen." style="cursor:pointer;touch-action:none">
+      <svg id="rose" viewBox="-136 -136 272 272" width="290" height="290" role="img" aria-label="Kompassrose: außen Kompass-Grad, innen PVGIS-Azimut. Klicke in die Rose, um eine Richtung zu wählen." style="cursor:pointer;touch-action:none">
         <circle r="132" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
         <circle r="103" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="2"/>
         <circle r="70" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
@@ -91,12 +91,13 @@ input[type=range]{width:100%;padding:0;accent-color:var(--accent)}
   </section>
   <section class="card" aria-labelledby="h-b">
     <h2 id="h-b">Ertrag schätzen</h2>
-    <div class="row">
-      <label for="tilt">Neigung der Module<select id="tilt"><option value="0">0° (waagerecht)</option><option value="30">30° (Schrägdach)</option><option value="60">60°</option><option value="90" selected>90° (senkrecht am Geländer)</option></select></label>
-      <label for="kwp">Leistung in kWp<input id="kwp" type="number" min="0" step="0.1" value="0.8"></label>
+    <div class="row" style="display:grid;grid-template-columns:1fr;max-width:420px">
+      <label for="tilt">Neigung der Module<select id="tilt" style="width:100%"><option value="0">0° (waagerecht)</option><option value="30">30° (Schrägdach)</option><option value="60">60°</option><option value="90" selected>90° (senkrecht am Geländer)</option></select></label>
+      <label for="kwp">Platz am Balkon<select id="kwp" style="width:100%"><option value="0.4">1 Modul (ca. 1,7 m × 1,1 m): 0,4 kWp</option><option value="0.8" selected>2 Module (ca. 3,4 m × 1,1 m): 0,8 kWp</option><option value="1.2">3 Module (ca. 5,1 m × 1,1 m): 1,2 kWp</option><option value="1.6">4 Module (ca. 6,8 m × 1,1 m): 1,6 kWp</option></select></label>
     </div>
+    <p class="small"><b>Was heißt kWp?</b> Kilowatt-Peak ist die Leistung eines Solarmoduls bei voller Sonne. Ein modernes Modul ist etwa 1,7 m breit und 1,1 m hoch, wiegt gut 20 kg und bringt etwa 0,4 kWp. Quer am Geländer befestigt ist es etwas höher als ein normales Geländer (ca. 1 m). Ein typisches Balkonkraftwerk hat 2 Module, also 0,8 kWp. Miss, wie viel Meter Geländer nach draußen frei sind.</p>
     <div class="result" id="out" aria-live="polite"></div>
-    <p class="small">Schätzung für Kiel ohne Schatten: 1 kWp liefert bei bester Ausrichtung etwa 950 kWh pro Jahr. PVGIS rechnet genauer. Weicht dein PVGIS-Ergebnis stark ab, prüfe Azimut, Neigung und Leistung.</p>
+    <p class="small">Schätzung für Kiel ohne Schatten: 1 kWp liefert bei bester Ausrichtung etwa 950 kWh pro Jahr. PVGIS rechnet genauer. Weicht dein PVGIS-Ergebnis stark ab, prüfe Azimut, Neigung und Leistung. Ab 3 Modulen bringt das Balkonkraftwerk vor allem bei wenig Sonne mehr, denn der Wechselrichter gibt höchstens 800 W ins Hausnetz ab. Die Schätzung berücksichtigt das nicht.</p>
   </section>
 </div>
 <script>
