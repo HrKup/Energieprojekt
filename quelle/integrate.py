@@ -461,3 +461,25 @@ for o,n in (('a)','a) 15 min duschen'),('b)','b) 15 min + Sparduschkopf'),('c)',
     x='<tr><td>%s</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'%o
     i=src.index(x,a); src=src[:i]+x.replace('<td>%s</td>'%o,'<td style=\\"white-space:nowrap\\">%s</td>'%n,1)+src[i+len(x):]
 open('lernpfad.html','w').write(src); print('6.7 ok')
+
+# ---- Teil 7: drei Infos zu einer zusammenlegen, E = P · t erklären (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+def _find(s): return [k for k,(a,b) in enumerate(_objs) if s in src[a:b]][0]
+i1=_find('Teil 7 · Info 1 von 3</div>'); i2=_find('Teil 7 · Info 2 von 3</div>'); i3=_find('Teil 7 · Info 3 von 3</div>')
+assert i2==i1+1 and i3==i1+2
+def _body(k,h1):
+    o=src[_objs[k][0]:_objs[k][1]]; t='<h1>'+h1+'</h1>'
+    return o[o.index(t)+len(t):o.rindex('"}')]
+b1=_body(i1,'Leistung auf dem Typenschild'); b2=_body(i2,'Stand-by: heimliche Stromfresser'); b3=_body(i3,'Das Energielabel')
+old='Erinnerung aus Teil 1, <b>E = P · t</b>.'
+assert old in b1
+b1=b1.replace(old,'Erinnerung aus Teil 1: <b>E = P · t</b>, also <b>Energie = Leistung · Zeit</b>. Ein Wasserkocher mit 2 000 W (= 2 kW), der 3 Minuten (= 0,05 h) läuft, braucht 2 kW · 0,05 h = 0,1 kWh. Damit die Einheit kWh herauskommt, rechnet man die Leistung in kW und die Zeit in Stunden um.',1)
+NT='Strom im Haushalt: Leistung, Stand-by und Energielabel'
+H2='<h2 style=\\"margin-top:24px\\">%s</h2>'
+o1=src[_objs[i1][0]:_objs[i1][1]]
+new=o1[:o1.index('"t": "Leistung auf dem Typenschild"')]+'"t": "'+NT+'", "h": "<div class=\\"eyebrow\\">Teil 7 · Info</div><h1>'+NT+'</h1>'+H2%'Leistung auf dem Typenschild'+b1+H2%'Stand-by: heimliche Stromfresser'+b2+H2%'Das Energielabel'+b3+'"}'+o1[o1.rindex('"}')+2:]
+src=src[:_objs[i1][0]]+new+src[_objs[i3][1]:]
+open('lernpfad.html','w').write(src); print('teil7 merged')
