@@ -129,7 +129,7 @@ open('lernpfad.html','w').write(src); print('2.4 ok')
 src=open('lernpfad.html').read()
 a=src.index('{"k": "task", "n": "3.2"'); b=src.index('{"k": "task", "n": "3.3"')
 h32=('<div class="eyebrow">Teil 3 · Aufgabe 3.2 <span class="tag mappe">✎ Mappe</span></div><h1>Ein Wärmebild auswerten</h1>'
- '<figure class="fig"><img src="fig/thermo_passivhaus.png" alt="Wärmebild: links ein Altbau mit gelb-grüner Fassade, rechts ein gedämmtes Haus mit blauer Fassade und helleren Fenstern; Farbskala rechts von 3 bis 9 °C"><figcaption>Wärmebild im Winter: links ein Altbau, rechts ein gedämmtes Haus (Passivhaus). Bild: Wikimedia Commons (Passivhaus thermogram gedaemmt ungedaemmt)</figcaption></figure>'
+ '<figure class="fig"><img src="fig/thermo_passivhaus.png" alt="Wärmebild: links ein Altbau mit gelb-grüner Fassade, rechts ein gedämmtes Haus mit blauer Fassade und helleren Fenstern; Farbskala rechts von 3 bis 9 °C"><figcaption>Wärmebild im Winter: links ein Altbau, rechts ein gedämmtes Haus (Passivhaus). Bild: Passivhaus Institut, <a href="https://commons.wikimedia.org/wiki/File:Passivhaus_thermogram_gedaemmt_ungedaemmt.png" target="_blank" rel="noopener">Wikimedia Commons</a>, Lizenz <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.de" target="_blank" rel="noopener">CC BY-SA 3.0</a></figcaption></figure>'
  '<p class="task-q">Draußen ist es etwa 0 °C, drinnen sind beide Häuser gleich warm geheizt.</p>'
  '<ul class="bullets" style="list-style:none;padding-left:0">'
  '<li>a) Lies an der Farbskala ab, wie warm die Außenwand des Altbaus und die des gedämmten Hauses ungefähr sind.</li>'
@@ -159,8 +159,13 @@ def _fig(title,img,alt,cap):
     assert m, title
     f='<figure class=\\"fig\\"><img style=\\"width:520px\\" src=\\"fig/'+img+'\\" alt=\\"'+alt+'\\"><figcaption>'+cap+'</figcaption></figure>'
     src=src[:m.end()]+f+src[m.end():]
-_fig('Was misst eine Wärmebildkamera?','thermo_messen.jpg','Wärmebild von zwei Personen auf einem Bildschirm, rechts eine Farbskala von 16,5 bis 41,9 °C, in der Mitte ein Messkreuz mit 26,5 °C',
- 'Beispiel: Wärmebild von Menschen in einem Raum. Rechts die Farbskala (hier 16,5 bis 41,9 °C), das Messkreuz zeigt die Temperatur an einem Punkt: 26,5 °C auf der Kleidung, 24,0 °C an der Wand. Bild: Wikimedia Commons (RaBoe)')
 _fig('Wärmebrücken finden','thermo_altbau.jpg','Wärmebild eines ungedämmten Altbaus im Winter mit Messpunkten: Fenster und Wand gelb bis rot, Dach und Himmel blau bis violett',
- 'Beispiel: ungedämmter Altbau im Winter, von außen. Die Kästchen sind Messpunkte in °C. Rund um die Fenster und an der Wand ist es deutlich wärmer (gelb, rot) als am Dach: Hier entweicht viel Wärme. Bild: Wikimedia Commons (Ungedämmte Außenwand)')
+ 'Beispiel: ungedämmter Altbau im Winter, von außen. Die Kästchen sind Messpunkte in °C. Rund um die Fenster und an der Wand ist es deutlich wärmer (gelb, rot) als am Dach: Hier entweicht viel Wärme. Bild: Lutz Weidner, <a href=\\"https://commons.wikimedia.org/wiki/File:Ungedaemmte_Aussenwand.jpg\\" target=\\"_blank\\" rel=\\"noopener\\">Wikimedia Commons</a>, Lizenz <a href=\\"https://creativecommons.org/licenses/by-sa/3.0/deed.de\\" target=\\"_blank\\" rel=\\"noopener\\">CC BY-SA 3.0</a>, verkleinert')
 open('lernpfad.html','w').write(src); print('Teil3 Bilder ok')
+
+# ---- Schrift lokal statt Google Fonts (Datenschutz, 19.11.) ----
+src=open('lernpfad.html').read()
+src=re.sub(r'<link rel="preconnect" href="https://fonts.googleapis.com">\s*','',src)
+src=re.sub(r'<link rel="stylesheet" href="https://fonts.googleapis.com/[^"]*">','<link rel="stylesheet" href="fonts/fonts.css">',src)
+assert 'googleapis' not in src
+open('lernpfad.html','w').write(src); print('fonts lokal ok')
