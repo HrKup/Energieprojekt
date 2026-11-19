@@ -300,3 +300,31 @@ body:not([data-view="home"]) .where{visibility:hidden}
 .prog2 .pct{font-size:.8rem}
 @media (max-width:900px){.prog2 .pr{grid-template-columns:minmax(0,9rem) 70px 3em}}''',1)
 open('lernpfad.html','w').write(src); print('prog2 ok')
+
+# ---- Teil 6 Info 1: Reaktionsgleichung erklärt (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+def _b(e): return '<i class="at at-'+e.lower()+'">'+e+'</i>'
+def _mol(*a): return '<span class="mol">'+''.join(_b(x) for x in a)+'</span>'
+EQ=('<div class="card rgl"><div class="rg">'
+ '<div class="f">CH<sub>4</sub></div><div class="op">+</div><div class="f">2 O<sub>2</sub></div><div class="op">→</div><div class="f">CO<sub>2</sub></div><div class="op">+</div><div class="f">2 H<sub>2</sub>O</div>'
+ '<div class="m">'+_mol('H','H','C','H','H')+'</div><div></div><div class="m">'+_mol('O','O')+_mol('O','O')+'</div><div></div><div class="m">'+_mol('O','C','O')+'</div><div></div><div class="m">'+_mol('H','O','H')+_mol('H','O','H')+'</div>'
+ '<div class="n">Methan</div><div></div><div class="n">Sauerstoff</div><div class="n">reagiert zu</div><div class="n">Kohlenstoff&shy;dioxid</div><div></div><div class="n">Wasser</div>'
+ '<div class="br" style="grid-column:1/4">Ausgangsstoffe (Edukte)</div><div></div><div class="br" style="grid-column:5/8">Produkte</div>'
+ '</div><p class="leg">'+_b('C')+' Kohlenstoff-Atom '+_b('H')+' Wasserstoff-Atom '+_b('O')+' Sauerstoff-Atom</p></div>'
+ '<div class="text"><p><b>So liest du eine Reaktionsgleichung:</b> Links stehen die Ausgangsstoffe, rechts die Produkte. Der Pfeil bedeutet „reagiert zu“. Jeder Stoff besteht aus winzigen Teilchen, den Molekülen, und diese sind aus Atomen aufgebaut. Die Formel zeigt, welche Atome in einem Molekül stecken: CH<sub>4</sub> ist 1 Kohlenstoff-Atom mit 4 Wasserstoff-Atomen. Die kleine Zahl unten zählt die Atome in einem Molekül, die große Zahl davor zählt die Moleküle. Bei der Verbrennung gehen keine Atome verloren und es kommen keine neuen dazu. Sie werden nur neu zusammengesetzt. Zähl nach: Links und rechts sind es jeweils 1 C, 4 H und 4 O. Mehr dazu lernst du im Chemieunterricht.</p><p>')
+a='Erdgas besteht vor allem aus Methan: CH₄ + 2 O₂ → CO₂ + 2 H₂O. '
+assert a in src
+src=src.replace(a,'Erdgas besteht vor allem aus Methan. Bei der Verbrennung reagiert es mit dem Sauerstoff aus der Luft:</p></div>'+EQ.replace('"','\\"'),1)
+src=src.replace('.where{color:var(--muted)','''.rgl{padding:18px 12px}
+.rg{display:grid;grid-template-columns:repeat(7,auto);justify-content:center;align-items:center;column-gap:10px;row-gap:6px;text-align:center}
+.rg .f{font-size:1.6rem;font-weight:700}.rg .op{font-size:1.5rem;font-weight:700;color:var(--muted)}
+.rg .n{font-size:.85rem;color:var(--muted)}
+.rg .br{border-top:3px solid var(--accent);padding-top:4px;font-size:.85rem;font-weight:700;color:var(--accent);margin-top:4px}
+.mol{display:inline-flex;align-items:center;margin:2px 4px}
+.at{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font-style:normal;font-size:.8rem;font-weight:700;margin-left:-4px;border:1.5px solid #333}
+.at:first-child{margin-left:0}
+.at-c{background:#333;color:#fff}.at-h{background:#fff;color:#333;width:21px;height:21px;font-size:.7rem}.at-o{background:#e03131;color:#fff;border-color:#a51111}
+.rgl .leg{text-align:center;font-size:.85rem;color:var(--muted);margin:12px 0 0}.rgl .leg .at{margin:0 4px 0 12px;vertical-align:middle}
+@media (max-width:620px){.rg{column-gap:4px}.rg .f{font-size:1.15rem}.rg .op{font-size:1.1rem}.at{width:16px;height:16px;font-size:.55rem}.at-h{width:13px;height:13px}}
+.where{color:var(--muted)''',1)
+open('lernpfad.html','w').write(src); print('rgl ok')
