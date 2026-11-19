@@ -251,3 +251,25 @@ for _a,_b in zip(_st,_st[1:]+[None]):
     _parts.append(_o)
 src=''.join(_parts); print('titel',_n)
 open('lernpfad.html','w').write(src)
+
+# ---- Teil 5: U-Wert-Info mit Aufgabe 5.2 zusammenlegen, 5.2 Pflicht (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+ui=[k for k,(a,b) in enumerate(_objs) if 'Teil 5 · Info 3 von 3</div><h1>Der U-Wert</h1>' in src[a:b]][0]
+ti=[k for k,(a,b) in enumerate(_objs) if src[a:b].startswith('{"k": "task", "n": "5.2"')][0]
+assert ti==ui+1
+uo=src[_objs[ui][0]:_objs[ui][1]]; to=src[_objs[ti][0]:_objs[ti][1]]
+body=uo[uo.index('<h1>Der U-Wert</h1>')+len('<h1>Der U-Wert</h1>'):uo.rindex('"}')]
+old_t='Wärmeverlust eines neuen Fensters berechnen'
+to=to.replace('"t": "'+old_t+'"','"t": "Der U-Wert: Wärmeverlust eines Fensters"',1)
+to=to.replace('<h1>'+old_t+'</h1>','<h1>Der U-Wert: Wärmeverlust eines Fensters</h1>'+body+'<h2 style=\\"margin-top:28px\\">Deine Aufgabe</h2>',1)
+to=_re.sub(r' <span class=\\"tag star\\">★ freiwillig</span>','',to,1)
+to=_re.sub(r'<div class=\\"where-box star\\">.*?</div></div>','',to,1)
+to=to.replace(', "star": true}','}',1)
+to=to.replace('Berechne mit der Formel aus dem Info-Kasten,','Berechne mit der Formel oben,',1)
+assert 'Freiwillige Aufgabe' not in to and 'tag star' not in to
+src=src[:_objs[ui][0]]+to+src[_objs[ti][1]:]
+src=src.replace('Teil 5 · Info 1 von 3','Teil 5 · Info 1 von 2').replace('Teil 5 · Info 2 von 3','Teil 5 · Info 2 von 2')
+open('lernpfad.html','w').write(src); print('5.2 merged')
