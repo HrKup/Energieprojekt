@@ -337,3 +337,10 @@ k=('<figure class="fig"><img style="max-height:none;width:min(100%,700px)" src="
    '<figcaption>Wo die Anlagen liegen: 1 Küstenkraftwerk und 2 Wärmespeicher am Ostufer, 3 Müllverbrennung, 4 Heizkraftwerk Humboldtstraße. Die Fernwärmerohre verbinden sie unter der Erde mit den Häusern auf beiden Seiten der Förde. Karte: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap-Mitwirkende</a>, Lizenz ODbL</figcaption></figure>')
 src=src.replace(a,a+k.replace('"','\\"'),1)
 open('lernpfad.html','w').write(src); print('karte ok')
+
+# ---- Wärmepumpen-Schema groß anzeigen ----
+src=open('lernpfad.html').read()
+a='<img src=\\"fig/wp_haus.png\\"'
+assert a in src
+src=src.replace(a,'<img style=\\"max-height:none;width:min(100%,860px)\\" src=\\"fig/wp_haus.png\\"',1)
+open('lernpfad.html','w').write(src); print('wp_haus ok')
