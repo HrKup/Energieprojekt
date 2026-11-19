@@ -397,3 +397,16 @@ src=src[:a]+'<h1>Heizungsarten vergleichen</h1>'+txt+src[b:]
 c=src.index('<details class=\\"tip\\"><summary>Tipp 1</summary><div>Wenn die Seite von co2online nicht lädt'); d=src.index('</details>',c)+len('</details>')
 src=src[:c]+src[d:]
 open('lernpfad.html','w').write(src); print('6.2 ok')
+
+# ---- 6.3 (Wärmespeicher) streichen, 6.4-6.8 umnummerieren (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+k3=[k for k,(a,b) in enumerate(_objs) if src[a:b].startswith('{"k": "task", "n": "6.3"')][0]
+assert 'Wärmespeicher' in src[_objs[k3][0]:_objs[k3][1]]
+src=src[:_objs[k3][0]]+src[_objs[k3+1][0]:]
+for i in range(4,9):
+    src=src.replace('"n": "6.%d"'%i,'"n": "6.%d"'%(i-1)).replace('Teil 6 · Aufgabe 6.%d '%i,'Teil 6 · Aufgabe 6.%d '%(i-1))
+assert '"n": "6.8"' not in src
+open('lernpfad.html','w').write(src); print('6.3 removed')
