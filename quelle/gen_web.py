@@ -98,8 +98,8 @@ def zuhause_box(teil, first):
     z = PR.get(teil, {}).get('zuhause') or []
     if not z: return ''
     li = ''.join(f'<li>{md(x)}</li>' for x in z)
-    return (f'<div class="where-box proto"><span class="ic">▤</span><div>Bevor du beginnst<p>Hast du diese Daten schon von zu Hause? Wenn nicht, notiere dir als Hausaufgabe: Das brauchst du für die nächste Stunde.</p>'
-            f'<ul class="bullets" style="color:var(--ink);font-weight:400">{li}</ul></div></div>')
+    return (f'<div class="where-box proto"><span class="ic">▤</span><div>Bevor du beginnst<p>Hake ab, welche Daten von zu Hause du schon hast. Was noch fehlt, notierst du als Hausaufgabe.</p>'
+            f'<ul class="daten">{li}</ul></div></div>')
 
 def build():
     chapters = []; checks = {}
@@ -223,8 +223,8 @@ def build():
             if n != 3: steps.append('Schreib unter <b>Für dein Gutachten</b> deine Stichpunkte.')
             hw = ''
             if nxt:
-                hw = ('<div class="where-box mappe"><span class="ic">⌂</span><div>Hausaufgabe für die nächste Stunde<p>Finde zu Hause heraus, was du für Teil ' + str(n + 1) + ' brauchst:</p>'
-                      '<ul class="bullets" style="color:var(--ink);font-weight:400">' + ''.join(f'<li>{md(z)}</li>' for z in nxt) + '</ul></div></div>')
+                hw = ('<div class="where-box mappe"><span class="ic">⌂</span><div>Hausaufgabe für die nächste Stunde<p>Finde zu Hause heraus, was du für Teil ' + str(n + 1) + ' brauchst. Hake ab, was du schon hast:</p>'
+                      '<ul class="daten">' + ''.join(f'<li>{md(z)}</li>' for z in nxt) + '</ul></div></div>')
             ges = f'<div class="merk">{cur["geschafft"]}</div>' if cur.get('geschafft') else ''
             h = (f'<div class="eyebrow">{cur["short"]} · Wechsel <span class="tag proto">▤ Protokoll</span></div><h1>Jetzt arbeitest du im Protokoll weiter</h1>{ges}'
                  f'<div class="where-box proto"><span class="ic">▤</span><div>Öffne dein Protokoll, Teil {n}<p>Dort arbeitest du mit den Zahlen deiner eigenen Wohnung oder deines Hauses.</p></div></div>'

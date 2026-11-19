@@ -13,7 +13,7 @@ a=src.index(' {k:"info",t:"Zwei Fenster nebeneinander"'); b=src.index(' {k:"info
 src=src[:a]+src[b:]
 # Bevor du beginnst Teil 1
 rep("<p>Erhebe zu Hause die Daten aus dem Protokoll, Teil 1: Personen, Wohnfläche, Baujahr, Energieausweis, Heiz- und Stromverbrauch mit Kosten.</p>",
-    "<p>Hast du diese Daten schon von zu Hause? Wenn nicht, notiere dir als Hausaufgabe: Das brauchst du für die nächste Stunde.</p><ul class=\"bullets\" style=\"color:var(--ink);font-weight:400\"><li>Anzahl der Personen im Haushalt und Wohnfläche</li><li>Baujahr und, falls vorhanden, den Energieausweis</li><li>Heizverbrauch und Stromverbrauch pro Jahr mit Kosten (Jahresabrechnung, Eltern fragen)</li></ul>")
+    "<p>Hake ab, welche Daten von zu Hause du schon hast. Was noch fehlt, notierst du als Hausaufgabe.</p><ul class=\"daten\"><li>Anzahl der Personen im Haushalt und Wohnfläche</li><li>Baujahr und, falls vorhanden, den Energieausweis</li><li>Heizverbrauch und Stromverbrauch pro Jahr mit Kosten (Jahresabrechnung, Eltern fragen)</li></ul>")
 # Tipps 1.3 ohne Formelzeichen
 rep('tips(["Rechne erst die Energie pro Tag: E = P · t. Achte darauf, Watt in Kilowatt umzurechnen.","100 W = 0,1 kW. Pro Tag: 0,1 kW · 4 h = 0,4 kWh. Jetzt mal 365 Tage, dann mal 0,35 €."])',
     'tips(["Rechne zuerst die Energie für einen Tag aus: Leistung mal Zeit. Dafür rechnest du die 100 W in Kilowatt um (durch 1 000 teilen).","100 W sind 0,1 kW. Der Fernseher läuft 4 Stunden, also rechnest du 0,1 kW mal 4 h. Das ist die Energie pro Tag in kWh.","Die Energie pro Tag nimmst du mal 365, dann hast du die Energie pro Jahr. Diese Zahl nimmst du mal 0,35 €, dann hast du die Kosten."])')
@@ -49,6 +49,11 @@ rep('/* Startseite */','''.fig{margin:0;display:flex;flex-direction:column;gap:6
 table.grid td{height:2em}
 .tbl{overflow-x:auto}
 @media (max-width:520px){.steck dl{grid-template-columns:1fr}.steck dd{margin-bottom:6px}}
+ul.daten{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:6px;font-weight:400;color:var(--ink)}
+ul.daten label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ul.daten input{width:1.25rem;height:1.25rem;margin-top:.15rem;flex:none;accent-color:var(--done)}
+ul.daten li.hab span{color:var(--muted)}
+.offen{font-weight:700;margin-top:6px}
 /* Startseite */''')
 # NBSP + iframe-Höhe in show()
 rep('$("#slide").innerHTML=s.h+extra;','$("#slide").innerHTML=nb(s.h)+extra;\n  document.querySelectorAll(".tool-frame iframe").forEach(f=>f.addEventListener("load",()=>{try{f.style.height=(f.contentDocument.documentElement.scrollHeight+20)+"px";}catch(e){}}));')
@@ -60,3 +65,41 @@ function nb(h){return h.replace(/>([^<]+)</g,(m,t)=>">"+t.replace(RE_TH,"$1\\u00
 rep('<span class="num">${k?k:"★"}</span>','<span class="num">${c.id==="start"?"★":c.id==="zusatz"?"Z":c.id==="anhang"?"A":c.id.replace("teil","")}</span>')
 open('lernpfad.html','w').write(src)
 print(len(src))
+
+# ---- Datenlisten zum Abhaken (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+JS=r'''
+/* Datenlisten zum Abhaken: Folie wird erst grün, wenn alle Daten da sind */
+const DKEY="eb-daten-v1";let DAT={};try{DAT=JSON.parse(localStorage.getItem(DKEY)||"{}")||{};}catch(e){}
+const dsave=()=>{try{localStorage.setItem(DKEY,JSON.stringify(DAT));}catch(e){}};
+const dtext=h=>h.replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
+function datenOf(s){if(s._d===undefined){const m=s.h.match(/<ul class="daten">([\s\S]*?)<\/ul>/);s._d=m?[...m[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map(x=>dtext(x[1])):null;}return s._d;}
+const allHave=s=>{const d=datenOf(s);return !d||d.every(k=>DAT[k]);};
+function syncDaten(){CH.forEach(c=>c.slides.forEach((s,i)=>{if(s.k==="info"&&datenOf(s)&&isDone(c.id,i)!==allHave(s))setDone(c.id,i,allHave(s));}));}
+function wireDaten(cid,i){
+  const s=chapter(cid).slides[i],d=datenOf(s);if(!d)return;
+  if(s.k==="info"&&isDone(cid,i))d.forEach(k=>{if(DAT[k]===undefined)DAT[k]=true;});
+  const ul=document.querySelector("#slide ul.daten");if(!ul)return;
+  const sum=document.createElement("p");sum.className="offen";ul.after(sum);
+  const upd=()=>{const n=d.filter(k=>!DAT[k]).length;sum.textContent=n?("Noch offen: "+n+" von "+d.length+". Notiere sie als Hausaufgabe in deiner Mappe."):"Alles da. Du kannst loslegen.";};
+  [...ul.children].forEach((li,k)=>{const key=d[k];li.className=DAT[key]?"hab":"";
+    li.innerHTML=`<label><input type="checkbox" ${DAT[key]?"checked":""}><span>${li.innerHTML}</span></label>`;
+    li.querySelector("input").onchange=e=>{DAT[key]=e.target.checked;li.className=DAT[key]?"hab":"";dsave();syncDaten();upd();renderSide(cid);updTop();};});
+  upd();
+}
+'''
+src=src.replace('/* Fortschritt sichern */',JS+'\n/* Fortschritt sichern */',1)
+src=src.replace('  wire();\n','  wire();wireDaten(cid,i);\n',1)
+src=src.replace('if(s.k==="info")setDone(cur.c,cur.i,true);','if(s.k==="info"&&allHave(s))setDone(cur.c,cur.i,true);',1)
+assert 'wireDaten(cid,i)' in src and 'allHave(s))setDone' in src
+open('lernpfad.html','w').write(src)
+print('daten ok')
+
+import json as _j
+_z=_j.load(open('content.json'))['proto']['2']['zuhause']
+_hw='<div class="where-box mappe"><span class="ic">⌂</span><div>Hausaufgabe für die nächste Stunde<p>Finde zu Hause heraus, was du für Teil 2 brauchst. Hake ab, was du schon hast:</p><ul class="daten">'+''.join('<li>'+x+'</li>' for x in _z)+'</ul></div></div>'
+src=open('lernpfad.html').read()
+m='<p class="small">Klicke auf „Aufgabe erledigt“, wenn du Teil 1 im Protokoll fertig hast.'
+assert m in src
+src=src.replace(m,_hw+'\n  '+m,1)
+open('lernpfad.html','w').write(src); print('t1 hw ok')
