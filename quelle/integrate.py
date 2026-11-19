@@ -274,3 +274,29 @@ assert 'tag star' not in to and 'Nur die Rechnung' in to
 src=src[:_objs[ui][0]]+to+src[_objs[ti][1]:]
 src=src.replace('Teil 5 · Info 1 von 3','Teil 5 · Info 1 von 2').replace('Teil 5 · Info 2 von 3','Teil 5 · Info 2 von 2')
 open('lernpfad.html','w').write(src); print('5.2 merged')
+
+# ---- Zwei Fortschrittsbalken: gesamt + aktueller Teil (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='<span class="bar top-bar" aria-hidden="true"><i id="topBar"></i></span><span class="pct" id="topPct"></span>'
+assert a in src
+src=src.replace(a,'<div class="prog2"><div class="pr"><span class="pl">Lernpfad gesamt</span><span class="bar top-bar" aria-hidden="true"><i id="allBar"></i></span><span class="pct" id="allPct"></span></div><div class="pr" id="partRow"><span class="pl" id="partLbl"></span><span class="bar top-bar" aria-hidden="true"><i id="topBar"></i></span><span class="pct" id="topPct"></span></div></div>',1)
+a='function updTop(){if(!cur)return;const p=pct(cur.c);$("#topPct").textContent=p+" %";$("#topBar").style.width=p+"%";}'
+assert a in src
+src=src.replace(a,'''function allPct(){let d=0,n=0;CH.forEach(ch=>{if(ch.id==="zusatz"||ch.id==="anhang")return;n+=ch.slides.length;d+=S.done[ch.id].filter(i=>i<ch.slides.length).length;});return n?Math.round(100*d/n):0;}
+function updTop(){const g=allPct();$("#allPct").textContent=g+" %";$("#allBar").style.width=g+"%";
+  if(!cur){$("#partRow").hidden=true;return;}
+  const ch=chapter(cur.c),p=pct(cur.c);$("#partRow").hidden=false;$("#partLbl").textContent=ch.short+": "+ch.title;$("#topPct").textContent=p+" %";$("#topBar").style.width=p+"%";}''',1)
+a='$("#topPct").textContent="";$("#topBar").style.width="0";'
+assert a in src
+src=src.replace(a,'updTop();',1)
+a='.where{color:var(--muted);font-size:.95rem;min-width:0;flex:1}'
+assert a in src
+src=src.replace(a,a+'''
+body:not([data-view="home"]) .where{visibility:hidden}
+.prog2{display:flex;flex-direction:column;gap:3px;align-items:stretch}
+.prog2 .pr{display:grid;grid-template-columns:minmax(0,15rem) 120px 3.2em;align-items:center;gap:8px}
+.prog2 .pr[hidden]{display:none}
+.prog2 .pl{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog2 .pct{font-size:.8rem}
+@media (max-width:900px){.prog2 .pr{grid-template-columns:minmax(0,9rem) 70px 3em}}''',1)
+open('lernpfad.html','w').write(src); print('prog2 ok')

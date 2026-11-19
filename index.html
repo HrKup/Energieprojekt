@@ -45,6 +45,13 @@ a{color:var(--accent)}
 .brand{font-family:var(--display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:0;padding:4px 2px}
 .brand .dot{width:12px;height:12px;border-radius:3px;background:var(--accent)}
 .where{color:var(--muted);font-size:.95rem;min-width:0;flex:1}
+body:not([data-view="home"]) .where{visibility:hidden}
+.prog2{display:flex;flex-direction:column;gap:3px;align-items:stretch}
+.prog2 .pr{display:grid;grid-template-columns:minmax(0,15rem) 120px 3.2em;align-items:center;gap:8px}
+.prog2 .pr[hidden]{display:none}
+.prog2 .pl{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog2 .pct{font-size:.8rem}
+@media (max-width:900px){.prog2 .pr{grid-template-columns:minmax(0,9rem) 70px 3em}}
 .bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;width:120px}
 .bar>i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
 .pct{font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem;min-width:3.2em;text-align:right}
@@ -180,7 +187,7 @@ textarea{width:100%;min-height:4.5rem;border-radius:8px;border:1px solid var(--l
     <button class="btn ghost menu-btn" id="menuBtn" aria-controls="side" aria-expanded="false">Folien</button>
     <button class="brand" id="homeBtn" title="Zur Übersicht"><span class="dot"></span>Energieberatung</button>
     <span class="where" id="where"></span>
-    <span class="bar top-bar" aria-hidden="true"><i id="topBar"></i></span><span class="pct" id="topPct"></span>
+    <div class="prog2"><div class="pr"><span class="pl">Lernpfad gesamt</span><span class="bar top-bar" aria-hidden="true"><i id="allBar"></i></span><span class="pct" id="allPct"></span></div><div class="pr" id="partRow"><span class="pl" id="partLbl"></span><span class="bar top-bar" aria-hidden="true"><i id="topBar"></i></span><span class="pct" id="topPct"></span></div></div>
     <button class="btn primary" id="saveBtn">Fortschritt sichern</button>
   </header>
   <div class="mid">
@@ -384,7 +391,7 @@ function route(){
 function home(){
   cur=null;document.body.dataset.view="home";
   $("#where").textContent="Übersicht";$("#foot").hidden=true;$("#side").classList.remove("show");
-  $("#topPct").textContent="";$("#topBar").style.width="0";
+  updTop();
   renderSide(null);
   const resume=S.last&&chapter(S.last[0])?S.last:null;
   $("#slide").innerHTML=`<div class="eyebrow">Lernpfad zur Energieberatung</div><h1>Das Wissen für dein Gutachten</h1>
@@ -423,7 +430,10 @@ function show(cid,i){
   updTop();renderSide(cid);
   const t=document.querySelector(".thumb.cur");if(t)t.scrollIntoView({block:"nearest"});
 }
-function updTop(){if(!cur)return;const p=pct(cur.c);$("#topPct").textContent=p+" %";$("#topBar").style.width=p+"%";}
+function allPct(){let d=0,n=0;CH.forEach(ch=>{if(ch.id==="zusatz"||ch.id==="anhang")return;n+=ch.slides.length;d+=S.done[ch.id].filter(i=>i<ch.slides.length).length;});return n?Math.round(100*d/n):0;}
+function updTop(){const g=allPct();$("#allPct").textContent=g+" %";$("#allBar").style.width=g+"%";
+  if(!cur){$("#partRow").hidden=true;return;}
+  const ch=chapter(cur.c),p=pct(cur.c);$("#partRow").hidden=false;$("#partLbl").textContent=ch.short+": "+ch.title;$("#topPct").textContent=p+" %";$("#topBar").style.width=p+"%";}
 function next(){
   if(!cur)return;const ch=chapter(cur.c),s=ch.slides[cur.i];
   if(s.k==="info"&&allHave(s))setDone(cur.c,cur.i,true);
