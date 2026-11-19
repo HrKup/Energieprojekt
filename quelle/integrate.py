@@ -483,3 +483,14 @@ o1=src[_objs[i1][0]:_objs[i1][1]]
 new=o1[:o1.index('"t": "Leistung auf dem Typenschild"')]+'"t": "'+NT+'", "h": "<div class=\\"eyebrow\\">Teil 7 · Info</div><h1>'+NT+'</h1>'+H2%'Leistung auf dem Typenschild'+b1+H2%'Stand-by: heimliche Stromfresser'+b2+H2%'Das Energielabel'+b3+'"}'+o1[o1.rindex('"}')+2:]
 src=src[:_objs[i1][0]]+new+src[_objs[i3][1]:]
 open('lernpfad.html','w').write(src); print('teil7 merged')
+
+# ---- Sicherheitshinweis Lampen (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='<li>Wie viele Stunden pro Tag brennen die Lampen in den meistgenutzten Räumen ungefähr?</li></ul>'
+n=src.count(a); assert n==2, n
+SAFE=('<div style=\\"margin-top:12px;padding:10px 14px;border:2px solid #c92a2a;border-radius:8px;background:#fff5f5;color:#1a1a1a\\">'
+ '<b style=\\"color:#c92a2a\\">⚠ Sicherheit: Schraube keine Lampe heraus!</b> In der Fassung liegt Strom an, solange die Sicherung eingeschaltet ist, auch wenn der Lichtschalter aus ist. '
+ 'Eine eingeschaltete Lampe kann außerdem sehr heiß werden. Lies nur ab, was du siehst, ohne die Lampe anzufassen, schau auf Verpackungen von Ersatzlampen nach oder frag deine Eltern. '
+ 'Erkennst du eine Lampe nicht, schreib „unbekannt“.</div>')
+src=src.replace(a,a+SAFE)
+open('lernpfad.html','w').write(src); print('safety ok')
