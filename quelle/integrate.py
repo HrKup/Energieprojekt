@@ -328,3 +328,12 @@ src=src.replace('.where{color:var(--muted)','''.rgl{padding:18px 12px}
 @media (max-width:620px){.rg{column-gap:4px}.rg .f{font-size:1.15rem}.rg .op{font-size:1.1rem}.at{width:16px;height:16px;font-size:.55rem}.at-h{width:13px;height:13px}}
 .where{color:var(--muted)''',1)
 open('lernpfad.html','w').write(src); print('rgl ok')
+
+# ---- Teil 6: Karte zur Fernwärme (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='<figcaption>So kommt die Fernwärme in Kiel zu den Wohnungen (vereinfacht; Angaben: BDEW, ZfK, Stadtwerke Kiel)</figcaption></figure>'
+assert a in src
+k=('<figure class="fig"><img style="max-height:none;width:min(100%,700px)" src="fig/fernwaerme_karte.jpg" alt="Stadtplan von Kiel mit den Nummern 1 bis 4: 1 und 2 am Ostufer in Neumühlen-Dietrichsdorf, 3 an der Ostring-Kreuzung im Süden, 4 am Schreventeich" loading="lazy">'
+   '<figcaption>Wo die Anlagen liegen: 1 Küstenkraftwerk und 2 Wärmespeicher am Ostufer, 3 Müllverbrennung, 4 Heizkraftwerk Humboldtstraße. Die Fernwärmerohre verbinden sie unter der Erde mit den Häusern auf beiden Seiten der Förde. Karte: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap-Mitwirkende</a>, Lizenz ODbL</figcaption></figure>')
+src=src.replace(a,a+k.replace('"','\\"'),1)
+open('lernpfad.html','w').write(src); print('karte ok')
