@@ -30,8 +30,11 @@ def wp_haus():
     ax.add_patch(Circle((5.0,5.3),0.75,fc='#FFE066',ec=INK,lw=1.8,zorder=5)); badge(ax,5.0,6.5,2)
     
     # Strom
-    arrow(ax,(7.6,8.4),(5.75,6.0),color='#F2C200',lw=4,ms=22)
-    ax.text(7.7,8.5,'Strom',ha='center',va='bottom',fontsize=12,fontweight='bold',color='#B08900')
+    ax.add_patch(FancyBboxPatch((9.1,6.0),1.3,1.0,boxstyle='round,pad=0.05',fc='white',ec=INK,lw=1.5,zorder=5))
+    ax.text(9.75,6.5,'kWh',ha='center',va='center',fontsize=9,fontweight='bold',zorder=6)
+    ax.text(9.75,7.25,'Stromzähler',ha='center',fontsize=9.5)
+    ax.plot([9.1,7.0,7.0,5.9],[6.5,6.5,5.75,5.75],color='#E0A800',lw=3,zorder=2,ls=(0,(4,2)))
+    ax.text(7.25,6.75,'Strom',ha='center',fontsize=11,fontweight='bold',color='#B08900')
     # Ventil
     vx,vy=5.0,2.2
     ax.add_patch(Polygon([(vx-0.55,vy+0.4),(vx-0.55,vy-0.4),(vx+0.55,vy+0.4),(vx+0.55,vy-0.4)],closed=True,fc='white',ec=INK,lw=1.5,zorder=5)); badge(ax,vx,1.25,4)
@@ -49,7 +52,13 @@ def wp_haus():
     arrow(ax,(7.6,1.6),(6.9,1.6),color='#F783AC',lw=0,ms=0.1) 
     arrow(ax,(7.0,2.2),(6.2,2.2),color='#F783AC',lw=0,ms=22); arrow(ax,(3.2,1.6),(2.4,1.6),color=PC,lw=0,ms=22)
     arrow(ax,(2.6,6.4),(3.5,6.4),color=PC,lw=0,ms=22)
-    ax.text(7.4,5.65,'heiß',fontsize=10,color=PH,ha='center',fontweight='bold'); ax.text(2.9,2.65,'sehr kalt',fontsize=10,color=PC,ha='center',fontweight='bold'); ax.text(7.7,2.55,'flüssig',fontsize=10,color='#D6336C',ha='center',fontweight='bold')
+    ax.text(7.45,4.4,'heiß',fontsize=10,color=PH,ha='left',fontweight='bold'); ax.text(2.9,2.65,'sehr kalt',fontsize=10,color=PC,ha='center',fontweight='bold'); ax.text(7.7,2.55,'flüssig',fontsize=10,color='#D6336C',ha='center',fontweight='bold')
+    # Heizungswasser im Innengerät: nimmt Wärme vom Kältemittel auf (geschlossener Kreis)
+    from matplotlib.colors import to_rgb
+    c0,c1=np.array(to_rgb(WC)),np.array(to_rgb(WH))
+    pts=[(12.2,1.8),(11.05,1.8)]+[(11.05 if i%2==0 else 11.65, 1.8+i*0.2) for i in range(8)]+[(11.05,3.2),(12.2,3.2)]
+    for i in range(len(pts)-1):
+        t=i/(len(pts)-2); ax.plot([pts[i][0],pts[i+1][0]],[pts[i][1],pts[i+1][1]],color=tuple(c0*(1-t)+c1*t),lw=3.5,solid_capstyle='round',zorder=4)
     # Heizkreis
     def heizk(x,y):
         ax.add_patch(Rectangle((x,y),2.4,1.6,fc='white',ec=INK,lw=1.5,zorder=4))
@@ -67,7 +76,7 @@ def wp_haus():
     ax.text(1.0,0.6,'Verdampfer',ha='right',va='center',fontsize=10.5,fontweight='bold')
     ax.text(5.0,7.25,'Verdichter',ha='center',va='center',fontsize=10.5,fontweight='bold')
     ax.text(5.55,1.25,'Ventil',ha='left',va='center',fontsize=10.5,fontweight='bold')
-    ax.text(11.35,2.6,'Ver-\nflüssiger',ha='center',va='center',fontsize=10.5,fontweight='bold')
+    ax.text(10.8,3.95,'Verflüssiger',ha='center',va='center',fontsize=10,fontweight='bold')
     # Schritte
     st=['1  Verdampfer: Das sehr kalte Kältemittel nimmt Wärme aus der Außenluft auf und verdampft.',
         '2  Verdichter: Strom treibt ihn an. Er presst das Gas zusammen, dabei wird es heiß.',
