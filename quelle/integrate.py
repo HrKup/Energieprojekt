@@ -149,3 +149,18 @@ import json as _js
 new='{"k": "task", "n": "3.2", "t": "Ein Wärmebild auswerten", "h": '+_js.dumps(h32,ensure_ascii=False)+'}, '
 src=src[:a]+new+src[b:]
 open('lernpfad.html','w').write(src); print('3.2 ok')
+
+# ---- Teil 3 Info: Beispiel-Wärmebilder (Tom 19.11.) ----
+import re as _re
+src=open('lernpfad.html').read()
+def _fig(title,img,alt,cap):
+    global src
+    m=_re.search(r'<h1>'+_re.escape(title)+r'</h1><div class=\\"text\\">.*?</div>',src)
+    assert m, title
+    f='<figure class=\\"fig\\"><img style=\\"width:520px\\" src=\\"fig/'+img+'\\" alt=\\"'+alt+'\\"><figcaption>'+cap+'</figcaption></figure>'
+    src=src[:m.end()]+f+src[m.end():]
+_fig('Was misst eine Wärmebildkamera?','thermo_messen.jpg','Wärmebild von zwei Personen auf einem Bildschirm, rechts eine Farbskala von 16,5 bis 41,9 °C, in der Mitte ein Messkreuz mit 26,5 °C',
+ 'Beispiel: Wärmebild von Menschen in einem Raum. Rechts die Farbskala (hier 16,5 bis 41,9 °C), das Messkreuz zeigt die Temperatur an einem Punkt: 26,5 °C auf der Kleidung, 24,0 °C an der Wand. Bild: Wikimedia Commons (RaBoe)')
+_fig('Wärmebrücken finden','thermo_altbau.jpg','Wärmebild eines ungedämmten Altbaus im Winter mit Messpunkten: Fenster und Wand gelb bis rot, Dach und Himmel blau bis violett',
+ 'Beispiel: ungedämmter Altbau im Winter, von außen. Die Kästchen sind Messpunkte in °C. Rund um die Fenster und an der Wand ist es deutlich wärmer (gelb, rot) als am Dach: Hier entweicht viel Wärme. Bild: Wikimedia Commons (Ungedämmte Außenwand)')
+open('lernpfad.html','w').write(src); print('Teil3 Bilder ok')
