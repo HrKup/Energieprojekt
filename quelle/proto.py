@@ -71,10 +71,10 @@ def gutachten(prompt=None):
     p = P('', keep=True); add(p, (prompt + ' ' if prompt else '') + 'Stichpunkte reichen. Ganze Sätze schreibst du erst im Gutachten (Teil 10).', italic=True, size=10)
     t = d.add_table(rows=3, cols=2); borders(t)
     for i, lab in enumerate(['Das ist gut:', 'Das ist verbesserungswürdig:', 'Mein Vorschlag (mit kWh, €, CO₂, falls berechnet):']):
-        row = t.rows[i]; cant_split(row); row_height(row, 1.0)
+        row = t.rows[i]; cant_split(row); row_height(row, 0.7)
         cell_text(row.cells[0], lab, bold=True, size=10); shade(row.cells[1], ANSWER_FILL)
     set_widths(t, (5.4, 10.6))
-    P('', after=2)
+    _sp = P('', after=0); _sp.paragraph_format.line_spacing = Pt(4)
 
 def eignung(what, extra=None):
     text = f'**Eignung prüfen:** Entscheide, ob {what} für eure Wohnung oder euer Haus geeignet ist. Wenn nicht, begründe genau, woran es scheitert (zum Beispiel Ausrichtung, Platz, Mietwohnung, Kosten). Auch eine gut begründete Ablehnung ist ein Ergebnis für dein Gutachten.'
@@ -90,8 +90,13 @@ def weiter_lp(n):
     c = t.rows[0].cells[0]; c.paragraphs[0].text = ''
     p0 = c.paragraphs[0]; add(p0, f'Teil {n-1} im Protokoll fertig? Speichern und weiter im Lernpfad: ', bold=True)
     xlink(p0, f'Teil {n} öffnen', f'https://hrkup.github.io/Energieprojekt/#teil{n}-1', bold=True)
-    q = c.add_paragraph(); add(q, 'Mit gedrückter Strg-Taste klicken. Sichere am Stundenende deinen Fortschrittscode (Seite 1).', italic=True, size=9)
+    add(p0, ' (Strg + Klick). Fortschrittscode sichern (Seite 1)!', italic=True, size=9)
+    p0.paragraph_format.space_after = Pt(0)
     set_widths(t, (16.0,)); cant_split(t.rows[0])
+    for q in t._tbl.iter(qn('w:p')):
+        ppr = q.get_or_add_pPr(); k = ppr.find(qn('w:keepNext'))
+        if k is not None: ppr.remove(k)
+    sp = P('', after=0); sp.paragraph_format.line_spacing = Pt(2)
 
 _section = section
 def section(num, title, anchor, newpage=True):
@@ -343,4 +348,19 @@ for i, (num, title, anc) in enumerate(SECTIONS):
 set_widths(t, (1.2, 14.8))
 toc_par._p.addnext(t._tbl); toc_par._p.getparent().remove(toc_par._p)
 exec(open('/tmp/claude-0/-home-user/4ea94787-b298-5048-82ac-b19bdfe2c68e/scratchpad/schemafix.py').read())
+def _fld(run, code):
+    for typ, txt in (('begin', None), (None, code), ('separate', None), (None, '1'), ('end', None)):
+        if typ:
+            e = OxmlElement('w:fldChar'); e.set(qn('w:fldCharType'), typ); run._r.append(e)
+        elif txt == code:
+            e = OxmlElement('w:instrText'); e.set(qn('xml:space'), 'preserve'); e.text = ' ' + code + ' '; run._r.append(e)
+        else:
+            e = OxmlElement('w:t'); e.text = txt; run._r.append(e)
+for sec in d.sections:
+    for ft in [sec.footer] + ([sec.first_page_footer] if sec.different_first_page_header_footer else []):
+        ft.is_linked_to_previous = False
+        fp = ft.paragraphs[0]; fp.text = ''; fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for code, pre in (('PAGE', 'Seite '), ('NUMPAGES', ' von ')):
+            r = fp.add_run(pre); r.font.size = Pt(9); r.font.color.rgb = GREY
+            r = fp.add_run(); r.font.size = Pt(9); r.font.color.rgb = GREY; _fld(r, code)
 keep_tables(); print('schema', fix_schema(d.element)); d.save(OUT); print('ok', len(SECTIONS))
