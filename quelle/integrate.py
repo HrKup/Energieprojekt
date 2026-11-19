@@ -180,3 +180,8 @@ def _after_text(title,html):
 _after_text('So gelingen gute Wärmebilder','<p class="lead" style="font-size:1rem">Beispielbild ansehen: Auf der Seite <a href="https://www.co2online.de/modernisieren-und-bauen/sanierung-modernisierung/thermografie/" target="_blank" rel="noopener">„Thermografie“ von co2online</a> siehst du oben ein Mehrfamilienhaus als Foto und als Wärmebild. Weiter unten unter „Welche Fehler kann man bei einer Thermografieaufnahme machen?“ steht, warum Sonne und Fenster das Ergebnis verfälschen.</p>')
 _after_text('Wärmebrücken finden','<p class="lead" style="font-size:1rem">Weitere Beispiele von innen: <a href="https://www.berlin.de/ba-steglitz-zehlendorf/politik-und-verwaltung/beauftragte/klimaschutz/beispielhafte_thermographieaufnahmen.pdf" target="_blank" rel="noopener">Wärmebilder aus Berliner Wohnungen</a> (undichte Fenster und Türen, ungedämmte Hausecke, schlecht gedämmte Geschossdecke).</p>')
 open('lernpfad.html','w').write(src); print('Teil3 Links ok')
+
+# ---- Teil 4 Info 2: Verweis auf 2.4 (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_after_text('Welcher Dämmstoff fürs Dach?','<p class="lead" style="font-size:1rem">Hast du Aufgabe 2.4 bearbeitet? Vergleiche deine Tabelle mit diesem Text.</p>')
+open('lernpfad.html','w').write(src); print('4 Info2 ok')
