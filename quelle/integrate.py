@@ -124,3 +124,28 @@ a='Wenn du einen Nachteil nicht findest: Mineralwolle'
 assert a in src
 src=src.replace(a,'Nicht jeder Nachteil steht auf der Seite. Hier sind Hilfen: Mineralwolle',1)
 open('lernpfad.html','w').write(src); print('2.4 ok')
+
+# ---- 3.2 schwerer, mit Wärmebild (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a=src.index('{"k": "task", "n": "3.2"'); b=src.index('{"k": "task", "n": "3.3"')
+h32=('<div class="eyebrow">Teil 3 · Aufgabe 3.2 <span class="tag mappe">✎ Mappe</span></div><h1>Ein Wärmebild auswerten</h1>'
+ '<figure class="fig"><img src="fig/thermo_passivhaus.png" alt="Wärmebild: links ein Altbau mit gelb-grüner Fassade, rechts ein gedämmtes Haus mit blauer Fassade und helleren Fenstern; Farbskala rechts von 3 bis 9 °C"><figcaption>Wärmebild im Winter: links ein Altbau, rechts ein gedämmtes Haus (Passivhaus). Bild: Wikimedia Commons (Passivhaus thermogram gedaemmt ungedaemmt)</figcaption></figure>'
+ '<p class="task-q">Draußen ist es etwa 0 °C, drinnen sind beide Häuser gleich warm geheizt.</p>'
+ '<ul class="bullets" style="list-style:none;padding-left:0">'
+ '<li>a) Lies an der Farbskala ab, wie warm die Außenwand des Altbaus und die des gedämmten Hauses ungefähr sind.</li>'
+ '<li>b) Erkläre, warum ausgerechnet das gut gedämmte Haus die kältere Fassade hat.</li>'
+ '<li>c) Beim gedämmten Haus erscheinen die Fenster heller als die Wand. Beurteile, ob man daraus schließen kann, dass die Fenster schlecht dämmen.</li>'
+ '<li>d) Von innen fotografiert zeigt eine Zimmerecke an der Außenwand 12 °C, die übrige Wand 18 °C. Erläutere, welches Problem dort entstehen kann und warum.</li></ul>'
+ '<div class="where-box mappe"><span class="ic">✎</span><div>In deine Mappe<p>Schreib deine Antworten in ganzen Sätzen in deine Mappe.</p></div></div>'
+ '<details class="tip"><summary>Tipp 1</summary><div>a) Die Farbskala steht rechts am Bildrand. Blau bedeutet etwa 3 bis 4 °C, Grün etwa 5 bis 6 °C, Gelb etwa 7 °C.</div></details>'
+ '<details class="tip"><summary>Tipp 2</summary><div>b) Die Kamera misst nur die Oberfläche. Überlege: Wie viel Wärme aus dem Inneren kommt bei einer guten Dämmung noch an der Außenseite an?</div></details>'
+ '<details class="tip"><summary>Tipp 3</summary><div>c) Lies noch einmal die Info-Folie „So gelingen gute Wärmebilder“: Was passiert bei Glas? Und: Auch sehr gute Fenster dämmen weniger als eine dick gedämmte Wand.</div></details>'
+ '<details class="tip"><summary>Tipp 4</summary><div>d) Denk an eine kalte Flasche aus dem Kühlschrank: Was passiert mit der feuchten Raumluft an einer kalten Oberfläche?</div></details>'
+ '<details class="tip"><summary>Lösung anzeigen</summary><div class="sol">a) Altbau: etwa 5 bis 7 °C (grün bis gelb). Gedämmtes Haus: etwa 3 bis 4 °C (blau), also fast so kalt wie die Außenluft.<br>'
+ 'b) Die Dämmung lässt kaum Wärme nach außen durch. Deshalb bleibt die Außenseite der Wand kalt. Beim Altbau dringt viel Wärme durch die Wand, die Fassade wird warm. Eine warme Fassade bedeutet also: Hier geht Wärme verloren.<br>'
+ 'c) Nur bedingt. Glas spiegelt die Wärmestrahlung der Umgebung, die Temperatur auf Scheiben ist deshalb oft falsch. Außerdem dämmt auch ein gutes Fenster weniger als eine dick gedämmte Wand. Die Fenster sind hier nur etwa 5 °C warm, das ist für Fenster wenig. Dass sie schlecht sind, kann man daraus nicht schließen.<br>'
+ 'd) Die Ecke ist eine Wärmebrücke. An der kalten Stelle kühlt die feuchte Raumluft ab, Wasser schlägt sich nieder (wie an einer kalten Flasche). Die Wand wird feucht, und dort kann sich Schimmel bilden.</div></details>')
+import json as _js
+new='{"k": "task", "n": "3.2", "t": "Ein Wärmebild auswerten", "h": '+_js.dumps(h32,ensure_ascii=False)+'}, '
+src=src[:a]+new+src[b:]
+open('lernpfad.html','w').write(src); print('3.2 ok')
