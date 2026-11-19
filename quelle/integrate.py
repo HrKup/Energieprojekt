@@ -494,3 +494,21 @@ SAFE=('<div style=\\"margin-top:12px;padding:10px 14px;border:2px solid #c92a2a;
  'Erkennst du eine Lampe nicht, schreib „unbekannt“.</div>')
 src=src.replace(a,a+SAFE)
 open('lernpfad.html','w').write(src); print('safety ok')
+
+# ---- Teil 8: fünf Infos zu einer zusammenlegen (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+ks=[[k for k,(a,b) in enumerate(_objs) if 'Teil 8 · Info %d von 5</div>'%i in src[a:b]][0] for i in range(1,6)]
+assert ks==list(range(ks[0],ks[0]+5))
+parts=[]
+for n,k in enumerate(ks):
+    o=src[_objs[k][0]:_objs[k][1]]
+    h1=_re.search(r'<h1>(.*?)</h1>',o).group(1)
+    body=o[o.index('</h1>')+5:o.rindex('"}')]
+    parts.append(body if n==0 else '<h2 style=\\"margin-top:24px\\">'+h1+'</h2>'+body)
+o1=src[_objs[ks[0]][0]:_objs[ks[0]][1]]
+new=o1[:o1.index('<div class=\\"eyebrow\\">')]+'<div class=\\"eyebrow\\">Teil 8 · Info</div><h1>Lampen im Vergleich</h1>'+''.join(parts)+'"}'+o1[o1.rindex('"}')+2:]
+src=src[:_objs[ks[0]][0]]+new+src[_objs[ks[4]][1]:]
+open('lernpfad.html','w').write(src); print('teil8 merged')
