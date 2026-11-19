@@ -185,3 +185,10 @@ open('lernpfad.html','w').write(src); print('Teil3 Links ok')
 src=open('lernpfad.html').read()
 _after_text('Welcher Dämmstoff fürs Dach?','<p class="lead" style="font-size:1rem">Hast du Aufgabe 2.4 bearbeitet? Vergleiche deine Tabelle mit diesem Text.</p>')
 open('lernpfad.html','w').write(src); print('4 Info2 ok')
+
+# ---- Kompass größer anzeigen (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='<img src=\\"fig/windrose.png\\"'
+assert a in src
+src=src.replace(a,'<img style=\\"max-height:none;width:min(100%,520px)\\" src=\\"fig/windrose.png\\"')
+open('lernpfad.html','w').write(src); print('windrose ok')
