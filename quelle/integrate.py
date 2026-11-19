@@ -229,3 +229,25 @@ h44=('<div class="eyebrow">Teil 4 · Aufgabe 4.4 <span class="tag screen">● hi
 import json as _js
 src=src[:a]+'{"k": "task", "n": "4.4", "t": "Übung: Balkonkraftwerk-Planer", "h": '+_js.dumps(h44,ensure_ascii=False)+'}, '+src[b:]
 open('lernpfad.html','w').write(src); print('4.4 ok')
+
+# ---- Kurze Aufgabentitel statt abgeschnittener Sätze (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+TIT={'2.3':'Was die Thermoskanne mit dem Haus gemeinsam hat','2.4':'Dämmstoffe vergleichen','2.5':'Lohnt sich die Wanddämmung?',
+'3.3':'Wann Wärmebilder täuschen','4.2':'Dachboden: Geschossdecke statt Dachschräge?','4.3':'Ein Dämmstoff für Familie B',
+'4.5':'Ertrag mit PVGIS berechnen','5.2':'Wärmeverlust eines neuen Fensters berechnen','6.2':'Heizungsarten vergleichen',
+'6.3':'Wozu braucht das Küstenkraftwerk einen Wärmespeicher?','6.4':'Der Kieler Wärmeplan','6.5':'Wie die Wärmepumpe Wärme aus kalter Luft holt',
+'6.6':'Gasheizung oder Wärmepumpe?','6.7':'Heiz- und Lüftungstipps des Umweltbundesamts','7.2':'Föhn gegen WLAN-Router','7.3':'Lohnt sich ein neuer Kühlschrank?',
+'7.4':'Stand-by-Verluste vermeiden','8.2':'Glühlampe oder LED?','9.2':'Der CO₂-Fußabdruck beim Wohnen','9.4':'„Was ich mache, ist doch egal“','Z.2':'Lohnen sich smarte Thermostate?'}
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_parts=[src[:_st[0]]]; _n=0
+for _a,_b in zip(_st,_st[1:]+[None]):
+    _o=src[_a:_b] if _b else src[_a:]
+    m=_re.match(r'\{"k": "task", "n": "([^"]+)", "t": "((?:[^"\\]|\\.)*)"',_o)
+    if m and m.group(1) in TIT:
+        old=m.group(2); new=TIT[m.group(1)].replace('"','\\"')
+        _o=_o.replace('"t": "'+old+'"','"t": "'+new+'"',1)
+        if '<h1>'+old+'</h1>' in _o: _o=_o.replace('<h1>'+old+'</h1>','<h1>'+new+'</h1>',1); _n+=1
+        else: print('kein h1',m.group(1))
+    _parts.append(_o)
+src=''.join(_parts); print('titel',_n)
+open('lernpfad.html','w').write(src)
