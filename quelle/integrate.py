@@ -169,3 +169,14 @@ src=re.sub(r'<link rel="preconnect" href="https://fonts.googleapis.com">\s*','',
 src=re.sub(r'<link rel="stylesheet" href="https://fonts.googleapis.com/[^"]*">','<link rel="stylesheet" href="fonts/fonts.css">',src)
 assert 'googleapis' not in src
 open('lernpfad.html','w').write(src); print('fonts lokal ok')
+
+# ---- Teil 3 Info 3 + Info 2: Links zu Beispielbildern (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+def _after_text(title,html):
+    global src
+    m=_re.search(r'<h1>'+_re.escape(title)+r'</h1><div class=\\"text\\">.*?</div>',src)
+    assert m, title
+    src=src[:m.end()]+html.replace('"','\\"')+src[m.end():]
+_after_text('So gelingen gute Wärmebilder','<p class="lead" style="font-size:1rem">Beispielbild ansehen: Auf der Seite <a href="https://www.co2online.de/modernisieren-und-bauen/sanierung-modernisierung/thermografie/" target="_blank" rel="noopener">„Thermografie“ von co2online</a> siehst du oben ein Mehrfamilienhaus als Foto und als Wärmebild. Weiter unten unter „Welche Fehler kann man bei einer Thermografieaufnahme machen?“ steht, warum Sonne und Fenster das Ergebnis verfälschen.</p>')
+_after_text('Wärmebrücken finden','<p class="lead" style="font-size:1rem">Weitere Beispiele von innen: <a href="https://www.berlin.de/ba-steglitz-zehlendorf/politik-und-verwaltung/beauftragte/klimaschutz/beispielhafte_thermographieaufnahmen.pdf" target="_blank" rel="noopener">Wärmebilder aus Berliner Wohnungen</a> (undichte Fenster und Türen, ungedämmte Hausecke, schlecht gedämmte Geschossdecke).</p>')
+open('lernpfad.html','w').write(src); print('Teil3 Links ok')
