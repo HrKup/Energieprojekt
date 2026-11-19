@@ -111,3 +111,16 @@ assert a in src; src=src.replace(a,'Teil 2 · Aufgabe 2.2 <span class=\\"tag scr
 a=' Notiere zwei Ergebnisse, die dich überrascht haben.</p><div class=\\"tool-frame\\"><iframe src=\\"tools/daemm-quiz.html\\" title=\\"Dämm-Quiz\\" loading=\\"lazy\\"></iframe></div><div class=\\"where-box mappe\\"><span class=\\"ic\\">✎</span><div>In deine Mappe<p>Bearbeite die Aufgabe in deiner Mappe.</p></div></div>'
 assert a in src; src=src.replace(a,'</p><div class=\\"tool-frame\\"><iframe src=\\"tools/daemm-quiz.html\\" title=\\"Dämm-Quiz\\" loading=\\"lazy\\"></iframe></div>',1)
 open('lernpfad.html','w').write(src); print('quiz ok')
+
+# ---- 2.4 UBA-Seite präzisieren (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='</a> über die drei Gruppen von Dämmstoffen. Trage je Gruppe'
+assert a in src
+src=src.replace(a,'</a> über die drei Gruppen von Dämmstoffen. Du brauchst nur einen kurzen Abschnitt: Scrolle zur Überschrift <b>„Gewusst wie“</b> und lies dort den fett gedruckten Absatz <b>„Dämmstoffe“</b> (er steht nach „Fenster“). Schneller geht es mit <b>Strg + F</b> und dem Suchwort „Dämmstoffe“. Trage je Gruppe',1)
+a='Auf der Seite des Umweltbundesamts steht ein Abschnitt „Dämmstoffe“. Die drei Gruppen heißen dort nicht ausdrücklich so. Ordne die Beispiele selbst zu: Steinwolle und Glaswolle sind mineralisch, Polystyrol ist ein Kunststoff, Holzfaser und Zellulose wachsen nach.'
+assert a in src
+src=src.replace(a,'Im Absatz „Dämmstoffe“ kommen die drei Gruppen nacheinander: erst die <b>mineralischen</b> (Steinwolle, Glaswolle), dann die aus <b>Kunststoff</b> (Polystyrol, aus Erdöl), dann die <b>natürlichen</b> (zum Beispiel Holzfaser, Stroh, Zellulose aus Altpapier). Den Rest der Seite brauchst du nicht.',1)
+a='Wenn du einen Nachteil nicht findest: Mineralwolle'
+assert a in src
+src=src.replace(a,'Nicht jeder Nachteil steht auf der Seite. Hier sind Hilfen: Mineralwolle',1)
+open('lernpfad.html','w').write(src); print('2.4 ok')
