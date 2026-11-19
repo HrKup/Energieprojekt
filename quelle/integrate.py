@@ -103,3 +103,11 @@ m='<p class="small">Klicke auf „Aufgabe erledigt“, wenn du Teil 1 im Protoko
 assert m in src
 src=src.replace(m,_hw+'\n  '+m,1)
 open('lernpfad.html','w').write(src); print('t1 hw ok')
+
+# ---- Dämm-Quiz ohne Mappe (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a='Teil 2 · Aufgabe 2.2 <span class=\\"tag screen\\">● hier am Bildschirm</span> <span class=\\"tag mappe\\">✎ Mappe</span>'
+assert a in src; src=src.replace(a,'Teil 2 · Aufgabe 2.2 <span class=\\"tag screen\\">● hier am Bildschirm</span>',1)
+a=' Notiere zwei Ergebnisse, die dich überrascht haben.</p><div class=\\"tool-frame\\"><iframe src=\\"tools/daemm-quiz.html\\" title=\\"Dämm-Quiz\\" loading=\\"lazy\\"></iframe></div><div class=\\"where-box mappe\\"><span class=\\"ic\\">✎</span><div>In deine Mappe<p>Bearbeite die Aufgabe in deiner Mappe.</p></div></div>'
+assert a in src; src=src.replace(a,'</p><div class=\\"tool-frame\\"><iframe src=\\"tools/daemm-quiz.html\\" title=\\"Dämm-Quiz\\" loading=\\"lazy\\"></iframe></div>',1)
+open('lernpfad.html','w').write(src); print('quiz ok')
