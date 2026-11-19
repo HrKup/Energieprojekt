@@ -512,3 +512,23 @@ o1=src[_objs[ks[0]][0]:_objs[ks[0]][1]]
 new=o1[:o1.index('<div class=\\"eyebrow\\">')]+'<div class=\\"eyebrow\\">Teil 8 · Info</div><h1>Lampen im Vergleich</h1>'+''.join(parts)+'"}'+o1[o1.rindex('"}')+2:]
 src=src[:_objs[ks[0]][0]]+new+src[_objs[ks[4]][1]:]
 open('lernpfad.html','w').write(src); print('teil8 merged')
+
+# ---- Teil 9: vier Infos zu zwei zusammenlegen (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+for (x,y,tit,neu) in ((1,2,'Der CO₂-Fußabdruck: was er misst und woher er kommt','1 von 2'),(3,4,'Was kann ich tun? Fußabdruck und Handabdruck','2 von 2')):
+    _st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+    _objs=[]
+    for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+    ks=[[k for k,(a,b) in enumerate(_objs) if 'Teil 9 · Info %d von 4</div>'%i in src[a:b]][0] for i in (x,y)]
+    assert ks[1]==ks[0]+1
+    parts=[]
+    for k in ks:
+        o=src[_objs[k][0]:_objs[k][1]]
+        h1=_re.search(r'<h1>(.*?)</h1>',o).group(1)
+        parts.append('<h2 style=\\"margin-top:24px\\">'+h1+'</h2>'+o[o.index('</h1>')+5:o.rindex('"}')])
+    o1=src[_objs[ks[0]][0]:_objs[ks[0]][1]]
+    t0=_re.search(r'"t": "(.*?)", "h"',o1).group(1)
+    head=o1[:o1.index('<div class=\\"eyebrow\\">')].replace('"t": "'+t0+'"','"t": "'+tit+'"',1)
+    new=head+'<div class=\\"eyebrow\\">Teil 9 · Info '+neu+'</div><h1>'+tit+'</h1>'+''.join(parts)+'"}'+o1[o1.rindex('"}')+2:]
+    src=src[:_objs[ks[0]][0]]+new+src[_objs[ks[1]][1]:]
+open('lernpfad.html','w').write(src); print('teil9 merged')
