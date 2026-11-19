@@ -546,3 +546,24 @@ a='.tool-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;b
 src=src.replace(a,'.tool-frame{border:0;background:transparent;margin-top:8px}')
 src=src.replace('.tool-frame iframe{display:block;width:100%;min-height:520px;border:0}','.tool-frame iframe{display:block;width:100%;min-height:300px;border:0;background:transparent}')
 open('lernpfad.html','w').write(src); print('tools inline')
+
+# ---- Zusatz: Darum geht es + vier Infos auf eine Seite (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+zi=src.index('{"id": "zusatz"')
+_st=[m.start() for m in _re.finditer(r'\{"k": "',src)]
+_objs=[]
+for _a,_b in zip(_st,_st[1:]+[None]): _objs.append((_a,_b if _b else len(src)))
+d0=[k for k,(a,b) in enumerate(_objs) if a>zi and '"t": "Darum geht es"' in src[a:b]][0]
+ks=[[k for k,(a,b) in enumerate(_objs) if '★ Zusatz · Info %d von 4</div>'%i in src[a:b]][0] for i in range(1,5)]
+assert ks==[d0+1,d0+2,d0+3,d0+4], (d0,ks)
+parts=[]
+for k in ks:
+    o=src[_objs[k][0]:_objs[k][1]]
+    h1=_re.search(r'<h1>(.*?)</h1>',o).group(1)
+    parts.append('<h2 style=\\"margin-top:24px\\">'+h1+'</h2>'+o[o.index('</h1>')+5:o.rindex('"}')])
+o=src[_objs[d0][0]:_objs[d0][1]]
+NT='Smart Home: Was steckt dahinter?'
+o=o.replace('"t": "Darum geht es"','"t": "'+NT+'"',1).replace('<h1>Darum geht es</h1>','<h1>'+NT+'</h1>',1)
+p=o.rindex('"}'); o=o[:p]+''.join(parts)+o[p:]
+src=src[:_objs[d0][0]]+o+src[_objs[ks[3]][1]:]
+open('lernpfad.html','w').write(src); print('zusatz merged')
