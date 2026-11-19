@@ -215,3 +215,17 @@ src=''.join(_parts)
 src=src.replace('.where-box.mappe{','.where-box.star{background:#FFF3BF;color:#8a5a00;border:2px solid #F59F00}\n.where-box.star .ic{color:#F59F00}\n.where-box.mappe{',1)
 print('starbox',cnt)
 open('lernpfad.html','w').write(src)
+
+# ---- 4.4 ohne Mappe-Aufgabe: nur Ausprobieren (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a=src.index('{"k": "task", "n": "4.4"'); b=src.index('{"k": "task", "n": "4.5"')
+h44=('<div class="eyebrow">Teil 4 · Aufgabe 4.4 <span class="tag screen">● hier am Bildschirm</span></div><h1>Übung: Balkonkraftwerk-Planer</h1>'
+ '<p class="task-q">Ein Balkon zeigt laut Kompass-App nach 240°. Probiere den Planer aus:</p>'
+ '<ul class="bullets" style="list-style:none;padding-left:0">'
+ '<li>a) Stelle 240° ein (Zahl eingeben oder in die Rose klicken). Lies ab, welche Himmelsrichtung das ist und ob der Balkon geeignet ist.</li>'
+ '<li>b) Wähle unten aus, wie viele Module an den Balkon passen, und lies den geschätzten Jahresertrag ab. Merke dir den Wert für 2 Module, du brauchst ihn in Aufgabe 4.5.</li>'
+ '<li>c) Probiere andere Richtungen aus, zum Beispiel 180° (Süden) und 0° (Norden). Was fällt dir auf?</li></ul>'
+ '<div class="tool-frame"><iframe src="tools/solar-helfer.html" title="Balkonkraftwerk-Planer" loading="lazy"></iframe></div>')
+import json as _js
+src=src[:a]+'{"k": "task", "n": "4.4", "t": "Übung: Balkonkraftwerk-Planer", "h": '+_js.dumps(h44,ensure_ascii=False)+'}, '+src[b:]
+open('lernpfad.html','w').write(src); print('4.4 ok')
