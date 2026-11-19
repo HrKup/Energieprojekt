@@ -436,3 +436,28 @@ c=src.index('<details class=\\"tip\\"><summary>Tipp 1</summary><div>Auf der Seit
 src=src[:c]+'<details class=\\"tip\\"><summary>Tipp 1</summary><div>b) Verbinde zwei Stellen im Text: Was passiert mit der Wand neben dem Fenster? Und was passiert, wenn warme, feuchte Raumluft auf eine kalte Fläche trifft?</div></details>'+src[d:]
 src=src.replace('<li>b) Erkläre, warum ein dauerhaft gekipptes Fenster im Winter Energie verschwendet und Schimmel fördern kann.</li>','<li>b) Erkläre, warum ein dauerhaft gekipptes Fenster im Winter Energie verschwendet und Schimmel fördern kann.</li>',1)
 open('lernpfad.html','w').write(src); print('6.5/6.6 ok')
+
+# ---- 6.7 Warmduscher: Werte übersichtlich, Tabellenzeilen benannt (Tom 19.11.) ----
+src=open('lernpfad.html').read()
+a=src.index('<h1>Die Warmduscher-Rechnung</h1><p class=\\"task-q\\">'); b=src.index('</ul>',a)+5
+assert 'Trage deine Ergebnisse' in src[a:b]
+new=('<h1>Die Warmduscher-Rechnung</h1><p class=\\"task-q\\">Jemand duscht gern lange und warm. Wie viel Energie, Geld und CO₂ kostet das? Die Wohnung wird mit Gas beheizt.</p>'
+ '<div class=\\"card\\"><h2>Das brauchst du für die Rechnung</h2><ul class=\\"bullets\\">'
+ '<li><b>Normaler Duschkopf:</b> 13 Liter pro Minute</li>'
+ '<li><b>Sparduschkopf:</b> 7 Liter pro Minute</li>'
+ '<li><b>Wassertemperatur:</b> von 10 °C auf 40 °C, also 30 °C wärmer</li>'
+ '<li><b>Gas:</b> 0,12 € und 0,24 kg CO₂ pro kWh Wärme</li>'
+ '<li><b>Ein Jahr:</b> 300 Duschen</li></ul>'
+ '<p><b>Rechenhilfe:</b> Energie (Wh) = Liter · 30 °C · 1,16 Wh pro Liter und °C<br>Kosten (€) = kWh · 0,12 €<br>CO₂ (kg) = kWh · 0,24 kg</p></div>'
+ '<p class=\\"task-q\\">Berechne für jede Dusche die Wassermenge, die Energie, die Kosten und das CO₂. Trage die Ergebnisse in die Tabelle in deiner Mappe ein.</p>'
+ '<ul class=\\"bullets\\" style=\\"list-style:none;padding-left:0\\">'
+ '<li>a) 15 Minuten duschen mit normalem Duschkopf</li>'
+ '<li>b) 15 Minuten duschen mit Sparduschkopf</li>'
+ '<li>c) 5 Minuten duschen mit Sparduschkopf</li>'
+ '<li>d) Rechne alle drei auf ein Jahr hoch.</li>'
+ '<li>e) Berechne, wie viel Prozent Energie c) gegenüber a) spart.</li></ul>')
+src=src[:a]+new+src[b:]
+for o,n in (('a)','a) 15 min duschen'),('b)','b) 15 min + Sparduschkopf'),('c)','c) 5 min + Sparduschkopf')):
+    x='<tr><td>%s</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'%o
+    i=src.index(x,a); src=src[:i]+x.replace('<td>%s</td>'%o,'<td style=\\"white-space:nowrap\\">%s</td>'%n,1)+src[i+len(x):]
+open('lernpfad.html','w').write(src); print('6.7 ok')
