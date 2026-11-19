@@ -476,7 +476,7 @@ null
 "sub": [
 "a) Klicke auf der Karte auf Kiel und wähle „Netzgekoppelt“.",
 "b) Trage ein: Leistung 0,8 kWp, Neigung 90° (Module senkrecht am Geländer), Azimut aus der vorigen Aufgabe. Entferne den Haken bei „Optimieren“.",
-"c) Lies den Jahresertrag in kWh ab und vergleiche ihn mit der Schätzung des Balkonkraftwerk-Planers.",
+"c) Lies den Jahresertrag in kWh ab. Er steht im Ergebnis unter „Jährliche PV-Energieproduktion“.",
 "d) Berechne die Ersparnis pro Jahr (die Hälfte des Stroms wird selbst genutzt, 0,35 € pro kWh) und die Amortisationszeit bei 450 € Kosten."
 ]
 },
